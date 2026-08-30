@@ -76,21 +76,48 @@ function contarCarrinho() {
   badge.hidden = total === 0;
 }
 
-/* Menu do celular. */
+/* Menu do celular. Ele é fixo e precisa nascer logo abaixo do cabeçalho,
+   que também é fixo. Como a altura do cabeçalho muda conforme a rolagem
+   (a tarja do topo some), a posição é recalculada na hora de abrir. */
 function montarMenu() {
   const botao = $("#navToggle");
   const nav = $("#nav");
-  if (!botao || !nav) return;
-  botao.addEventListener("click", () => {
-    const aberto = nav.classList.toggle("is-open");
-    botao.setAttribute("aria-expanded", aberto);
-    botao.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
-  });
+  const header = $("#header");
+  if (!botao || !nav || !header) return;
+
+  const fundo = document.createElement("div");
+  fundo.className = "nav-fundo";
+  fundo.hidden = true;
+  document.body.appendChild(fundo);
+
+  function encaixar() {
+    nav.style.top = Math.max(0, Math.round(header.getBoundingClientRect().bottom)) + "px";
+  }
+
+  function mostrar(abrir) {
+    if (abrir) encaixar();
+    nav.classList.toggle("is-open", abrir);
+    fundo.hidden = !abrir;
+    botao.setAttribute("aria-expanded", abrir);
+    botao.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
+  }
+
+  botao.addEventListener("click", () => mostrar(!nav.classList.contains("is-open")));
+  fundo.addEventListener("click", () => mostrar(false));
   nav.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") {
-      nav.classList.remove("is-open");
-      botao.setAttribute("aria-expanded", "false");
-    }
+    if (e.target.tagName === "A") mostrar(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) mostrar(false);
+  });
+
+  /* enquanto está aberto, continua colado no cabeçalho */
+  addEventListener("scroll", () => {
+    if (nav.classList.contains("is-open")) encaixar();
+  }, { passive: true });
+  addEventListener("resize", () => {
+    if (nav.classList.contains("is-open")) encaixar();
+    else nav.style.top = "";
   });
 }
 

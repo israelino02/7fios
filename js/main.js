@@ -460,7 +460,54 @@
       $$("#categorias .sel")[categoriaAtiva].focus();
     });
 
+    seguirRolagem(alvo);
     pintarCategorias();
+  }
+
+  /* No celular os painéis ficam empilhados e não há como passar o mouse.
+     Então quem manda é a rolagem: o painel mais perto do meio da tela vai
+     abrindo sozinho enquanto a pessoa desce a página. */
+  function seguirRolagem(alvo) {
+    const empilhado = () => window.matchMedia("(max-width: 760px)").matches;
+    let pendente = false;
+
+    function conferir() {
+      pendente = false;
+      if (!empilhado()) return;
+
+      const caixa = alvo.getBoundingClientRect();
+      const altura = window.innerHeight;
+      /* fora da tela: não mexe em nada */
+      if (caixa.bottom < 0 || caixa.top > altura) return;
+
+      const total = VITRINE_CATEGORIAS.length;
+      const cabecalho = $("#header");
+      const teto = cabecalho ? cabecalho.getBoundingClientRect().bottom : 0;
+
+      /* A conta acompanha a faixa atravessando a tela: quando o topo dela
+         encosta no cabeçalho começa o primeiro departamento; quando o fim
+         dela chega ali, termina no último. Cada um ganha a sua vez. */
+      const percorrido = teto - caixa.top;
+      const andamento = Math.min(1, Math.max(0, percorrido / caixa.height));
+      const escolhido = Math.min(total - 1, Math.floor(andamento * total));
+
+      if (escolhido !== categoriaAtiva) {
+        categoriaAtiva = escolhido;
+        pintarCategorias();
+      }
+    }
+
+    addEventListener(
+      "scroll",
+      () => {
+        if (pendente) return;
+        pendente = true;
+        requestAnimationFrame(conferir);
+      },
+      { passive: true }
+    );
+    addEventListener("resize", conferir);
+    conferir();
   }
 
   function montarBanners() {
