@@ -1,0 +1,16 @@
+# Fotos originais: 1,7 GB de arquivos de câmera. O site não usa esta pasta,
+# ela é só a fonte para o script gerar a "assets/". Guarde um backup dela
+# fora do GitHub (Drive, HD externo).
+imagens/
+
+# Lixo do macOS
+.DS_Store
+._*
+
+# Arquivos de trabalho temporários
+_bundle.html
+_conferir.html
+_teste-bundle.html
+
+# Configuração local do editor (tem caminho absoluto desta máquina)
+.claude/

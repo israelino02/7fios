@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contato | 7 Fios Têxtil</title>
+<meta name="description" content="Fale com a 7 Fios Têxtil: WhatsApp, e-mail, endereço no Polo de Confecções de Santa Cruz do Capibaribe e horário de atendimento.">
+<meta name="theme-color" content="#1D0E47">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=6">
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+<!-- ============================== TARJA TOPO ============================= -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <p class="topbar__aviso" id="avisoTopo"></p>
+    <ul class="topbar__info">
+      <li><span data-empresa="horario"></span></li>
+      <li><a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================== CABEÇALHO ============================= -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="7 Fios Têxtil, página inicial">
+      <img src="assets/logo.jpg" alt="7 Fios Têxtil" width="52" height="52">
+    </a>
+
+    <form class="busca" role="search" id="formBusca" onsubmit="return false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+      <input type="search" id="inputBusca" placeholder="Buscar tecido, aviamento, cor…" aria-label="Buscar produtos" autocomplete="off">
+      <button type="button" class="busca__limpar" id="limparBusca" aria-label="Limpar busca" hidden>&times;</button>
+    </form>
+
+    <div class="header__acoes">
+      <a class="acao acao--wpp" data-wpp href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
+        <span class="acao__txt"><small>Fale com o vendedor</small><strong>WhatsApp</strong></span>
+      </a>
+
+      <a class="acao acao--carrinho" href="index.html#loja" aria-label="Ver meu orçamento na loja">
+        <span class="acao__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h14l-1.6 8.4a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L5.4 3H2V1h5l.6 3ZM9 18a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg>
+          <span class="badge" id="badgeCarrinho" hidden>0</span>
+        </span>
+        <span class="acao__txt"><small>Meu</small><strong>Orçamento</strong></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- =============================== MENU ================================= -->
+<nav class="navbar" id="nav" aria-label="Menu">
+  <div class="container navbar__inner">
+    <a href="index.html">Início</a>
+    <a href="index.html#loja" data-ir-grupos="poliamida,poliester">Microfibras</a>
+    <a href="index.html#loja" data-ir-grupos="dryfit">Dry-fit</a>
+    <a href="index.html#loja" data-ir-grupos="estampados">Estampados</a>
+    <a href="index.html#loja" data-ir-grupos="aviamentos">Aviamentos</a>
+    <a href="index.html#faq">Dúvidas</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="contato.html" class="is-active">Contato</a>
+  </div>
+</nav>
+
+<main id="conteudo">
+
+<section class="pagina-topo">
+  <div class="container">
+    <p class="eyebrow">Fale conosco</p>
+    <h1>Contato</h1>
+    <p class="pagina-topo__sub">Estamos no Polo de Confecções de Pernambuco, prontos para atender sua confecção.</p>
+  </div>
+</section>
+
+<section class="section section--curta section--clara">
+  <div class="container">
+    <div class="destaque-wpp">
+      <span class="destaque-wpp__ico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 5V5a2 2 0 0 1 2-2Z"/></svg>
+      </span>
+      <h2>Atendimento pelo WhatsApp</h2>
+      <p>Nossa forma mais rápida de atendimento. Tire suas dúvidas, consulte produtos e receba atendimento personalizado.</p>
+      <a class="btn btn--gold btn--lg" data-wpp href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
+        Conversar agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--curta" aria-labelledby="t-canais">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">Canais</p>
+      <h2 class="section__titulo" id="t-canais">Formas de contato</h2>
+    </header>
+
+    <div class="canais">
+      <article class="canal">
+        <span class="canal__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 5V5a2 2 0 0 1 2-2Z"/></svg>
+        </span>
+        <h3>WhatsApp</h3>
+        <p data-empresa="telefone"></p>
+        <a class="btn btn--linha btn--block" data-wpp href="#" target="_blank" rel="noopener">Fale conosco</a>
+      </article>
+
+      <article class="canal">
+        <span class="canal__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.6 2L12 12.2 19.4 7H4.6Z"/></svg>
+        </span>
+        <h3>E-mail</h3>
+        <p data-empresa="email"></p>
+        <a class="btn btn--linha btn--block" data-email-link href="#">Enviar e-mail</a>
+      </article>
+
+      <article class="canal">
+        <span class="canal__ico">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+        </span>
+        <h3>Endereço</h3>
+        <p data-empresa="endereco"></p>
+        <a class="btn btn--linha btn--block" data-mapa href="#" target="_blank" rel="noopener">Ver no mapa</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--curta section--clara" aria-labelledby="t-onde">
+  <div class="container">
+    <header class="section__head">
+      <h2 class="section__titulo" id="t-onde">Onde estamos</h2>
+      <p class="section__sub">Av. Pref. Braz de Líra, 760, Santa Cruz do Capibaribe, PE</p>
+    </header>
+
+    <div class="mapa">
+      <div class="mapa__foto" id="mapaFoto">
+        <iframe
+          title="Mapa da 7 Fios Têxtil"
+          src="https://www.google.com/maps?q=Av.+Pref.+Braz+de+Lira,+760,+Santa+Cruz+do+Capibaribe,+PE&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+      <div class="mapa__acoes">
+        <a class="btn btn--navy" data-rota href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M21.7 11.3 12.7 2.3a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4ZM13 15v-2.5h-2V15l-3-3.5 3-3.5V10h4v5h-2Z"/></svg>
+          Traçar rota até a loja
+        </a>
+        <a class="btn btn--linha" data-mapa href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
+      </div>
+    </div>
+
+    <div class="grid-duplo">
+      <article class="bloco">
+        <span class="canal__ico canal__ico--pequeno">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
+        </span>
+        <h3>Telefone</h3>
+        <p class="bloco__valor"><a data-tel-link href="#" data-empresa="telefone"></a></p>
+        <p class="bloco__nota">Ligue ou chame no WhatsApp, o número é o mesmo.</p>
+
+        <div class="avaliacao">
+          <span class="avaliacao__estrelas" aria-hidden="true">★★★★★</span>
+          <p>Já comprou com a gente? Conte como foi.</p>
+          <a class="btn btn--linha btn--block" data-avaliar href="#" target="_blank" rel="noopener">
+            Avalie-nos no Google
+          </a>
+        </div>
+      </article>
+
+      <article class="bloco">
+        <span class="canal__ico canal__ico--pequeno">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg>
+        </span>
+        <h3>Horário de funcionamento</h3>
+        <dl class="horarios" id="horarios"></dl>
+      </article>
+    </div>
+
+    <a class="insta" data-insta-link href="#" target="_blank" rel="noopener">
+      <span class="insta__ico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 10.7a4.2 4.2 0 1 1 0-8.4 4.2 4.2 0 0 1 0 8.4Zm6.8-11a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
+      </span>
+      <span class="insta__txt">
+        <strong>Acompanhe nossas novidades, lançamentos e inspirações para seus projetos.</strong>
+        <span class="insta__arroba" data-empresa="instagram"></span>
+      </span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== RODAPÉ =============================== -->
+<footer class="footer" id="contato">
+  <div class="container footer__grid">
+    <div>
+      <h3 class="footer__brand">7 Fios Têxtil</h3>
+      <p>Tecidos e aviamentos de alta qualidade no Polo de Confecções de Pernambuco.</p>
+    </div>
+
+    <div>
+      <h4>Contato</h4>
+      <ul class="footer__list">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+          <span data-empresa="endereco"></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
+          <a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg>
+          <span data-empresa="horario"></span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Categorias</h4>
+      <ul class="footer__list footer__list--nav" id="footerDeps"></ul>
+    </div>
+
+    <div>
+      <h4>A loja</h4>
+      <ul class="footer__list footer__list--nav">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#loja">Todos os produtos</a></li>
+        <li><a href="index.html#faq">Dúvidas frequentes</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© <span id="ano"></span> Sete Fios Têxtil. Todos os direitos reservados.</p>
+    <p class="footer__nota">Preços e disponibilidade sob consulta pelo WhatsApp.</p>
+  </div>
+</footer>
+
+<!-- ========================= BOTÃO FLUTUANTE =========================== -->
+<a class="fab" data-wpp href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
+</a>
+
+
+<script src="js/config.js?v=6"></script>
+<script src="js/produtos.js?v=6"></script>
+<script src="js/catalogo-imagens.js?v=6"></script>
+<script src="js/comum.js?v=6"></script>
+<script src="js/pagina.js?v=6"></script>
+</body>
+</html>
