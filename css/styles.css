@@ -1122,3 +1122,30 @@ h1,h2,h3,.brand__name{
   .valor h3{ font-size:.85rem; margin-bottom:.3rem; }
   .valor p{ font-size:.74rem; line-height:1.5; }
 }
+
+/* ======================================================================
+   CELULAR: rodapé mais curto e organizado
+   Em coluna única ele virava uma tira comprida. Marca e contato ocupam a
+   largura toda; as duas listas de links ficam lado a lado.
+   ====================================================================== */
+@media (max-width:640px){
+  .footer{ padding:1.8rem 0 0; font-size:.84rem; }
+  .footer__grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:1.3rem .9rem; padding-bottom:1.3rem;
+  }
+  .footer__grid > div:nth-child(1),
+  .footer__grid > div:nth-child(2){ grid-column:1 / -1; }
+
+  .footer__brand{ font-size:1.05rem; margin-bottom:.35rem; }
+  .footer__grid > div:nth-child(1) p{ font-size:.8rem; max-width:44ch; }
+  .footer h4{ font-size:.85rem; margin-bottom:.55rem; }
+  .footer__list li{ margin-bottom:.45rem; gap:.45rem; }
+  .footer__list .ico{ width:.95em; height:.95em; margin-top:.15rem; }
+  .footer__list--nav li{ margin-bottom:.4rem; }
+
+  .footer__bottom{
+    flex-direction:column; align-items:center; text-align:center;
+    gap:.3rem; padding:.9rem 0 4.5rem; font-size:.72rem;
+  }
+}
