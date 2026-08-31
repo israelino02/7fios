@@ -71,25 +71,16 @@
   /* ====================================================================== */
   /*  CARRINHO DE ORÇAMENTO                                                 */
   /* ====================================================================== */
-  const CHAVE = CHAVE_CARRINHO;
   let carrinho = [];
 
+  /* A leitura e a gravação são as mesmas de todas as páginas (js/comum.js),
+     para o número do carrinho nunca discordar entre a loja e as outras. */
   function carregarCarrinho() {
-    try {
-      const bruto = localStorage.getItem(CHAVE);
-      carrinho = bruto ? JSON.parse(bruto) : [];
-    } catch (e) {
-      carrinho = [];
-    }
-    carrinho = carrinho.filter((i) => acharProduto(i.sku));
+    carrinho = lerCarrinho();
   }
 
   function salvarCarrinho() {
-    try {
-      localStorage.setItem(CHAVE, JSON.stringify(carrinho));
-    } catch (e) {
-      /* navegador sem armazenamento: o orçamento vale só nesta visita */
-    }
+    gravarCarrinho(carrinho);
   }
 
   function addCarrinho(sku, qtd = 1, cor = "") {
@@ -105,7 +96,7 @@
   function mudarQtd(indice, delta) {
     const item = carrinho[indice];
     if (!item) return;
-    item.qtd += delta;
+    item.qtd = Math.min(9999, item.qtd + delta);
     if (item.qtd < 1) carrinho.splice(indice, 1);
     salvarCarrinho();
     pintarCarrinho();
@@ -736,7 +727,9 @@
     const p = acharProduto(skuAberto);
     const s = slides[slideAtual] || {};
     const cor = p._cores.length && s.legenda ? s.legenda : "";
-    addCarrinho(skuAberto, Math.max(1, Number($("#modalQtd").value || 1)), cor);
+    const pedido = Math.floor(Number($("#modalQtd").value));
+    const quantos = Number.isFinite(pedido) ? Math.min(9999, Math.max(1, pedido)) : 1;
+    addCarrinho(skuAberto, quantos, cor);
     fecharFicha();
     abrirDrawer();
   });
@@ -745,7 +738,9 @@
     const campo = e.target.closest("[data-item-input]");
     if (!campo) return;
     const item = carrinho[Number(campo.closest(".item").dataset.n)];
-    if (item) item.qtd = Math.max(1, Math.floor(Number(campo.value) || 1));
+    const digitado = Math.floor(Number(campo.value));
+    const nova = Number.isFinite(digitado) ? Math.min(9999, Math.max(1, digitado)) : 1;
+    if (item) item.qtd = nova;
     salvarCarrinho();
     pintarCarrinho();
   });

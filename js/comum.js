@@ -61,17 +61,58 @@ function aplicarEmpresa() {
   if (ano) ano.textContent = new Date().getFullYear();
 }
 
+/* ==========================================================================
+   ORÇAMENTO GUARDADO NO NAVEGADOR
+   Todas as páginas leem por aqui. Antes, a loja descartava item de catálogo
+   antigo mas não regravava, e as outras páginas contavam o que estava lá:
+   dava contagem diferente em cada página. Agora a leitura valida e regrava.
+   ========================================================================== */
+
+function gravarCarrinho(itens) {
+  try {
+    localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(itens));
+  } catch (e) {
+    /* navegador sem armazenamento: o orçamento vale só nesta visita */
+  }
+}
+
+/* Devolve só o que ainda faz sentido: produto que existe, quantidade que é
+   número inteiro e positivo, cor que é texto. O resto é descartado e o que
+   sobra é regravado, para nenhuma página discordar da outra. */
+function lerCarrinho() {
+  let bruto = [];
+  try {
+    const guardado = JSON.parse(localStorage.getItem(CHAVE_CARRINHO) || "[]");
+    if (Array.isArray(guardado)) bruto = guardado;
+  } catch (e) {
+    bruto = [];
+  }
+
+  const existe = (sku) =>
+    typeof PRODUTOS !== "undefined" && PRODUTOS.some((p) => p.sku === sku);
+
+  const limpos = [];
+  bruto.forEach((item) => {
+    if (!item || typeof item !== "object") return;
+    if (typeof item.sku !== "string" || !existe(item.sku)) return;
+    const qtd = Math.floor(Number(item.qtd));
+    if (!Number.isFinite(qtd) || qtd < 1) return;
+    limpos.push({
+      sku: item.sku,
+      qtd: Math.min(qtd, 9999),
+      cor: typeof item.cor === "string" ? item.cor : "",
+    });
+  });
+
+  if (limpos.length !== bruto.length) gravarCarrinho(limpos);
+  return limpos;
+}
+
 /* Contador do orçamento: aparece em todas as páginas. */
 function contarCarrinho() {
   const badge = $("#badgeCarrinho");
   if (!badge) return;
-  let itens = [];
-  try {
-    itens = JSON.parse(localStorage.getItem(CHAVE_CARRINHO) || "[]");
-  } catch (e) {
-    itens = [];
-  }
-  const total = itens.reduce((s, i) => s + (Number(i.qtd) || 0), 0);
+  const total = lerCarrinho().reduce((s, i) => s + i.qtd, 0);
   badge.textContent = total;
   badge.hidden = total === 0;
 }
