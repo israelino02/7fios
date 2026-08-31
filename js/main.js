@@ -276,12 +276,18 @@
       const [g, c] = Array.from(estado.categorias)[0].split(":");
       atual = `${nomeDep(g)} · ${nomeCategoria(g, c)}`;
     } else if (estado.grupos.size) {
-      const cat = VITRINE_CATEGORIAS.find(
-        (c) =>
-          c.grupos.length === estado.grupos.size &&
-          c.grupos.every((g) => estado.grupos.has(g))
-      );
-      atual = cat ? cat.nome : Array.from(estado.grupos).map(nomeDep).join(" e ");
+      /* se a seleção bate com uma categoria ou com um atalho, usa o nome
+         curto em vez de emendar os departamentos um a um */
+      const combina = (lista) =>
+        lista.find(
+          (c) =>
+            c.grupos.length === estado.grupos.size &&
+            c.grupos.every((g) => estado.grupos.has(g))
+        );
+      const achou =
+        combina(VITRINE_CATEGORIAS) ||
+        (typeof ATALHOS_CELULAR !== "undefined" ? combina(ATALHOS_CELULAR) : null);
+      atual = achou ? achou.nome : Array.from(estado.grupos).map(nomeDep).join(" e ");
     }
     $("#crumbAtual").textContent = atual;
 
@@ -322,6 +328,15 @@
       b.setAttribute("aria-pressed", ativo);
     });
     $("#fPronta").checked = estado.pronta;
+
+    if (typeof ATALHOS_CELULAR !== "undefined") {
+      $$("#atalhosDep .atalho-dep").forEach((botao) => {
+        const escolha = ATALHOS_CELULAR[Number(botao.dataset.atalho)];
+        const ligado = mesmaSelecao(escolha.grupos);
+        botao.classList.toggle("is-ativo", ligado);
+        botao.setAttribute("aria-pressed", ligado);
+      });
+    }
   }
 
   function reiniciarPagina() {
@@ -331,6 +346,38 @@
   /* ====================================================================== */
   /*  MONTAGEM DA PÁGINA                                                    */
   /* ====================================================================== */
+  /* Atalhos que ficam logo abaixo da migalha no celular. Cada um troca o
+     filtro de departamento; tocar no que já está ligado volta para todos. */
+  function mesmaSelecao(grupos) {
+    return (
+      estado.grupos.size === grupos.length && grupos.every((g) => estado.grupos.has(g))
+    );
+  }
+
+  function montarAtalhos() {
+    const alvo = $("#atalhosDep");
+    if (!alvo || typeof ATALHOS_CELULAR === "undefined") return;
+
+    alvo.innerHTML = ATALHOS_CELULAR.map(
+      (a, i) =>
+        `<button class="atalho-dep" type="button" data-atalho="${i}" aria-pressed="false">${esc(a.nome)}</button>`
+    ).join("");
+
+    alvo.addEventListener("click", (e) => {
+      const botao = e.target.closest("[data-atalho]");
+      if (!botao) return;
+      const escolha = ATALHOS_CELULAR[Number(botao.dataset.atalho)];
+      estado.categorias.clear();
+      const jaEstava = mesmaSelecao(escolha.grupos);
+      estado.grupos.clear();
+      if (!jaEstava) escolha.grupos.forEach((g) => estado.grupos.add(g));
+      estado.busca = "";
+      $("#inputBusca").value = "";
+      $("#limparBusca").hidden = true;
+      reiniciarPagina();
+    });
+  }
+
   function montarFiltros() {
     $("#fDepartamento").innerHTML = Object.keys(DEPARTAMENTOS)
       .map((g) => {
@@ -834,6 +881,7 @@
   }
   montarBanners();
   montarFiltros();
+  montarAtalhos();
   /* Se veio de outra página com filtro ou busca na URL, já aplica. */
   const parametros = new URLSearchParams(location.search);
   const buscaUrl = parametros.get("busca");

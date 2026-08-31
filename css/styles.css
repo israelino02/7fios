@@ -426,6 +426,9 @@ h1,h2,h3,.brand__name{
 .produtos{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); }
 .loja__mais{ display:flex; justify-content:center; margin-top:2rem; }
 
+/* atalhos das três linhas: só no celular, logo abaixo da migalha */
+.atalhos-dep{ display:none; }
+
 .vazio{
   grid-column:1/-1; text-align:center; padding:3.5rem 1rem;
   border:1px dashed var(--cinza-200); border-radius:var(--raio); color:var(--cinza-500);
@@ -700,6 +703,19 @@ h1,h2,h3,.brand__name{
   .filtros__fundo{ display:block; position:fixed; inset:0; z-index:135; background:rgba(20,9,53,.55); }
   .filtros__fundo[hidden]{ display:none; }
   #abrirFiltros{ display:inline-flex; }
+
+  .atalhos-dep{
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.45rem; margin:-.4rem 0 1rem;
+  }
+  .atalho-dep{
+    cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    background:var(--branco); color:var(--navy);
+    border:1px solid var(--cinza-200); border-radius:999px;
+    padding:.6rem .5rem; font-size:.82rem; font-weight:600;
+    transition:background var(--tr), border-color var(--tr), color var(--tr);
+  }
+  .atalho-dep.is-ativo{ background:var(--navy); border-color:var(--navy); color:var(--branco); }
 
   .footer__grid{ grid-template-columns:1fr 1fr; }
 }

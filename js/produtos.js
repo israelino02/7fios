@@ -101,6 +101,15 @@ const VITRINE_CATEGORIAS = [
   },
 ];
 
+/* ------------------------------------------------------- ATALHOS DO CELULAR
+   Três botões que aparecem logo abaixo da migalha, só em tela de celular.
+   "grupos" aponta para as chaves de DEPARTAMENTOS.                         */
+const ATALHOS_CELULAR = [
+  { nome: "Microfibras", grupos: ["poliamida", "poliester", "estampados"] },
+  { nome: "Dry-fit",     grupos: ["dryfit"] },
+  { nome: "Aviamentos",  grupos: ["aviamentos"] },
+];
+
 /* -------------------------------------------------------------- CATEGORIAS
    Subdivisões dentro de cada departamento.                                 */
 const CATEGORIAS = {
