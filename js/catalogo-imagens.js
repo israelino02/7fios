@@ -8,7 +8,6 @@ const BANNERS = {
   "hero": "assets/banners/hero.jpg?v=1788166360",
   "microfibras": "assets/banners/microfibras.jpg?v=1788166360",
   "aviamentos": "assets/banners/aviamentos.jpg?v=1788166360",
-  "loja": "assets/banners/loja.jpg?v=1788166360",
   "mapa": "assets/banners/mapa.jpg?v=1788166360"
 };
 
@@ -36,6 +35,11 @@ const GERENTES = [
     "img": "assets/gerentes/perfil-raianne-comercial.jpg?v=1788166361"
   }
 ];
+
+const VIDEOS = {
+  "historia": "assets/video/historia.mp4?v=1788167349",
+  "historiaCapa": "assets/video/historia-capa.jpg?v=1788167349"
+};
 
 const IMAGENS = {
   "darlyng": {

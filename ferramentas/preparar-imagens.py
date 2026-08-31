@@ -14,7 +14,7 @@ Ele pula o que já foi convertido, então rodar de novo é rápido.
 Os textos dos produtos ficam em js/produtos.js e NUNCA são tocados por aqui.
 """
 
-import colorsys, io, json, os, re, struct, subprocess, sys, unicodedata, zlib
+import colorsys, io, json, os, re, shutil, struct, subprocess, sys, unicodedata, zlib
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGEM = os.path.join(RAIZ, "imagens")
@@ -330,6 +330,52 @@ def familia_da_cor(nome, hexa):
             return PALAVRA_COR[palavra]
     return familia(hexa)
 
+# ------------------------------------------------------------------- vídeo
+# Pasta com o vídeo da história. O arquivo é copiado como está (já vem em
+# 720p e não temos ffmpeg aqui para recomprimir), e a capa que aparece antes
+# de dar play é um quadro tirado do próprio vídeo pelo Quick Look do macOS.
+PASTA_VIDEO = "video historia"
+EXT_VIDEO = (".mp4", ".mov", ".m4v", ".MP4", ".MOV", ".M4V")
+
+def preparar_video(conta):
+    pasta = os.path.join(ORIGEM, PASTA_VIDEO)
+    if not os.path.isdir(pasta):
+        return {}
+    arquivos = sorted(f for f in os.listdir(pasta) if f.endswith(EXT_VIDEO))
+    if not arquivos:
+        print(f"  ! sem vídeo em {PASTA_VIDEO}", flush=True)
+        return {}
+
+    origem = os.path.join(pasta, arquivos[0])
+    destino = os.path.join(DESTINO, "video", "historia.mp4")
+    os.makedirs(os.path.dirname(destino), exist_ok=True)
+
+    marca = [os.path.relpath(origem, RAIZ), os.path.getsize(origem),
+             int(os.path.getmtime(origem)), 0, 0]
+    chave = os.path.relpath(destino, RAIZ)
+    if not os.path.exists(destino) or _ficha.get(chave) != marca:
+        shutil.copyfile(origem, destino)
+        _ficha[chave] = marca
+        print(f"  vídeo: {arquivos[0]} ({os.path.getsize(origem)//(1024*1024)} MB)", flush=True)
+
+    # capa: um quadro do vídeo, para o navegador não baixar os megabytes todos
+    # antes de a pessoa apertar o play
+    capa = os.path.join(DESTINO, "video", "historia-capa.jpg")
+    if not os.path.exists(capa) or os.path.getmtime(capa) < os.path.getmtime(destino):
+        temp = os.path.join(DESTINO, "video", "_quadro")
+        os.makedirs(temp, exist_ok=True)
+        subprocess.run(["qlmanage", "-t", "-s", "1400", "-o", temp, destino],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        quadros = [f for f in os.listdir(temp) if f.endswith(".png")]
+        if quadros:
+            conta(os.path.join(temp, quadros[0]), capa, *LARGURA["banner"])
+        shutil.rmtree(temp, ignore_errors=True)
+
+    saida = {"historia": web(destino)}
+    if os.path.exists(capa):
+        saida["historiaCapa"] = web(capa)
+    return saida
+
 # ------------------------------------------------------------------ execução
 def main():
     total = {"feitas": 0}
@@ -504,6 +550,8 @@ def main():
             estado = "COM fotos, falta cadastrar" if tem_foto else "vazia, sem fotos ainda"
             print(f"  - {rel}  ({estado})")
 
+    videos = preparar_video(conta)
+
     saida = os.path.join(RAIZ, "js", "catalogo-imagens.js")
     with io.open(saida, "w", encoding="utf-8") as fp:
         fp.write("/* ======================================================================\n")
@@ -515,6 +563,7 @@ def main():
         fp.write("const CAPAS_DEP = " + json.dumps(deps, ensure_ascii=False, indent=2) + ";\n\n")
         fp.write("const FITA = " + json.dumps(fita, ensure_ascii=False) + ";\n\n")
         fp.write("const GERENTES = " + json.dumps(gerentes, ensure_ascii=False, indent=2) + ";\n\n")
+        fp.write("const VIDEOS = " + json.dumps(videos, ensure_ascii=False, indent=2) + ";\n\n")
         fp.write("const IMAGENS = " + json.dumps(imagens, ensure_ascii=False, indent=2) + ";\n")
 
     os.makedirs(DESTINO, exist_ok=True)

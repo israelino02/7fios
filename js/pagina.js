@@ -84,13 +84,32 @@
       .join("");
   }
 
+  /* No lugar da foto da loja entra o vídeo da história. Ele só começa a
+     baixar quando a pessoa aperta o play: até lá o navegador mostra um quadro
+     do próprio vídeo, e não os 8 MB do arquivo. Se um dia o vídeo sair da
+     pasta, a foto da loja volta ao lugar dele. */
   const historiaFoto = $("#historiaFoto");
   const fotoLoja = typeof BANNERS !== "undefined" && (BANNERS.loja || BANNERS.hero);
-  if (historiaFoto && fotoLoja) {
-    historiaFoto.style.setProperty(
-      "--foto",
-      `url("${new URL(fotoLoja, document.baseURI).href}")`
-    );
+  const video = typeof VIDEOS !== "undefined" && VIDEOS.historia;
+  if (historiaFoto && video) {
+    const capa = (typeof VIDEOS !== "undefined" && VIDEOS.historiaCapa) || fotoLoja || "";
+    historiaFoto.classList.add("historia__foto--video");
+    historiaFoto.innerHTML = `
+      <video controls playsinline preload="none"${capa ? ` poster="${esc(capa)}"` : ""}>
+        <source src="${esc(video)}" type="video/mp4">
+        Seu navegador não abre vídeo.
+      </video>`;
+  } else if (historiaFoto) {
+    /* sem vídeo (é o caso do link de visualização, que tem limite de peso):
+       fica o quadro da fachada tirado dele, ou a foto da loja */
+    const capa =
+      (typeof VIDEOS !== "undefined" && VIDEOS.historiaCapa) || fotoLoja;
+    if (capa) {
+      historiaFoto.style.setProperty(
+        "--foto",
+        `url("${new URL(capa, document.baseURI).href}")`
+      );
+    }
   }
 
   /* Foto da fachada por trás do mapa, caso ele não carregue. */
