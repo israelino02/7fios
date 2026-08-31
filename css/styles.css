@@ -425,7 +425,6 @@ h1,h2,h3,.brand__name{
 
 .produtos{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); }
 .loja__mais{ display:flex; justify-content:center; margin-top:2rem; }
-.deps-rapido{ display:none; }
 
 .vazio{
   grid-column:1/-1; text-align:center; padding:3.5rem 1rem;
@@ -475,9 +474,17 @@ h1,h2,h3,.brand__name{
   color:var(--cinza-500);
 }
 
-@media (max-width:640px){
-  .faq__item summary{ padding:.85rem 1rem; font-size:.88rem; }
-  .faq__item p{ padding:0 1rem 1rem; font-size:.85rem; }
+@media (max-width:760px){
+  /* perguntas em duas colunas, para a lista não virar uma tira comprida */
+  .faq__lista{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.5rem; align-items:start;
+  }
+  .faq__item summary{ padding:.7rem .8rem; font-size:.78rem; gap:.5rem; }
+  .faq__item summary::after{ font-size:1.1rem; }
+  .faq__item p{ padding:0 .8rem .85rem; font-size:.78rem; line-height:1.55; }
+  /* a pergunta aberta ocupa a linha inteira, para o texto respirar */
+  .faq__item[open]{ grid-column:1 / -1; }
 }
 
 /* ==================== ATALHOS PARA SOBRE E CONTATO ==================== */
@@ -694,29 +701,7 @@ h1,h2,h3,.brand__name{
   .filtros__fundo[hidden]{ display:none; }
   #abrirFiltros{ display:inline-flex; }
 
-  /* Atalho de departamento, à vista acima dos produtos: resolve num toque
-     o filtro mais usado. Categoria, cor e disponibilidade seguem na gaveta. */
-  .deps-rapido{
-    display:flex; gap:.45rem; margin-bottom:.9rem;
-    overflow-x:auto; padding-bottom:.35rem;
-    scrollbar-width:none; -webkit-overflow-scrolling:touch;
-  }
-  .deps-rapido::-webkit-scrollbar{ display:none; }
-  .dep-chip{
-    flex:none; cursor:pointer; white-space:nowrap;
-    background:var(--branco); color:var(--cinza-500);
-    border:1px solid var(--cinza-200); border-radius:999px;
-    padding:.5rem .95rem; font-size:.82rem; font-weight:500;
-    transition:background var(--tr), border-color var(--tr), color var(--tr);
-  }
-  .dep-chip em{ font-style:normal; color:var(--cinza-400); font-size:.75rem; margin-left:.15rem; }
-  .dep-chip.is-ativo{
-    background:var(--navy); border-color:var(--navy); color:var(--branco); font-weight:600;
-  }
-  .dep-chip.is-ativo em{ color:rgba(255,255,255,.65); }
-
   .footer__grid{ grid-template-columns:1fr 1fr; }
-}
 }
 
 @media (max-width:900px){
@@ -761,6 +746,8 @@ h1,h2,h3,.brand__name{
   .footer__grid{ grid-template-columns:1fr; }
   /* celular: três colunas de produtos, tudo mais justo */
   .produtos{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:.45rem; }
+  /* foto mais baixa: o card inteiro encurta e cabe mais na tela */
+  .card__media{ aspect-ratio:4/3; }
   .card__corpo{ padding:.5rem .45rem 0; }
   .card__preco{ padding:0 .45rem; }
   .card__acoes{ flex-direction:row; padding:.5rem .45rem .5rem; gap:.25rem; }
