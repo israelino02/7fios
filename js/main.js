@@ -484,11 +484,12 @@
       const cabecalho = $("#header");
       const teto = cabecalho ? cabecalho.getBoundingClientRect().bottom : 0;
 
-      /* A conta acompanha a faixa atravessando a tela: quando o topo dela
-         encosta no cabeçalho começa o primeiro departamento; quando o fim
-         dela chega ali, termina no último. Cada um ganha a sua vez. */
-      const percorrido = teto - caixa.top;
-      const andamento = Math.min(1, Math.max(0, percorrido / caixa.height));
+      /* A troca começa cedo: assim que a faixa aparece na parte de baixo da
+         tela já entra o primeiro departamento, e termina no último quando o
+         fim dela passa pelo cabeçalho. Cada um ganha a sua vez. */
+      const comeco = altura * 0.85;
+      const trecho = comeco - teto + caixa.height;
+      const andamento = Math.min(1, Math.max(0, (comeco - caixa.top) / trecho));
       const escolhido = Math.min(total - 1, Math.floor(andamento * total));
 
       if (escolhido !== categoriaAtiva) {

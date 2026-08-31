@@ -438,8 +438,10 @@ h1,h2,h3,.brand__name{
 .video video{ width:100%; display:block; background:#000; }
 
 /* ============================ BENEFÍCIOS ============================== */
-.beneficios{ background:var(--navy); color:var(--branco); padding:2rem 0; }
+.beneficios{ background:var(--navy); color:var(--branco); padding:2rem 0; overflow:hidden; }
 .beneficios__grid{ display:grid; gap:1.2rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+/* as cópias só existem para a esteira do celular */
+.ben--copia{ display:none; }
 .ben{ display:flex; align-items:center; gap:.85rem; }
 .ben svg{ width:26px; height:26px; fill:var(--gold); flex:none; }
 .ben div{ display:flex; flex-direction:column; line-height:1.3; }
@@ -758,8 +760,13 @@ h1,h2,h3,.brand__name{
   .vitrine{ grid-auto-columns:minmax(165px,1fr); }
   .modal__compra{ flex-direction:column; }
   .qtd{ align-self:flex-start; }
-  .banner__acoes{ gap:.5rem; }
-  .banner__acoes .btn{ flex:1 1 auto; padding:.7rem .9rem; font-size:.85rem; }
+  /* os três botões dividem uma linha só */
+  .banner__acoes{ gap:.35rem; flex-wrap:nowrap; }
+  .banner__acoes .btn{
+    flex:1 1 0; min-width:0; padding:.62rem .3rem;
+    font-size:.75rem; gap:.28rem;
+  }
+  .banner__acoes .btn .ico{ width:.95em; height:.95em; }
   .banner{ padding:1.7rem; }
   .banner--principal{ min-height:0; }
 }
@@ -1053,4 +1060,65 @@ h1,h2,h3,.brand__name{
   .atalho{ padding:1.1rem 1.1rem; gap:.8rem; }
   .atalho__txt strong{ font-size:1.05rem; }
   .atalho__txt span{ font-size:.78rem; }
+}
+
+/* ======================================================================
+   CELULAR: esteira dos benefícios, filtro em destaque e blocos 2 por 2
+   ====================================================================== */
+@media (max-width:760px){
+  /* os quatro selos viram uma esteira em linha única */
+  .beneficios{ padding:1rem 0; }
+  .beneficios__grid{
+    display:flex; flex-wrap:nowrap;
+    width:max-content; max-width:none; margin:0;
+    gap:2.2rem; padding-right:2.2rem;
+    animation:esteira 24s linear infinite;
+  }
+  .ben{ flex:none; gap:.6rem; }
+  .ben--copia{ display:flex; }
+  .ben svg{ width:22px; height:22px; }
+  .ben strong{ font-size:.84rem; white-space:nowrap; }
+  .ben span{ font-size:.74rem; white-space:nowrap; }
+}
+
+/* o conteúdo é duplicado, então andar metade dele fecha o ciclo sem emenda */
+@keyframes esteira{
+  from{ transform:translateX(0); }
+  to  { transform:translateX(-50%); }
+}
+@media (prefers-reduced-motion:reduce){
+  .beneficios__grid{ animation:none; }
+}
+
+@media (max-width:640px){
+  /* filtro bem mais visível: dourado, cheio e do tamanho do dedo */
+  .loja__barra{ gap:.7rem; }
+  .loja__ferramentas{ width:100%; gap:.5rem; }
+  #abrirFiltros{
+    flex:1 1 auto; justify-content:center;
+    background:var(--gold); color:var(--navy); border-color:var(--gold);
+    font-size:.92rem; font-weight:700; padding:.75rem 1.1rem;
+    box-shadow:0 4px 14px rgba(255,216,1,.35);
+  }
+  #abrirFiltros:hover{ background:var(--gold-600); border-color:var(--gold-600); }
+  #abrirFiltros .ico{ width:1.05em; height:1.05em; }
+  .ordenar{ flex:1 1 auto; }
+  .ordenar span{ display:none; }
+  .ordenar select{ width:100%; padding:.72rem .9rem; font-size:.88rem; }
+
+  /* Sobre: missão e visão lado a lado, e os valores dois a dois */
+  .grid-duplo--mv{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; }
+  .grid-duplo--mv .bloco{ padding:.9rem .8rem; }
+  .grid-duplo--mv .bloco h3{ font-size:.85rem; }
+  .grid-duplo--mv .bloco p{ font-size:.76rem; line-height:1.5; }
+  .grid-duplo--mv .canal__ico--pequeno{ width:32px; height:32px; margin-bottom:.45rem; }
+  .grid-duplo--mv .canal__ico--pequeno svg{ width:15px; height:15px; }
+
+  .valores{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; }
+  .valor{ border-radius:16px; }
+  .valor__vidro{ padding:.95rem .85rem; border-radius:16px; }
+  .valor__ico{ width:34px; height:34px; border-radius:10px; margin-bottom:.6rem; }
+  .valor__ico svg{ width:16px; height:16px; }
+  .valor h3{ font-size:.85rem; margin-bottom:.3rem; }
+  .valor p{ font-size:.74rem; line-height:1.5; }
 }
