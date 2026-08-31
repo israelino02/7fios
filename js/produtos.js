@@ -579,9 +579,6 @@ const EQUIPE = [
 /* ------------------------------------------------------------------- SOBRE
    Textos da página "Sobre". Edite à vontade.                              */
 const SOBRE = {
-  /* Vídeo da história, hospedado no YouTube. Para trocar, basta pôr aqui o
-     código do vídeo novo (o pedaço depois de youtu.be/ ou de watch?v=). */
-  video: "pLjRm11T7ZY",
   historia:
     "A Sete Fios nasceu da fé e da determinação. Com apenas um computador, um birô e uma mala de mostruário, os primeiros clientes surgiram entre idas e vindas em uma moto. O que parecia simples se tornou uma história de superação, gratidão e confiança no futuro. Durante a pandemia, vivemos momentos desafiadores, mas descobrimos a força da equipe e a fidelidade dos clientes que estiveram conosco desde o início. Hoje, muitos clientes deixaram de ser apenas compradores e se tornaram amigos, inspirando inovações e ajudando a moldar novos produtos.",
   missao:

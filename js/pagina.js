@@ -84,39 +84,31 @@
       .join("");
   }
 
-  /* No lugar da foto da loja entra o vídeo da história, que mora no YouTube.
-     A página não carrega o player junto com o resto: mostra um quadro da
-     fachada com o botão de play, e só monta o player quando alguém aperta.
-     Assim a página abre leve e o YouTube não acompanha quem só passou por
-     aqui. Onde o player não pode entrar (o link de visualização bloqueia
-     conteúdo de fora), o mesmo botão abre o vídeo no YouTube. */
+  /* No lugar da foto da loja entra o vídeo da história, servido pelo próprio
+     site. Nada de player de fora: o do YouTube carrega o título e o botão
+     dele por cima do filme, e os dois tiram a pessoa da página.
+
+     A página mostra primeiro um quadro da fachada tirado do próprio vídeo e
+     só baixa os megabytes quando alguém aperta o play, para quem passa pela
+     Sobre não pagar por um filme que não pediu. */
   const historiaFoto = $("#historiaFoto");
   const fotoLoja = typeof BANNERS !== "undefined" && (BANNERS.loja || BANNERS.hero);
-  const codigo = typeof SOBRE !== "undefined" && SOBRE.video;
+  const filme = typeof VIDEOS !== "undefined" && VIDEOS.historia;
   const capaVideo =
     (typeof VIDEOS !== "undefined" && VIDEOS.historiaCapa) || fotoLoja || "";
 
-  if (historiaFoto && codigo) {
-    const soLink = typeof SEM_CONTEUDO_DE_FORA !== "undefined" && SEM_CONTEUDO_DE_FORA;
-    const marca = soLink
-      ? `<a class="video-capa" href="https://youtu.be/${esc(codigo)}" target="_blank" rel="noopener"`
-      : `<button class="video-capa" type="button"`;
+  if (historiaFoto && filme) {
     historiaFoto.classList.add("historia__foto--video");
     historiaFoto.innerHTML = `
-      ${marca} aria-label="Assistir ao vídeo da Sete Fios Têxtil">
-        ${capaVideo ? `<img src="${esc(capaVideo)}" alt="" loading="lazy">` : ""}
-        <span class="video-capa__play" aria-hidden="true"></span>
-      </${soLink ? "a" : "button"}>`;
-
-    if (!soLink) {
-      historiaFoto.querySelector(".video-capa").addEventListener("click", () => {
-        historiaFoto.innerHTML =
-          `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(codigo)}?autoplay=1&rel=0"
-             title="A história da Sete Fios Têxtil" frameborder="0" allowfullscreen
-             allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>`;
-      });
-    }
+      <video controls playsinline preload="none"${
+        capaVideo ? ` poster="${esc(capaVideo)}"` : ""
+      }>
+        <source src="${esc(filme)}" type="video/mp4">
+        Seu navegador não abre vídeo.
+      </video>`;
   } else if (historiaFoto && capaVideo) {
+    /* sem o arquivo do vídeo (é o caso do link de visualização, que tem
+       limite de peso): fica o quadro da fachada tirado dele */
     historiaFoto.style.setProperty(
       "--foto",
       `url("${new URL(capaVideo, document.baseURI).href}")`

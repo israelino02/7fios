@@ -37,6 +37,7 @@ const GERENTES = [
 ];
 
 const VIDEOS = {
+  "historia": "assets/video/historia.mp4?v=1788168292",
   "historiaCapa": "assets/video/historia-capa.jpg?v=1788167349"
 };
 

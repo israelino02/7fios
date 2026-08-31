@@ -331,10 +331,10 @@ def familia_da_cor(nome, hexa):
     return familia(hexa)
 
 # ------------------------------------------------------------------- vídeo
-# O vídeo da história mora no YouTube (o código fica em js/produtos.js). Aqui
-# só tiramos dele o quadro que a página mostra antes de alguém apertar o
-# play: assim a capa é a do vídeo de verdade, sem depender de buscar imagem
-# no YouTube quando a página abre.
+# O vídeo da história é servido pelo próprio site, não por YouTube: assim
+# quem aperta o play não tem por onde sair da página. O arquivo é copiado
+# como está (já vem em 720p bem compactado) e a capa que aparece antes do
+# play é um quadro tirado dele pelo Quick Look do macOS.
 PASTA_VIDEO = "video historia"
 EXT_VIDEO = (".mp4", ".mov", ".m4v", ".MP4", ".MOV", ".M4V")
 
@@ -348,9 +348,18 @@ def preparar_video(conta):
         return {}
 
     origem = os.path.join(pasta, arquivos[0])
-    capa = os.path.join(DESTINO, "video", "historia-capa.jpg")
-    os.makedirs(os.path.dirname(capa), exist_ok=True)
+    destino = os.path.join(DESTINO, "video", "historia.mp4")
+    os.makedirs(os.path.dirname(destino), exist_ok=True)
 
+    marca = [os.path.relpath(origem, RAIZ), os.path.getsize(origem),
+             int(os.path.getmtime(origem)), 0, 0]
+    chave = os.path.relpath(destino, RAIZ)
+    if not os.path.exists(destino) or _ficha.get(chave) != marca:
+        shutil.copyfile(origem, destino)
+        _ficha[chave] = marca
+        print(f"  vídeo: {arquivos[0]} ({os.path.getsize(origem)//(1024*1024)} MB)", flush=True)
+
+    capa = os.path.join(DESTINO, "video", "historia-capa.jpg")
     if not os.path.exists(capa) or os.path.getmtime(capa) < os.path.getmtime(origem):
         temp = os.path.join(DESTINO, "video", "_quadro")
         os.makedirs(temp, exist_ok=True)
@@ -359,17 +368,12 @@ def preparar_video(conta):
         quadros = [f for f in os.listdir(temp) if f.endswith(".png")]
         if quadros:
             conta(os.path.join(temp, quadros[0]), capa, *LARGURA["banner"])
-            print(f"  capa do vídeo tirada de {arquivos[0]}", flush=True)
         shutil.rmtree(temp, ignore_errors=True)
 
-    # o arquivo pesado não vai para o site: quem serve o vídeo é o YouTube
-    antigo = os.path.join(DESTINO, "video", "historia.mp4")
-    if os.path.exists(antigo):
-        _ficha.pop(os.path.relpath(antigo, RAIZ), None)
-        os.remove(antigo)
-        print("  vídeo pesado removido de assets (agora vem do YouTube)", flush=True)
-
-    return {"historiaCapa": web(capa)} if os.path.exists(capa) else {}
+    saida = {"historia": web(destino)}
+    if os.path.exists(capa):
+        saida["historiaCapa"] = web(capa)
+    return saida
 
 # ------------------------------------------------------------------ execução
 def main():
