@@ -679,18 +679,47 @@ h1,h2,h3,.brand__name{
 
 /* ============================ RESPONSIVO ============================== */
 @media (max-width:1040px){
+  /* O painel de filtros fica à vista, como no computador: vira um bloco
+     acima dos produtos, com as listas em duas colunas para não esticar. */
   .loja__grid{ grid-template-columns:1fr; }
+  .filtros{ position:static; margin-bottom:1.2rem; }
+  .filtros__fechar{ display:none; }
+  .filtros__fundo{ display:none; }
+  #abrirFiltros{ display:none; }
+
+  /* Os quatro grupos se encaixam em duas colunas: Departamento numa,
+     Cor e Disponibilidade na outra, e Categoria (a maior) na largura toda. */
   .filtros{
-    position:fixed; top:0; left:0; bottom:0; z-index:140;
-    width:min(320px,88%); border-radius:0; overflow-y:auto;
-    transform:translateX(-100%); transition:transform var(--tr);
-    box-shadow:var(--sombra-alta);
+    padding:1rem 1.1rem;
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:1.2rem; align-content:start;
   }
-  .filtros.is-open{ transform:none; }
-  .filtros__fechar{ display:block; }
-  .filtros__fundo{ display:block; position:fixed; inset:0; z-index:135; background:rgba(20,9,53,.55); }
-  .filtros__fundo[hidden]{ display:none; }
-  #abrirFiltros{ display:inline-flex; }
+  .filtros__topo, #limparFiltros{ grid-column:1 / -1; }
+  .filtro:has(#fDepartamento){ grid-column:1; grid-row:span 2; order:1; }
+  .filtro:has(#fCores){ grid-column:2; order:2; border-bottom:0; }
+  .filtro:has(#fPronta){ grid-column:2; order:3; }
+  .filtro:has(#fCategoria){ grid-column:1 / -1; order:4; }
+  #limparFiltros{ order:5; margin-top:.7rem; }
+  .filtros__topo h2{ font-size:.88rem; }
+  .filtro__lista{ display:flex; flex-direction:column; gap:.22rem; }
+  .filtro__grupo{ margin:.3rem 0 0; font-size:.62rem; }
+
+  /* Categoria é a lista mais longa: ocupa a largura toda e se divide em
+     duas, com o nome do departamento mandando na linha inteira */
+  #fCategoria{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.22rem .7rem;
+  }
+  #fCategoria .filtro__grupo{ grid-column:1 / -1; }
+  .filtro{ padding:.55rem 0; }
+  .filtro h3{ margin-bottom:.35rem; font-size:.76rem; }
+  .check{ font-size:.79rem; gap:.4rem; line-height:1.25; }
+  .check input{ width:15px; height:15px; }
+  .check em{ font-size:.72rem; }
+  .cores{ gap:.4rem; }
+  .cor-btn{ width:23px; height:23px; }
+  #limparFiltros{ padding:.6rem 1rem; font-size:.85rem; }
+
   .footer__grid{ grid-template-columns:1fr 1fr; }
 }
 
@@ -735,24 +764,24 @@ h1,h2,h3,.brand__name{
   .banners__lado{ grid-template-columns:1fr; }
   .footer__grid{ grid-template-columns:1fr; }
   /* celular: três colunas de produtos, tudo mais justo */
-  .produtos{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:.45rem; }
+  .produtos{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; }
   .card__corpo{ padding:.5rem .45rem 0; }
   .card__preco{ padding:0 .45rem; }
   .card__acoes{ flex-direction:row; padding:.5rem .45rem .5rem; gap:.25rem; }
-  .card__cat{ font-size:.55rem; letter-spacing:.05em; }
-  .card__nome{ font-size:.75rem; line-height:1.25; }
-  .card__resumo{ font-size:.65rem; line-height:1.3; margin-bottom:.35rem; }
+  .card__cat{ font-size:.6rem; letter-spacing:.06em; }
+  .card__nome{ font-size:.86rem; line-height:1.25; }
+  .card__resumo{ font-size:.74rem; line-height:1.35; margin-bottom:.4rem; }
   /* corta em duas linhas para os cards não crescerem demais */
   .card__nome button, .card__resumo{
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
-  .card__preco strong{ font-size:.74rem; }
-  .card__preco small{ font-size:.6rem; }
-  .card__wpp{ font-size:.65rem; padding:.45rem .2rem; gap:.2rem; }
+  .card__preco strong{ font-size:.86rem; }
+  .card__preco small{ font-size:.68rem; }
+  .card__wpp{ font-size:.76rem; padding:.5rem .35rem; gap:.3rem; }
   .card__wpp .ico{ width:.9em; height:.9em; }
-  .card__add{ width:28px; height:28px; flex:none; }
+  .card__add{ width:32px; height:32px; flex:none; }
   .card__add svg{ width:14px; height:14px; }
-  .bolinha{ width:9px; height:9px; }
+  .bolinha{ width:11px; height:11px; }
   .bolinha__mais{ font-size:.6rem; }
   .card__cores{ gap:.18rem; padding-bottom:.4rem; }
   .card__olho{ font-size:.65rem; padding:.4rem; }
@@ -1093,7 +1122,7 @@ h1,h2,h3,.brand__name{
 @media (max-width:640px){
   /* filtro bem mais visível: dourado, cheio e do tamanho do dedo */
   .loja__barra{ gap:.7rem; }
-  .loja__ferramentas{ width:100%; gap:.5rem; }
+  .loja__ferramentas{ width:100%; gap:.5rem; justify-content:flex-end; }
   #abrirFiltros{
     flex:1 1 auto; justify-content:center;
     background:var(--gold); color:var(--navy); border-color:var(--gold);
