@@ -224,16 +224,37 @@ def web(caminho):
     except OSError:
         return rel
 
+# Ficha do que já foi convertido: guarda de qual arquivo veio cada foto do
+# site, com tamanho e data. Assim, trocar a foto por outra (mesmo que ela
+# tenha data mais antiga, como acontece ao copiar de outra pasta) refaz a
+# conversão. Antes a checagem era só pela data e trocas assim eram ignoradas.
+FICHA = os.path.join(DESTINO, ".convertidos.json")
+
+try:
+    _ficha = json.load(io.open(FICHA, encoding="utf-8"))
+except Exception:
+    _ficha = {}
+
 def converter(entrada, saida, largura, qualidade):
-    """Reduz e comprime com o sips (já vem no macOS). Pula se já existir."""
-    if os.path.exists(saida) and os.path.getmtime(saida) >= os.path.getmtime(entrada):
+    """Reduz e comprime com o sips (já vem no macOS). Pula o que não mudou."""
+    chave = os.path.relpath(saida, RAIZ)
+    try:
+        marca = [os.path.relpath(entrada, RAIZ), os.path.getsize(entrada),
+                 int(os.path.getmtime(entrada)), largura, qualidade]
+    except OSError:
+        marca = None
+
+    if os.path.exists(saida) and marca and _ficha.get(chave) == marca:
         return saida
+
     os.makedirs(os.path.dirname(saida), exist_ok=True)
     subprocess.run(
         ["sips", "-Z", str(largura), "-s", "format", "jpeg",
          "-s", "formatOptions", str(qualidade), entrada, "--out", saida],
         check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
     )
+    if marca:
+        _ficha[chave] = marca
     return saida
 
 def cor_media(imagem):
@@ -282,6 +303,32 @@ def familia(hexa):
     if h < 255: return "azul"
     if h < 292: return "roxo"
     return "rosa"
+
+# Quando o nome do arquivo já diz a cor, ele manda no filtro. A média de
+# pixels erra em foto de tecido escuro ou lavado: "Marrom" caía em preto e
+# "Verde Tw" em azul, e quem filtrasse por marrom não achava. A bolinha
+# continua com a cor medida na foto; só a gaveta de filtro segue o nome.
+PALAVRA_COR = {
+    "preto": "preto", "black": "preto",
+    "branco": "branco", "white": "branco", "off": "branco", "cru": "branco",
+    "cinza": "cinza", "grafite": "cinza", "chumbo": "cinza", "prata": "cinza",
+    "bege": "bege", "areia": "bege", "nude": "bege", "caramelo": "bege",
+    "marrom": "marrom", "cafe": "marrom", "chocolate": "marrom", "brown": "marrom",
+    "vermelho": "vermelho", "red": "vermelho", "vinho": "vermelho", "bordo": "vermelho",
+    "rosa": "rosa", "pink": "rosa", "salmao": "rosa",
+    "laranja": "laranja", "orange": "laranja", "coral": "laranja",
+    "amarelo": "amarelo", "yellow": "amarelo", "mostarda": "amarelo", "ouro": "amarelo",
+    "verde": "verde", "green": "verde", "musgo": "verde", "oliva": "verde",
+    "azul": "azul", "blue": "azul", "marinho": "azul", "turquesa": "azul",
+    "roxo": "roxo", "lilas": "roxo", "violeta": "roxo", "purple": "roxo", "uva": "roxo",
+}
+
+def familia_da_cor(nome, hexa):
+    palavras = re.findall(r"[a-z]+", slug(nome).replace("-", " "))
+    for palavra in palavras:
+        if palavra in PALAVRA_COR:
+            return PALAVRA_COR[palavra]
+    return familia(hexa)
 
 # ------------------------------------------------------------------ execução
 def main():
@@ -366,7 +413,7 @@ def main():
                 mini = conta(origem, os.path.join(base, "cores", cs + "-mini.jpg"), *LARGURA["cor_mini"])
                 hexa = cor_media(mini)
                 registro["cores"].append({
-                    "nome": nome, "hex": hexa, "familia": familia(hexa),
+                    "nome": nome, "hex": hexa, "familia": familia_da_cor(nome, hexa),
                     "img": web(grande),
                     "mini": web(mini),
                     "_origem": origem,
@@ -407,6 +454,23 @@ def main():
             capa_origem = os.path.join(resolver(pasta), lista[0])
         capa = conta(capa_origem, os.path.join(base, "capa.jpg"), *LARGURA["capa"])
         registro["capa"] = web(capa)
+        # Produto cujas "fotos de cor" são só quadradinhos chapados (a pasta
+        # tem PNGs de 11 KB, sem trama nenhuma). Mostrar aquilo em tela cheia
+        # fica pior que não mostrar: o site passa a usar a capa de verdade e o
+        # quadradinho vira só a bolinha da cor. Se um dia entrarem fotos reais
+        # na pasta, o peso sobe e isto se desliga sozinho.
+        pesos = sorted(c["_peso"] for c in registro["cores"])
+        if pesos and pesos[len(pesos) // 2] < LIMIAR_FOTO:
+            registro["coresChapadas"] = True
+            for c in registro["cores"]:
+                for campo in ("img", "mini"):
+                    caminho = os.path.join(RAIZ, c[campo].split("?")[0])
+                    _ficha.pop(os.path.relpath(caminho, RAIZ), None)
+                    if os.path.exists(caminho):
+                        os.remove(caminho)
+                    c.pop(campo)
+            print(f"  · {sl}: cores chapadas, usando a capa nas fotos", flush=True)
+
         for c in registro["cores"]:
             c.pop("_origem", None)
             c.pop("_peso", None)
@@ -452,6 +516,10 @@ def main():
         fp.write("const FITA = " + json.dumps(fita, ensure_ascii=False) + ";\n\n")
         fp.write("const GERENTES = " + json.dumps(gerentes, ensure_ascii=False, indent=2) + ";\n\n")
         fp.write("const IMAGENS = " + json.dumps(imagens, ensure_ascii=False, indent=2) + ";\n")
+
+    os.makedirs(DESTINO, exist_ok=True)
+    with io.open(FICHA, "w", encoding="utf-8") as fp:
+        json.dump(_ficha, fp)
 
     print(f"\nPronto: {total['feitas']} imagens processadas.")
     print(f"Gerado: {os.path.relpath(saida, RAIZ)}")

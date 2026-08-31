@@ -613,6 +613,11 @@ h1,h2,h3,.brand__name{
   transition:border-color var(--tr), transform var(--tr);
 }
 .amostra img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px; }
+/* cor que não tem foto de trama: a amostra é a própria cor */
+.amostra__cor{
+  display:block; width:100%; aspect-ratio:1/1; border-radius:6px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
+}
 .amostra span{
   font-size:.63rem; line-height:1.2; color:var(--cinza-500);
   padding:0 .1rem .15rem; text-align:center;
@@ -703,6 +708,10 @@ h1,h2,h3,.brand__name{
   .filtros__fundo{ display:block; position:fixed; inset:0; z-index:135; background:rgba(20,9,53,.55); }
   .filtros__fundo[hidden]{ display:none; }
   #abrirFiltros{ display:inline-flex; }
+
+  /* tarja que só repete o atalho aceso: no celular fica de fora */
+  #tagsAtivas[data-atalho] .tag-ativa[data-tirar="grupo"]{ display:none; }
+  #tagsAtivas[data-atalho]:not(:has(.tag-ativa:not([data-tirar="grupo"]))){ display:none; }
 
   .atalhos-dep{
     display:grid; grid-template-columns:repeat(3,minmax(0,1fr));

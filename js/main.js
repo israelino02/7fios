@@ -28,6 +28,7 @@
     p._cores = im.cores || [];
     p._galeria = im.galeria || [];
     p._capaPropria = !!im.capaPropria;
+    p._coresChapadas = !!im.coresChapadas;
     p._familias = Array.from(new Set(p._cores.map((c) => c.familia)));
   });
 
@@ -51,7 +52,10 @@
       if (p._capaPropria || !p._galeria.length) lista.push({ img: p._capa, legenda: "" });
     }
     p._galeria.forEach((g) => lista.push({ img: g, legenda: "" }));
-    p._cores.forEach((c) => lista.push({ img: c.img, legenda: c.nome, cor: c.hex }));
+    /* cor sem foto de verdade (só o quadradinho) não entra na galeria */
+    p._cores.forEach((c) => {
+      if (c.img) lista.push({ img: c.img, legenda: c.nome, cor: c.hex });
+    });
     if (!lista.length && p._capa) lista.push({ img: p._capa, legenda: "" });
     return lista;
   }
@@ -308,6 +312,16 @@
     if (estado.pronta) tags.push({ tipo: "pronta", valor: "1", rotulo: "Pronta entrega" });
     if (estado.busca.trim())
       tags.push({ tipo: "busca", valor: "1", rotulo: `Busca: ${estado.busca.trim()}` });
+
+    /* No celular, quando a seleção é exatamente a de um atalho, as tarjas só
+       repetem o que o botão já mostra aceso e roubam duas linhas da tela. O
+       atributo abaixo deixa o CSS escondê-las lá, e só as de departamento:
+       cor, categoria e busca continuam aparecendo, porque essas o atalho não
+       diz. No computador nada muda. */
+    const soAtalho =
+      typeof ATALHOS_CELULAR !== "undefined" &&
+      ATALHOS_CELULAR.some((a) => mesmaSelecao(a.grupos));
+    $("#tagsAtivas").toggleAttribute("data-atalho", soAtalho);
 
     $("#tagsAtivas").innerHTML = tags
       .map(
@@ -610,15 +624,23 @@
 
     $("#modalCoresTitulo").hidden = !p._cores.length;
     $("#modalCoresTitulo").textContent = `${p._cores.length} cores disponíveis`;
-    const base = slides.length - p._cores.length;
+    /* quando a cor tem foto, a amostra leva para ela; quando é só quadradinho
+       de cor, a amostra é a própria cor, sem foto chapada no meio */
+    const comFoto = p._cores.filter((c) => c.img);
+    const base = slides.length - comFoto.length;
     $("#modalCores").innerHTML = p._cores
-      .map(
-        (c, i) => `
-        <button class="amostra" type="button" data-slide="${base + i}" title="${esc(c.nome)}">
-          <img src="${esc(c.mini)}" alt="" loading="lazy">
+      .map((c) => {
+        const i = comFoto.indexOf(c);
+        const leva = i >= 0 ? ` data-slide="${base + i}"` : "";
+        const amostra = c.mini
+          ? `<img src="${esc(c.mini)}" alt="" loading="lazy">`
+          : `<span class="amostra__cor" style="background:${esc(c.hex)}"></span>`;
+        return `
+        <button class="amostra" type="button"${leva} title="${esc(c.nome)}">
+          ${amostra}
           <span>${esc(c.nome)}</span>
-        </button>`
-      )
+        </button>`;
+      })
       .join("");
 
     const det = p.detalhes || {};
@@ -698,7 +720,10 @@
     if (seta) return mostrarSlide(slideAtual + Number(seta.dataset.seta));
 
     const amostra = e.target.closest(".amostra");
-    if (amostra) return mostrarSlide(Number(amostra.dataset.slide));
+    if (amostra) {
+      if (amostra.dataset.slide) mostrarSlide(Number(amostra.dataset.slide));
+      return;
+    }
 
     const abrir = e.target.closest("[data-abrir]");
     if (abrir) {
@@ -892,6 +917,20 @@
   }
   const gruposUrl = parametros.get("grupos");
   if (gruposUrl) gruposUrl.split(",").forEach((g) => estado.grupos.add(g));
+
+  /* No celular a loja já abre em Microfibras, que é o carro-chefe. Quem quiser
+     ver outra linha toca em Dry-fit ou Aviamentos, ou desliga no próprio
+     atalho. No computador não: lá cabe a barra lateral e a loja inteira.
+     Só vale para quem chega sem pedir nada; link com filtro ou busca manda. */
+  if (
+    !gruposUrl &&
+    !buscaUrl &&
+    typeof ATALHOS_CELULAR !== "undefined" &&
+    ATALHOS_CELULAR.length &&
+    matchMedia("(max-width:1040px)").matches
+  ) {
+    ATALHOS_CELULAR[0].grupos.forEach((g) => estado.grupos.add(g));
+  }
 
   montarCategorias();
   carregarCarrinho();
