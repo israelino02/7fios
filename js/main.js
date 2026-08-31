@@ -322,6 +322,13 @@
       b.setAttribute("aria-pressed", ativo);
     });
     $("#fPronta").checked = estado.pronta;
+
+    $$("#depsRapido .dep-chip").forEach((chip) => {
+      const g = chip.dataset.depRapido;
+      const ligado = g ? estado.grupos.has(g) : estado.grupos.size === 0;
+      chip.classList.toggle("is-ativo", ligado);
+      chip.setAttribute("aria-pressed", ligado);
+    });
   }
 
   function reiniciarPagina() {
@@ -331,6 +338,36 @@
   /* ====================================================================== */
   /*  MONTAGEM DA PÁGINA                                                    */
   /* ====================================================================== */
+  /* Atalho de departamento que fica à vista no celular. O painel completo
+     (categoria, cor, disponibilidade) continua no botão "Filtrar". */
+  function montarDepsRapido() {
+    const alvo = $("#depsRapido");
+    if (!alvo) return;
+
+    const chips = [`<button class="dep-chip" type="button" data-dep-rapido="" aria-pressed="true">Todos</button>`];
+    Object.keys(DEPARTAMENTOS).forEach((g) => {
+      const n = PRODUTOS.filter((p) => p.grupo === g).length;
+      if (!n) return;
+      chips.push(
+        `<button class="dep-chip" type="button" data-dep-rapido="${esc(g)}" aria-pressed="false">
+           ${esc(nomeDep(g))} <em>${n}</em>
+         </button>`
+      );
+    });
+    alvo.innerHTML = chips.join("");
+
+    alvo.addEventListener("click", (e) => {
+      const chip = e.target.closest("[data-dep-rapido]");
+      if (!chip) return;
+      const g = chip.dataset.depRapido;
+      estado.categorias.clear();
+      if (!g) estado.grupos.clear();
+      else if (estado.grupos.has(g)) estado.grupos.delete(g);
+      else estado.grupos.add(g);
+      reiniciarPagina();
+    });
+  }
+
   function montarFiltros() {
     $("#fDepartamento").innerHTML = Object.keys(DEPARTAMENTOS)
       .map((g) => {
@@ -834,6 +871,7 @@
   }
   montarBanners();
   montarFiltros();
+  montarDepsRapido();
   /* Se veio de outra página com filtro ou busca na URL, já aplica. */
   const parametros = new URLSearchParams(location.search);
   const buscaUrl = parametros.get("busca");

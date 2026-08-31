@@ -425,6 +425,7 @@ h1,h2,h3,.brand__name{
 
 .produtos{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); }
 .loja__mais{ display:flex; justify-content:center; margin-top:2rem; }
+.deps-rapido{ display:none; }
 
 .vazio{
   grid-column:1/-1; text-align:center; padding:3.5rem 1rem;
@@ -679,48 +680,43 @@ h1,h2,h3,.brand__name{
 
 /* ============================ RESPONSIVO ============================== */
 @media (max-width:1040px){
-  /* O painel de filtros fica à vista, como no computador: vira um bloco
-     acima dos produtos, com as listas em duas colunas para não esticar. */
   .loja__grid{ grid-template-columns:1fr; }
-  .filtros{ position:static; margin-bottom:1.2rem; }
-  .filtros__fechar{ display:none; }
-  .filtros__fundo{ display:none; }
-  #abrirFiltros{ display:none; }
-
-  /* Os quatro grupos se encaixam em duas colunas: Departamento numa,
-     Cor e Disponibilidade na outra, e Categoria (a maior) na largura toda. */
+  /* o painel completo é gaveta, aberta pelo botão "Filtrar" */
   .filtros{
-    padding:1rem 1.1rem;
-    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
-    column-gap:1.2rem; align-content:start;
+    position:fixed; top:0; left:0; bottom:0; z-index:140;
+    width:min(330px,90%); border-radius:0; overflow-y:auto;
+    transform:translateX(-100%); transition:transform var(--tr);
+    box-shadow:var(--sombra-alta);
   }
-  .filtros__topo, #limparFiltros{ grid-column:1 / -1; }
-  .filtro:has(#fDepartamento){ grid-column:1; grid-row:span 2; order:1; }
-  .filtro:has(#fCores){ grid-column:2; order:2; border-bottom:0; }
-  .filtro:has(#fPronta){ grid-column:2; order:3; }
-  .filtro:has(#fCategoria){ grid-column:1 / -1; order:4; }
-  #limparFiltros{ order:5; margin-top:.7rem; }
-  .filtros__topo h2{ font-size:.88rem; }
-  .filtro__lista{ display:flex; flex-direction:column; gap:.22rem; }
-  .filtro__grupo{ margin:.3rem 0 0; font-size:.62rem; }
+  .filtros.is-open{ transform:none; }
+  .filtros__fechar{ display:block; }
+  .filtros__fundo{ display:block; position:fixed; inset:0; z-index:135; background:rgba(20,9,53,.55); }
+  .filtros__fundo[hidden]{ display:none; }
+  #abrirFiltros{ display:inline-flex; }
 
-  /* Categoria é a lista mais longa: ocupa a largura toda e se divide em
-     duas, com o nome do departamento mandando na linha inteira */
-  #fCategoria{
-    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:.22rem .7rem;
+  /* Atalho de departamento, à vista acima dos produtos: resolve num toque
+     o filtro mais usado. Categoria, cor e disponibilidade seguem na gaveta. */
+  .deps-rapido{
+    display:flex; gap:.45rem; margin-bottom:.9rem;
+    overflow-x:auto; padding-bottom:.35rem;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch;
   }
-  #fCategoria .filtro__grupo{ grid-column:1 / -1; }
-  .filtro{ padding:.55rem 0; }
-  .filtro h3{ margin-bottom:.35rem; font-size:.76rem; }
-  .check{ font-size:.79rem; gap:.4rem; line-height:1.25; }
-  .check input{ width:15px; height:15px; }
-  .check em{ font-size:.72rem; }
-  .cores{ gap:.4rem; }
-  .cor-btn{ width:23px; height:23px; }
-  #limparFiltros{ padding:.6rem 1rem; font-size:.85rem; }
+  .deps-rapido::-webkit-scrollbar{ display:none; }
+  .dep-chip{
+    flex:none; cursor:pointer; white-space:nowrap;
+    background:var(--branco); color:var(--cinza-500);
+    border:1px solid var(--cinza-200); border-radius:999px;
+    padding:.5rem .95rem; font-size:.82rem; font-weight:500;
+    transition:background var(--tr), border-color var(--tr), color var(--tr);
+  }
+  .dep-chip em{ font-style:normal; color:var(--cinza-400); font-size:.75rem; margin-left:.15rem; }
+  .dep-chip.is-ativo{
+    background:var(--navy); border-color:var(--navy); color:var(--branco); font-weight:600;
+  }
+  .dep-chip.is-ativo em{ color:rgba(255,255,255,.65); }
 
   .footer__grid{ grid-template-columns:1fr 1fr; }
+}
 }
 
 @media (max-width:900px){
