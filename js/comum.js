@@ -168,7 +168,8 @@ function montarRodape() {
   if (!alvo || typeof VITRINE_CATEGORIAS === "undefined") return;
   alvo.innerHTML = VITRINE_CATEGORIAS.map(
     (c) =>
-      `<li><a href="index.html?grupos=${encodeURIComponent(c.grupos.join(","))}#loja">${esc(c.nome)}</a></li>`
+      `<li><a href="index.html?grupos=${c.grupos.join(",")}#loja"
+              data-ir-grupos="${esc(c.grupos.join(","))}">${esc(c.nome)}</a></li>`
   ).join("");
 }
 

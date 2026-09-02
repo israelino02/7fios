@@ -290,13 +290,25 @@
         );
       const achou =
         combina(VITRINE_CATEGORIAS) ||
-        (typeof ATALHOS_CELULAR !== "undefined" ? combina(ATALHOS_CELULAR) : null);
+        (typeof ATALHOS_CELULAR !== "undefined" ? combina(ATALHOS_CELULAR) : null) ||
+        combina(nomesDoMenu());
       atual = achou ? achou.nome : Array.from(estado.grupos).map(nomeDep).join(" e ");
     }
     $("#crumbAtual").textContent = atual;
 
     pintarTagsAtivas();
     marcarFiltros();
+  }
+
+  /* O menu de cima também dá nome a um conjunto de departamentos: quem clica
+     em "Microfibras" espera ler "Microfibras" na migalha, e não "Microfibras
+     Poliamida e Microfibras Poliéster". Os nomes saem do próprio menu, então
+     mudar o menu já muda a migalha junto. */
+  function nomesDoMenu() {
+    return $$("#nav [data-ir-grupos]").map((a) => ({
+      nome: a.textContent.trim(),
+      grupos: a.dataset.irGrupos.split(","),
+    }));
   }
 
   function pintarTagsAtivas() {
@@ -353,8 +365,40 @@
     }
   }
 
+  /* Cada estado da loja tem endereço próprio: é o que permite anunciar uma
+     linha de produto direto no Google Ads, e deixa a pessoa copiar o link do
+     que está vendo. Só mexemos nos nossos parâmetros; o que vem de fora
+     (gclid do Ads, utm de campanha) fica onde está, senão a medição de
+     conversão do anúncio se perde. */
+  const NOSSOS_PARAMETROS = ["grupos", "categorias", "cores", "busca"];
+
+  function sincronizarEndereco() {
+    if (!history.replaceState) return;
+    const p = new URLSearchParams(location.search);
+    NOSSOS_PARAMETROS.forEach((k) => p.delete(k));
+    if (estado.grupos.size) p.set("grupos", Array.from(estado.grupos).join(","));
+    if (estado.categorias.size)
+      p.set("categorias", Array.from(estado.categorias).join(","));
+    if (estado.cores.size) p.set("cores", Array.from(estado.cores).join(","));
+    if (estado.busca.trim()) p.set("busca", estado.busca.trim());
+
+    /* vírgula é válida em endereço e fica bem mais legível para quem copia o
+       link ou cadastra o sitelink no Google Ads */
+    const consulta = p.toString().replace(/%2C/g, ",");
+    /* no arquivo único do link de visualização a âncora é a rota da tela
+       (#/loja); ali ela manda, senão trocaríamos a tela sem querer */
+    const rota = location.hash.indexOf("#/") === 0 ? location.hash : "";
+    history.replaceState(
+      null,
+      "",
+      location.pathname + (consulta ? "?" + consulta : "") +
+        (rota || (consulta ? "#loja" : location.hash))
+    );
+  }
+
   function reiniciarPagina() {
     pintarProdutos();
+    sincronizarEndereco();
   }
 
   /* ====================================================================== */
@@ -739,6 +783,10 @@
 
     const irDep = e.target.closest("[data-ir-dep], [data-ir-grupos]");
     if (irDep) {
+      /* o link do menu tem endereço de verdade, para servir de sitelink e
+         para funcionar vindo de outra página; aqui dentro da loja ele filtra
+         na hora, sem recarregar tudo de novo */
+      e.preventDefault();
       estado.categorias.clear();
       estado.grupos.clear();
       const grupos = irDep.dataset.irGrupos
@@ -917,6 +965,10 @@
   }
   const gruposUrl = parametros.get("grupos");
   if (gruposUrl) gruposUrl.split(",").forEach((g) => estado.grupos.add(g));
+  const categoriasUrl = parametros.get("categorias");
+  if (categoriasUrl) categoriasUrl.split(",").forEach((c) => estado.categorias.add(c));
+  const coresUrl = parametros.get("cores");
+  if (coresUrl) coresUrl.split(",").forEach((c) => estado.cores.add(c));
 
   /* No celular a loja já abre em Microfibras, que é o carro-chefe. Quem quiser
      ver outra linha toca em Dry-fit ou Aviamentos, ou desliga no próprio
@@ -924,6 +976,8 @@
      Só vale para quem chega sem pedir nada; link com filtro ou busca manda. */
   if (
     !gruposUrl &&
+    !categoriasUrl &&
+    !coresUrl &&
     !buscaUrl &&
     typeof ATALHOS_CELULAR !== "undefined" &&
     ATALHOS_CELULAR.length &&
@@ -936,4 +990,24 @@
   carregarCarrinho();
   pintarCarrinho();
   pintarProdutos();
+
+  /* Chegou por um link com filtro (um sitelink do anúncio, por exemplo) e sem
+     âncora no endereço: leva direto para a prateleira, senão a pessoa cai no
+     topo e não vê o que foi prometido no anúncio. Esperamos as imagens
+     assentarem: rolando antes disso, a loja ainda está subindo na página e a
+     rolagem para no lugar errado. */
+  if ((gruposUrl || categoriasUrl || coresUrl || buscaUrl) && !location.hash) {
+    const descer = () => {
+      /* a folha de estilo rola com animação, boa para quem clica no menu e
+         ruim para quem acabou de chegar: aqui a página já nasce na altura
+         certa, sem a pessoa ver o topo passar */
+      const raiz = document.documentElement;
+      const antes = raiz.style.scrollBehavior;
+      raiz.style.scrollBehavior = "auto";
+      $("#loja").scrollIntoView({ block: "start" });
+      raiz.style.scrollBehavior = antes;
+    };
+    if (document.readyState === "complete") descer();
+    else addEventListener("load", descer, { once: true });
+  }
 })();

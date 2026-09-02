@@ -16,9 +16,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- ?v=15 → depois de atualizar o catálogo, troque para ?v=16, ?v=17…
+<!-- ?v=26 → depois de atualizar o catálogo, troque para ?v=27, ?v=28…
      para que quem já visitou o site enxergue a versão nova na hora. -->
-<link rel="stylesheet" href="css/styles.css?v=21">
+<link rel="stylesheet" href="css/styles.css?v=26">
 </head>
 <body>
 
@@ -54,12 +54,12 @@
         <span class="acao__txt"><small>Fale com o vendedor</small><strong>WhatsApp</strong></span>
       </a>
 
-      <button class="acao acao--carrinho" id="abrirCarrinho" aria-label="Abrir meu orçamento">
+      <button class="acao acao--carrinho" id="abrirCarrinho" aria-label="Abrir meu carrinho">
         <span class="acao__ico">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h14l-1.6 8.4a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L5.4 3H2V1h5l.6 3ZM9 18a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg>
           <span class="badge" id="badgeCarrinho" hidden>0</span>
         </span>
-        <span class="acao__txt"><small>Meu</small><strong>Orçamento</strong></span>
+        <span class="acao__txt"><small>Meu</small><strong>Carrinho</strong></span>
       </button>
 
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
@@ -73,13 +73,13 @@
 <nav class="navbar" id="nav" aria-label="Menu">
   <div class="container navbar__inner">
     <a href="#inicio">Início</a>
-    <a href="#loja" data-ir-grupos="poliamida,poliester">Microfibras</a>
-    <a href="#loja" data-ir-grupos="dryfit">Dry-fit</a>
-    <a href="#loja" data-ir-grupos="estampados">Estampados</a>
-    <a href="#loja" data-ir-grupos="aviamentos">Aviamentos</a>
-    <a href="contato.html#faq">Dúvidas</a>
+    <a href="index.html?grupos=poliamida,poliester" data-ir-grupos="poliamida,poliester">Microfibras</a>
+    <a href="index.html?grupos=dryfit" data-ir-grupos="dryfit">Dry-fit</a>
+    <a href="index.html?grupos=estampados" data-ir-grupos="estampados">Estampados</a>
+    <a href="index.html?grupos=aviamentos" data-ir-grupos="aviamentos">Aviamentos</a>
     <a href="sobre.html">Sobre</a>
     <a href="contato.html">Contato</a>
+    <a href="contato.html#faq">Dúvidas</a>
   </div>
 </nav>
 
@@ -389,7 +389,7 @@
           <input type="number" id="modalQtd" value="1" min="1" step="1" aria-label="Quantidade">
           <button type="button" data-qtd="1" aria-label="Aumentar">+</button>
         </div>
-        <button class="btn btn--navy" id="modalAdd">Adicionar ao orçamento</button>
+        <button class="btn btn--navy" id="modalAdd">Adicionar ao carrinho</button>
       </div>
 
       <a class="btn btn--wpp btn--block" id="modalWpp" href="#" target="_blank" rel="noopener">
@@ -405,8 +405,8 @@
   <div class="drawer__overlay" data-fechar-drawer></div>
   <aside class="drawer__box" role="dialog" aria-modal="true" aria-labelledby="drawerTitulo">
     <header class="drawer__topo">
-      <h2 id="drawerTitulo">Meu orçamento</h2>
-      <button class="drawer__x" data-fechar-drawer aria-label="Fechar orçamento">&times;</button>
+      <h2 id="drawerTitulo">Meu carrinho</h2>
+      <button class="drawer__x" data-fechar-drawer aria-label="Fechar carrinho">&times;</button>
     </header>
 
     <div class="drawer__itens" id="drawerItens"></div>
@@ -420,7 +420,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
         Enviar pedido no WhatsApp
       </a>
-      <button class="drawer__limpar" id="limparCarrinho">Esvaziar orçamento</button>
+      <button class="drawer__limpar" id="limparCarrinho">Esvaziar carrinho</button>
     </footer>
   </aside>
 </div>
@@ -433,11 +433,11 @@
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
 </a>
 
-<script src="js/config.js?v=21"></script>
-<script src="js/catalogo-imagens.js?v=21"></script>
-<script src="js/produtos.js?v=21"></script>
-<script src="js/comum.js?v=21"></script>
-<script src="js/main.js?v=21"></script>
+<script src="js/config.js?v=26"></script>
+<script src="js/catalogo-imagens.js?v=26"></script>
+<script src="js/produtos.js?v=26"></script>
+<script src="js/comum.js?v=26"></script>
+<script src="js/main.js?v=26"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
