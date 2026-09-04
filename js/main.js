@@ -88,6 +88,13 @@
   }
 
   function addCarrinho(sku, qtd = 1, cor = "") {
+    const ficha = acharProduto(sku);
+    if (ficha) {
+      rastrear("adicionar_ao_carrinho", {
+        produto: ficha.nome, sku: ficha.sku, quantidade: qtd,
+        cor: cor || "", linha: nomeDep(ficha.grupo),
+      });
+    }
     const item = carrinho.find((i) => i.sku === sku && (i.cor || "") === cor);
     if (item) item.qtd += qtd;
     else carrinho.push({ sku, qtd, cor });
@@ -208,7 +215,7 @@
           <a class="card__wpp" href="${linkWhatsApp(p.nome)}" target="_blank" rel="noopener"
              aria-label="Consultar ${esc(p.nome)} no WhatsApp">${SVG_WPP} Consultar</a>
           <button class="card__add" type="button" data-add
-                  aria-label="Adicionar ${esc(p.nome)} ao orçamento">${SVG_MAIS}</button>
+                  aria-label="Adicionar ${esc(p.nome)} ao carrinho">${SVG_MAIS}</button>
         </div>
       </article>`;
   }
@@ -652,6 +659,9 @@
   function abrirFicha(sku) {
     const p = acharProduto(sku);
     if (!p) return;
+    rastrear("ver_produto", {
+      produto: p.nome, sku: p.sku, linha: nomeDep(p.grupo), cores: p._cores.length,
+    });
     skuAberto = sku;
     focoAnterior = document.activeElement;
 
@@ -889,8 +899,25 @@
   $("#inputBusca").addEventListener("input", (e) => {
     estado.busca = e.target.value;
     $("#limparBusca").hidden = !e.target.value;
+
+    /* Quem digita quer procurar na loja inteira, não dentro do que estava
+       filtrado. No celular isso era uma armadilha: a loja abre em Microfibras
+       e buscar "renda" não achava nada, sendo que existem quatro. O atalho já
+       limpava a busca; agora a busca limpa o filtro, dos dois lados. */
+    if (e.target.value.trim()) {
+      estado.grupos.clear();
+      estado.categorias.clear();
+    }
     clearTimeout(timerBusca);
-    timerBusca = setTimeout(reiniciarPagina, 140);
+    timerBusca = setTimeout(() => {
+      reiniciarPagina();
+      /* o campo não envia formulário nenhum, então o Tag Manager não teria
+         como ver a busca sozinho; o evento sai daqui, já com o resultado */
+      const termo = estado.busca.trim();
+      if (termo.length >= 3) {
+        rastrear("busca", { termo: termo, resultados: filtrados().length });
+      }
+    }, 400);
   });
   $("#inputBusca").addEventListener("keydown", (e) => {
     if (e.key === "Enter") {

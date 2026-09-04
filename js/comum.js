@@ -108,7 +108,7 @@ function lerCarrinho() {
   return limpos;
 }
 
-/* Contador do orçamento: aparece em todas as páginas. */
+/* Contador do carrinho: aparece em todas as páginas. */
 function contarCarrinho() {
   const badge = $("#badgeCarrinho");
   if (!badge) return;
@@ -116,6 +116,72 @@ function contarCarrinho() {
   badge.textContent = total;
   badge.hidden = total === 0;
 }
+
+/* ==========================================================================
+   MEDIÇÃO (Google Tag Manager / Google Ads)
+   Cada ação que vale dinheiro avisa o dataLayer com nome próprio. É daí que o
+   Gerenciador de Tags puxa as conversões, em vez de mirar em classe de CSS:
+   classe muda quando o layout muda, e leva a medição junto sem ninguém
+   perceber. Sem o Tag Manager instalado isto não faz nada além de encher uma
+   lista na memória, então pode ficar aqui desde já.
+   ========================================================================== */
+window.dataLayer = window.dataLayer || [];
+
+function rastrear(evento, dados) {
+  window.dataLayer.push(Object.assign({ event: evento }, dados || {}));
+}
+
+/* De onde na página partiu o clique. Serve para saber se quem chama no
+   WhatsApp vem do botão verde flutuante, do card do produto ou do rodapé. */
+function ondeEsta(el) {
+  if (el.closest(".fab")) return "botao-flutuante";
+  if (el.closest(".header")) return "cabecalho";
+  if (el.closest(".topo")) return "tarja-do-topo";
+  if (el.closest(".card")) return "card-do-produto";
+  if (el.closest(".modal")) return "ficha-do-produto";
+  if (el.closest(".drawer")) return "carrinho";
+  if (el.closest(".rodape")) return "rodape";
+  const secao = el.closest("section");
+  if (secao) {
+    if (secao.id) return secao.id;
+    /* as seções de Contato e Sobre se identificam pelo título, não por id */
+    const titulo = secao.getAttribute("aria-labelledby");
+    if (titulo) return titulo.replace(/^t-/, "");
+    const h = secao.querySelector("h1, h2");
+    if (h) return h.textContent.trim().toLowerCase().slice(0, 40);
+  }
+  return "pagina";
+}
+
+/* Um ouvinte só, no documento: pega também o que nasce depois (os cards e o
+   conteúdo do carrinho são montados por JS). */
+addEventListener("click", (e) => {
+  const el = e.target.closest("a, button, summary");
+  if (!el) return;
+  const onde = { origem: ondeEsta(el), pagina: location.pathname.split("/").pop() || "index.html" };
+
+  if (el.id === "enviarPedido") {
+    const itens = lerCarrinho();
+    return rastrear("enviar_pedido", Object.assign({
+      itens: itens.reduce((s, i) => s + i.qtd, 0),
+      produtos: itens.length,
+    }, onde));
+  }
+  if (el.hasAttribute("data-wpp")) return rastrear("clique_whatsapp", onde);
+  if (el.hasAttribute("data-tel-link")) return rastrear("clique_telefone", onde);
+  if (el.hasAttribute("data-email-link")) return rastrear("clique_email", onde);
+  if (el.hasAttribute("data-rota") || el.hasAttribute("data-mapa"))
+    return rastrear("clique_mapa", onde);
+  if (el.hasAttribute("data-avaliar")) return rastrear("clique_avaliacao", onde);
+  if (el.hasAttribute("data-insta-link")) return rastrear("clique_instagram", onde);
+  if (el.classList.contains("card__wpp")) return rastrear("clique_whatsapp", onde);
+  if (el.id === "abrirCarrinho") return rastrear("abrir_carrinho", onde);
+  if (el.tagName === "SUMMARY" && el.closest(".faq__item")) {
+    const item = el.closest(".faq__item");
+    /* só quando abre; fechar não diz nada */
+    if (!item.open) return rastrear("abrir_duvida", { pergunta: el.textContent.trim() });
+  }
+});
 
 /* Menu do celular. Ele é fixo e precisa nascer logo abaixo do cabeçalho,
    que também é fixo. Como a altura do cabeçalho muda conforme a rolagem

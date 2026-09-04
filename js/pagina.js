@@ -106,6 +106,14 @@
         <source src="${esc(filme)}" type="video/mp4">
         Seu navegador não abre vídeo.
       </video>`;
+
+    /* o Tag Manager não enxerga vídeo que não seja do YouTube, então o play e
+       o fim do filme são avisados daqui */
+    const player = historiaFoto.querySelector("video");
+    player.addEventListener("play", () => rastrear("play_video", { video: "historia" }), {
+      once: true,
+    });
+    player.addEventListener("ended", () => rastrear("video_ate_o_fim", { video: "historia" }));
   } else if (historiaFoto && capaVideo) {
     /* sem o arquivo do vídeo (é o caso do link de visualização, que tem
        limite de peso): fica o quadro da fachada tirado dele */
