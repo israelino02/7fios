@@ -14,3 +14,6 @@ _teste-bundle.html
 
 # Configuração local do editor (tem caminho absoluto desta máquina)
 .claude/
+
+# Pacote pronto para subir na hospedagem (gerado, não versionado)
+7fios-site.zip
