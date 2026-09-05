@@ -16,6 +16,7 @@ const CAPAS_DEP = {
   "poliester": "assets/departamentos/poliester.jpg?v=1788166361",
   "dryfit": "assets/departamentos/dryfit.jpg?v=1788166361",
   "estampados": "assets/departamentos/estampados.jpg?v=1788166361",
+  "suplex": "assets/departamentos/suplex.jpg?v=1788627871",
   "aviamentos": "assets/departamentos/aviamentos.jpg?v=1788166361"
 };
 
@@ -672,6 +673,137 @@ const IMAGENS = {
     "capa": "assets/produtos/premium/capa.jpg?v=1788166378",
     "capaPropria": true,
     "coresChapadas": true
+  },
+  "suplex-blackout": {
+    "cores": [
+      {
+        "nome": "Amarelo Bebe",
+        "hex": "#F7D68D",
+        "familia": "amarelo",
+        "img": "assets/produtos/suplex-blackout/cores/amarelo-bebe.jpg?v=1788627881",
+        "mini": "assets/produtos/suplex-blackout/cores/amarelo-bebe-mini.jpg?v=1788627881"
+      },
+      {
+        "nome": "Azul Bebe",
+        "hex": "#6590B7",
+        "familia": "azul",
+        "img": "assets/produtos/suplex-blackout/cores/azul-bebe.jpg?v=1788627881",
+        "mini": "assets/produtos/suplex-blackout/cores/azul-bebe-mini.jpg?v=1788627881"
+      },
+      {
+        "nome": "Azul Marinho",
+        "hex": "#111A2B",
+        "familia": "azul",
+        "img": "assets/produtos/suplex-blackout/cores/azul-marinho.jpg?v=1788627881",
+        "mini": "assets/produtos/suplex-blackout/cores/azul-marinho-mini.jpg?v=1788627881"
+      },
+      {
+        "nome": "Bege",
+        "hex": "#BEA68D",
+        "familia": "bege",
+        "img": "assets/produtos/suplex-blackout/cores/bege.jpg?v=1788627882",
+        "mini": "assets/produtos/suplex-blackout/cores/bege-mini.jpg?v=1788627882"
+      },
+      {
+        "nome": "Cacau",
+        "hex": "#3A2116",
+        "familia": "preto",
+        "img": "assets/produtos/suplex-blackout/cores/cacau.jpg?v=1788627882",
+        "mini": "assets/produtos/suplex-blackout/cores/cacau-mini.jpg?v=1788627882"
+      },
+      {
+        "nome": "Chumbo",
+        "hex": "#393738",
+        "familia": "cinza",
+        "img": "assets/produtos/suplex-blackout/cores/chumbo.jpg?v=1788627882",
+        "mini": "assets/produtos/suplex-blackout/cores/chumbo-mini.jpg?v=1788627882"
+      },
+      {
+        "nome": "Pimenta",
+        "hex": "#812B1C",
+        "familia": "vermelho",
+        "img": "assets/produtos/suplex-blackout/cores/pimenta.jpg?v=1788627882",
+        "mini": "assets/produtos/suplex-blackout/cores/pimenta-mini.jpg?v=1788627882"
+      },
+      {
+        "nome": "Preto",
+        "hex": "#0F0F0F",
+        "familia": "preto",
+        "img": "assets/produtos/suplex-blackout/cores/preto.jpg?v=1788627882",
+        "mini": "assets/produtos/suplex-blackout/cores/preto-mini.jpg?v=1788627882"
+      },
+      {
+        "nome": "Rosa Bebe",
+        "hex": "#E8BFBC",
+        "familia": "rosa",
+        "img": "assets/produtos/suplex-blackout/cores/rosa-bebe.jpg?v=1788627882",
+        "mini": "assets/produtos/suplex-blackout/cores/rosa-bebe-mini.jpg?v=1788627882"
+      },
+      {
+        "nome": "Verde Bebe",
+        "hex": "#CBD3AE",
+        "familia": "verde",
+        "img": "assets/produtos/suplex-blackout/cores/verde-bebe.jpg?v=1788627883",
+        "mini": "assets/produtos/suplex-blackout/cores/verde-bebe-mini.jpg?v=1788627883"
+      }
+    ],
+    "capa": "assets/produtos/suplex-blackout/capa.jpg?v=1788627883",
+    "capaPropria": true
+  },
+  "suplex-flex-fit": {
+    "cores": [
+      {
+        "nome": "Azul Bb",
+        "hex": "#6590B7",
+        "familia": "azul",
+        "img": "assets/produtos/suplex-flex-fit/cores/azul-bb.jpg?v=1788627883",
+        "mini": "assets/produtos/suplex-flex-fit/cores/azul-bb-mini.jpg?v=1788627883"
+      },
+      {
+        "nome": "Azul Marinho",
+        "hex": "#111A2B",
+        "familia": "azul",
+        "img": "assets/produtos/suplex-flex-fit/cores/azul-marinho.jpg?v=1788627883",
+        "mini": "assets/produtos/suplex-flex-fit/cores/azul-marinho-mini.jpg?v=1788627883"
+      },
+      {
+        "nome": "Bege",
+        "hex": "#BEA68D",
+        "familia": "bege",
+        "img": "assets/produtos/suplex-flex-fit/cores/bege.jpg?v=1788627883",
+        "mini": "assets/produtos/suplex-flex-fit/cores/bege-mini.jpg?v=1788627883"
+      },
+      {
+        "nome": "Bordo",
+        "hex": "#450913",
+        "familia": "vermelho",
+        "img": "assets/produtos/suplex-flex-fit/cores/bordo.jpg?v=1788627883",
+        "mini": "assets/produtos/suplex-flex-fit/cores/bordo-mini.jpg?v=1788627883"
+      },
+      {
+        "nome": "Cacau",
+        "hex": "#3A2116",
+        "familia": "preto",
+        "img": "assets/produtos/suplex-flex-fit/cores/cacau.jpg?v=1788627883",
+        "mini": "assets/produtos/suplex-flex-fit/cores/cacau-mini.jpg?v=1788627884"
+      },
+      {
+        "nome": "Preto",
+        "hex": "#0F0F0F",
+        "familia": "preto",
+        "img": "assets/produtos/suplex-flex-fit/cores/preto.jpg?v=1788627884",
+        "mini": "assets/produtos/suplex-flex-fit/cores/preto-mini.jpg?v=1788627884"
+      },
+      {
+        "nome": "Verde Major",
+        "hex": "#33321C",
+        "familia": "verde",
+        "img": "assets/produtos/suplex-flex-fit/cores/verde-major.jpg?v=1788627884",
+        "mini": "assets/produtos/suplex-flex-fit/cores/verde-major-mini.jpg?v=1788627884"
+      }
+    ],
+    "capa": "assets/produtos/suplex-flex-fit/capa.jpg?v=1788627884",
+    "capaPropria": true
   },
   "madri": {
     "cores": [

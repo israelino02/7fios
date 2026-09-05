@@ -32,9 +32,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- ?v=32 → depois de atualizar o catálogo, troque para ?v=31, ?v=32…
+<!-- ?v=33 → depois de atualizar o catálogo, troque para ?v=31, ?v=32…
      para que quem já visitou o site enxergue a versão nova na hora. -->
-<link rel="stylesheet" href="css/styles.css?v=32">
+<link rel="stylesheet" href="css/styles.css?v=33">
 </head>
 <body>
 <!-- Gerenciador de Tags, para navegador com JavaScript desligado -->
@@ -132,13 +132,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </article>
 
     <div class="banners__lado">
-      <button class="banner banner--mini" id="bannerMicrofibras" type="button" data-ir-dep="poliamida">
+      <!-- O lugar mais nobre da home, ao lado do banner grande: fica com o
+           produto em destaque, e o clique abre a ficha dele direto. Quem
+           manda é o campo "emDestaque" em js/produtos.js. -->
+      <button class="banner banner--mini banner--produto" id="bannerDestaque"
+              type="button" hidden>
         <span class="banner__veu" aria-hidden="true"></span>
         <span class="banner__conteudo">
-          <span class="banner__mini-tag">Destaque</span>
-          <strong>Microfibras 7 Fios</strong>
-          <span class="banner__desc">Poliamida e poliéster</span>
-          <span class="banner__link">Ver microfibras ›</span>
+          <span class="banner__mini-tag" id="bannerDestaqueTag">Destaque</span>
+          <strong id="bannerDestaqueNome"></strong>
+          <span class="banner__desc" id="bannerDestaqueDesc"></span>
+          <span class="banner__link" id="bannerDestaqueLink">Ver produto ›</span>
         </span>
       </button>
       <button class="banner banner--mini" id="bannerAviamentos" type="button" data-ir-dep="aviamentos">
@@ -453,11 +457,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
 </a>
 
-<script src="js/config.js?v=32"></script>
-<script src="js/catalogo-imagens.js?v=32"></script>
-<script src="js/produtos.js?v=32"></script>
-<script src="js/comum.js?v=32"></script>
-<script src="js/main.js?v=32"></script>
+<script src="js/config.js?v=33"></script>
+<script src="js/catalogo-imagens.js?v=33"></script>
+<script src="js/produtos.js?v=33"></script>
+<script src="js/comum.js?v=33"></script>
+<script src="js/main.js?v=33"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

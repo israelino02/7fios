@@ -105,7 +105,7 @@ DEPARTAMENTOS_IMG = {
     "poliester":  "MICROFIBRAS POLIESTER/CAPA/_DSC1260.jpg",
     "dryfit":     "DRY-FIT/CAPA/IMG_5919.jpg",
     "estampados": "ESTAMPADOS/ROMANTIK ESTAMPADO/_DSC1219.jpg",
-    "suplex":     "SUPLEX/CAPA/capa.jpg",
+    "suplex":     "SUPLEX/POLIAMIDA BLACKOUT 290/capa/pimenta.png",
     "aviamentos": "capas de frente/aviamentos 2.jpg",
 }
 

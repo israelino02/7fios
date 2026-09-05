@@ -238,7 +238,6 @@ const PRODUTOS = [
     descricao:
       "Suplex de poliamida com 290 g de cobertura total, indicado para legging e peças claras que não podem transparecer.",
     detalhes: { Linha: "Blackout", Tipo: "Suplex de poliamida", Gramatura: "290" },
-    semFoto: true,
   },
   {
     nome: "Suplex Flex Fit 310",
@@ -252,7 +251,6 @@ const PRODUTOS = [
     descricao:
       "Suplex de poliamida com 310 g e boa recuperação elástica, para peças de treino que precisam voltar ao lugar depois do movimento.",
     detalhes: { Linha: "Flex Fit", Tipo: "Suplex de poliamida", Gramatura: "310" },
-    semFoto: true,
   },
 
   /* --------------------------- MICROFIBRAS POLIÉSTER --------------------- */
@@ -300,11 +298,15 @@ const PRODUTOS = [
     novidade: true,
   },
   {
+    /* O carro-chefe da casa: aparece primeiro na loja, com selo no card e
+       banner próprio na home. Para trocar de produto em destaque, basta
+       mudar "emDestaque: true" para outro daqui. */
     nome: "Summersol",
     slug: "summersol",
     sku: "PE-005",
     grupo: "poliester",
     categoria: "liso",
+    emDestaque: true,
     resumo: "Leve, para peças de verão",
     unidade: "metro",
     preco: null,
