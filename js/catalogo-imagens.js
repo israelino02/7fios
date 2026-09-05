@@ -16,7 +16,7 @@ const CAPAS_DEP = {
   "poliester": "assets/departamentos/poliester.jpg?v=1788166361",
   "dryfit": "assets/departamentos/dryfit.jpg?v=1788166361",
   "estampados": "assets/departamentos/estampados.jpg?v=1788166361",
-  "suplex": "assets/departamentos/suplex.jpg?v=1788627871",
+  "suplex": "assets/departamentos/suplex.jpg?v=1788638298",
   "aviamentos": "assets/departamentos/aviamentos.jpg?v=1788166361"
 };
 
@@ -312,8 +312,8 @@ const IMAGENS = {
         "mini": "assets/produtos/poliamida-uv/cores/vermelho-mini.jpg?v=1788622933"
       }
     ],
-    "capa": "assets/produtos/poliamida-uv/capa.jpg?v=1788622933",
-    "capaPropria": true
+    "capa": "assets/produtos/poliamida-uv/capa.jpg?v=1788638299",
+    "capaPropria": false
   },
   "max-premium": {
     "cores": [
@@ -488,7 +488,7 @@ const IMAGENS = {
         "familia": "vermelho"
       }
     ],
-    "capa": "assets/produtos/max-premium/capa.jpg?v=1788622938",
+    "capa": "assets/produtos/max-premium/capa.jpg?v=1788638304",
     "capaPropria": true,
     "coresChapadas": true
   },
@@ -670,7 +670,7 @@ const IMAGENS = {
         "familia": "verde"
       }
     ],
-    "capa": "assets/produtos/premium/capa.jpg?v=1788166378",
+    "capa": "assets/produtos/premium/capa.jpg?v=1788638308",
     "capaPropria": true,
     "coresChapadas": true
   },
@@ -747,8 +747,8 @@ const IMAGENS = {
         "mini": "assets/produtos/suplex-blackout/cores/verde-bebe-mini.jpg?v=1788627883"
       }
     ],
-    "capa": "assets/produtos/suplex-blackout/capa.jpg?v=1788627883",
-    "capaPropria": true
+    "capa": "assets/produtos/suplex-blackout/capa.jpg?v=1788638309",
+    "capaPropria": false
   },
   "suplex-flex-fit": {
     "cores": [
@@ -802,8 +802,8 @@ const IMAGENS = {
         "mini": "assets/produtos/suplex-flex-fit/cores/verde-major-mini.jpg?v=1788627884"
       }
     ],
-    "capa": "assets/produtos/suplex-flex-fit/capa.jpg?v=1788627884",
-    "capaPropria": true
+    "capa": "assets/produtos/suplex-flex-fit/capa.jpg?v=1788638309",
+    "capaPropria": false
   },
   "madri": {
     "cores": [
@@ -1011,8 +1011,8 @@ const IMAGENS = {
         "mini": "assets/produtos/madri/cores/vermelho-mini.jpg?v=1788166387"
       }
     ],
-    "capa": "assets/produtos/madri/capa.jpg?v=1788166387",
-    "capaPropria": true
+    "capa": "assets/produtos/madri/capa.jpg?v=1788638310",
+    "capaPropria": false
   },
   "romantik-liso": {
     "cores": [
@@ -1150,8 +1150,8 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/vermelho-mini.jpg?v=1788166396"
       }
     ],
-    "capa": "assets/produtos/romantik-liso/capa.jpg?v=1788166396",
-    "capaPropria": true
+    "capa": "assets/produtos/romantik-liso/capa.jpg?v=1788638311",
+    "capaPropria": false
   },
   "romantik-risca": {
     "cores": [
@@ -1254,8 +1254,8 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-risca/cores/turquesa-mini.jpg?v=1788166401"
       }
     ],
-    "capa": "assets/produtos/romantik-risca/capa.jpg?v=1788166401",
-    "capaPropria": true
+    "capa": "assets/produtos/romantik-risca/capa.jpg?v=1788638311",
+    "capaPropria": false
   },
   "summersol": {
     "cores": [
@@ -1463,8 +1463,8 @@ const IMAGENS = {
         "mini": "assets/produtos/summersol/cores/vermelho-mini.jpg?v=1788166410"
       }
     ],
-    "capa": "assets/produtos/summersol/capa.jpg?v=1788166410",
-    "capaPropria": true
+    "capa": "assets/produtos/summersol/capa.jpg?v=1788638312",
+    "capaPropria": false
   },
   "dry-fit-prime": {
     "cores": [
@@ -1581,8 +1581,8 @@ const IMAGENS = {
         "mini": "assets/produtos/dry-fit-prime/cores/vermelho-mini.jpg?v=1788166413"
       }
     ],
-    "capa": "assets/produtos/dry-fit-prime/capa.jpg?v=1788166414",
-    "capaPropria": true
+    "capa": "assets/produtos/dry-fit-prime/capa.jpg?v=1788638375",
+    "capaPropria": false
   },
   "romantik-feminino": {
     "galeria": [

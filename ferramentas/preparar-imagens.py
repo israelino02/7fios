@@ -73,9 +73,11 @@ CAPAS_ARQUIVO = {}
 # "CAPA": dentro da pasta do produto (ex.: DARLYNG/CAPA) ou ao lado dela,
 # desde que cite o nome do produto (ex.: CAPA ROMANTIK FEMININO, ao lado de
 # FEMININO). Assim renomear a pasta não quebra nada.
-CAPAS_PRODUTO = {
-    "dry-fit-prime": "DRY-FIT/CAPA",
-}
+# Vazio de propósito: a regra vale para todo mundo igual. Tem pasta CAPA
+# dentro (ou ao lado, citando o nome do produto)? A foto de lá vira a capa.
+# Não tem? Entra a primeira foto de cor da pasta. Para trocar a capa de um
+# produto, é só criar a pasta CAPA dentro dele com a foto escolhida.
+CAPAS_PRODUTO = {}
 
 def pasta_de_capa(pasta):
     """Procura a pasta de capa do produto: primeiro dentro dele, depois ao lado."""
@@ -105,7 +107,7 @@ DEPARTAMENTOS_IMG = {
     "poliester":  "MICROFIBRAS POLIESTER/CAPA/_DSC1260.jpg",
     "dryfit":     "DRY-FIT/CAPA/IMG_5919.jpg",
     "estampados": "ESTAMPADOS/ROMANTIK ESTAMPADO/_DSC1219.jpg",
-    "suplex":     "SUPLEX/POLIAMIDA BLACKOUT 290/capa/pimenta.png",
+    "suplex":     "SUPLEX/POLIAMIDA BLACKOUT 290/pimenta.png",
     "aviamentos": "capas de frente/aviamentos 2.jpg",
 }
 
@@ -417,10 +419,11 @@ def main():
     deps = {}
     for nome, rel in DEPARTAMENTOS_IMG.items():
         origem = os.path.join(ORIGEM, rel)
-        if os.path.exists(origem):
-            destino = os.path.join(DESTINO, "departamentos", nome + ".jpg")
-            conta(origem, destino, *LARGURA["departamento"])
-            deps[nome] = web(destino)
+        if not os.path.exists(origem):
+            continue  # sem arquivo: mais abaixo pega emprestada a de um produto
+        destino = os.path.join(DESTINO, "departamentos", nome + ".jpg")
+        conta(origem, destino, *LARGURA["departamento"])
+        deps[nome] = web(destino)
 
     fita = None
     for arq in arquivos(FITA):
@@ -491,7 +494,9 @@ def main():
         if not capa_origem and registro["cores"]:
             fotos = [c for c in registro["cores"] if c["_peso"] >= LIMIAR_FOTO]
             if fotos:
-                capa_origem = max(fotos, key=lambda c: vivacidade(c["hex"]))["_origem"]
+                # sem pasta CAPA, vale a primeira foto da pasta: é a que o dono
+                # vê primeiro ao abrir, então é a que ele espera no card
+                capa_origem = fotos[0]["_origem"]
             else:
                 # só há quadradinhos de cor: usa a foto do departamento
                 dep = DEPARTAMENTOS_IMG.get(departamento_de(pasta))
@@ -570,6 +575,18 @@ def main():
                         _ficha.pop(os.path.relpath(os.path.join(raiz, a), RAIZ), None)
                 shutil.rmtree(caminho)
                 print(f"  · {nome}: saiu do catálogo, pasta gerada removida", flush=True)
+
+    # Departamento cujo arquivo de capa saiu do lugar fica com a capa do
+    # primeiro produto dele: o cartão da home nunca aparece vazio, mesmo
+    # depois de uma reorganização das pastas.
+    for nome in DEPARTAMENTOS_IMG:
+        if nome in deps:
+            continue
+        for pasta, sl, _ in PRODUTOS_IMG:
+            if departamento_de(pasta) == nome and imagens.get(sl, {}).get("capa"):
+                deps[nome] = imagens[sl]["capa"]
+                print(f"  · capa de {nome}: emprestada de {sl}", flush=True)
+                break
 
     videos = preparar_video(conta)
 

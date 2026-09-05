@@ -313,9 +313,10 @@ h1,h2,h3,.brand__name{
    chamativo sem virar poluição */
 .card__destaque{
   position:absolute; top:.6rem; left:.6rem; z-index:2;
+  max-width:calc(100% - 1.2rem);
   background:var(--gold); color:var(--navy);
   font-size:.64rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
-  padding:.32rem .6rem; border-radius:999px;
+  line-height:1.2; padding:.32rem .6rem; border-radius:999px;
   box-shadow:0 2px 10px rgba(20,9,53,.28);
 }
 
@@ -722,6 +723,13 @@ h1,h2,h3,.brand__name{
   /* tarja que só repete o atalho aceso: no celular fica de fora */
   #tagsAtivas[data-atalho] .tag-ativa[data-tirar="grupo"]{ display:none; }
   #tagsAtivas[data-atalho]:not(:has(.tag-ativa:not([data-tirar="grupo"]))){ display:none; }
+
+  /* card de 3 colunas é estreito: o selo encolhe para não encostar na borda */
+  .card__destaque{
+    top:.4rem; left:.4rem; max-width:calc(100% - .8rem);
+    /* sem caixa alta nem espaçamento entre letras, o selo cabe numa linha só */
+    font-size:.6rem; letter-spacing:0; text-transform:none; padding:.22rem .45rem;
+  }
 
   .atalhos-dep{
     display:grid; grid-template-columns:repeat(3,minmax(0,1fr));

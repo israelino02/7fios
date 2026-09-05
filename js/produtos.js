@@ -298,15 +298,15 @@ const PRODUTOS = [
     novidade: true,
   },
   {
-    /* O carro-chefe da casa: aparece primeiro na loja, com selo no card e
-       banner próprio na home. Para trocar de produto em destaque, basta
-       mudar "emDestaque: true" para outro daqui. */
+    /* O carro-chefe da casa: aparece primeiro na loja e leva o selo "Mais
+       procurado" no card. Para trocar de produto, basta mover
+       "maisProcurado: true" para outro daqui. */
     nome: "Summersol",
     slug: "summersol",
     sku: "PE-005",
     grupo: "poliester",
     categoria: "liso",
-    emDestaque: true,
+    maisProcurado: true,
     resumo: "Leve, para peças de verão",
     unidade: "metro",
     preco: null,

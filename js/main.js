@@ -199,7 +199,7 @@
         <div class="card__media" data-abrir>
           ${p._capa ? `<img src="${esc(p._capa)}" alt="${esc(p.nome)}" loading="lazy">` : ""}
           ${p._semFoto ? '<span class="card__embreve">Foto em breve</span>' : ""}
-          ${p.emDestaque ? '<span class="card__destaque">Destaque</span>' : ""}
+          ${p.maisProcurado ? '<span class="card__destaque">Mais procurado</span>' : ""}
           <button class="card__olho" type="button" data-abrir>Ver detalhes</button>
         </div>
         <div class="card__corpo">
@@ -251,9 +251,9 @@
 
     const ordens = {
       /* "Relevância" era a ordem do arquivo, sem critério nenhum. Agora abre
-         com o produto em destaque, depois os mais vendidos. */
+         com o mais procurado, depois os mais vendidos. */
       relevancia: (a, b) =>
-        (b.emDestaque ? 2 : 0) - (a.emDestaque ? 2 : 0) +
+        (b.maisProcurado ? 2 : 0) - (a.maisProcurado ? 2 : 0) +
         (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0),
       vendidos: (a, b) => (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0),
       novidades: (a, b) => (b.novidade ? 1 : 0) - (a.novidade ? 1 : 0),
@@ -622,22 +622,9 @@
 
   function montarBanners() {
     if (typeof BANNERS === "undefined") return;
-    const destaque = PRODUTOS.find((p) => p.emDestaque);
-    const alvo = $("#bannerDestaque");
-    if (alvo && destaque && destaque._capa) {
-      alvo.hidden = false;
-      $("#bannerDestaqueNome").textContent = destaque.nome;
-      $("#bannerDestaqueDesc").textContent = destaque._cores.length
-        ? `${nomeDep(destaque.grupo)} · ${destaque._cores.length} cores`
-        : nomeDep(destaque.grupo);
-      $("#bannerDestaqueLink").textContent = `Ver ${destaque.nome} ›`;
-      alvo.setAttribute("aria-label", `Ver ${destaque.nome}`);
-      alvo.addEventListener("click", () => abrirFicha(destaque.sku));
-    }
-
     const par = [
       ["#bannerHero", BANNERS.hero],
-      ["#bannerDestaque", destaque && destaque._capa],
+      ["#bannerMicrofibras", BANNERS.microfibras],
       ["#bannerAviamentos", BANNERS.aviamentos],
     ];
     par.forEach(([sel, url]) => {
