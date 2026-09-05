@@ -35,12 +35,13 @@ LARGURA = {
 # --------------------------------------------------------- mapa de produtos
 # (pasta de origem, slug, tipo) , tipo: "cores" ou "galeria"
 PRODUTOS_IMG = [
-    ("MICROFIBRAS POLIAMIDA/DARLYNG",                  "darlyng",              "cores"),
-    ("MICROFIBRAS POLIAMIDA/DELITEX POLIAMIDA",        "delitex",              "cores"),
+    ("MICROFIBRAS POLIAMIDA/POLIAMIDA UV",             "poliamida-uv",         "cores"),
+    ("MICROFIBRAS POLIAMIDA/MAX PREMIUM",              "max-premium",          "cores"),
     ("MICROFIBRAS POLIAMIDA/POLIAMIDA PREMIUM",        "premium",              "cores"),
+    ("SUPLEX/POLIAMIDA BLACKOUT 290",                  "suplex-blackout",      "cores"),
+    ("SUPLEX/POLIAMIDA FLEX FIT 310",                  "suplex-flex-fit",      "cores"),
     ("MICROFIBRAS POLIESTER/MADRI ",                   "madri",                "cores"),
     ("MICROFIBRAS POLIESTER/ROMANTIK LISO",            "romantik-liso",        "cores"),
-    ("MICROFIBRAS POLIESTER/ROMANTIK MESCLADO",        "romantik-mesclado",    "cores"),
     ("MICROFIBRAS POLIESTER/ROMANTIK RISCA DE GIZ",    "romantik-risca",       "cores"),
     ("MICROFIBRAS POLIESTER/SUMMERSOL",                "summersol",            "cores"),
     ("DRY-FIT/DRY FIT PRIME/Cores",                    "dry-fit-prime",        "cores"),
@@ -62,8 +63,6 @@ PRODUTOS_IMG = [
      "vies-rubi", "galeria"),
     ("Outros produtos/Viés/Viés noronha",              "vies-noronha",         "galeria"),
     ("Outros produtos/Viés/RENDA 7 MARES (17 CM)",     "renda-7-mares",        "galeria"),
-    ("Outros produtos/Viés/Renda Belle",               "renda-belle",          "galeria"),
-    ("Outros produtos/Viés/renda 7 fios (largura 3,3cm)", "renda-7-fios",      "galeria"),
 ]
 
 # Capa escolhida a dedo: aponta direto para um arquivo, quando a foto certa
@@ -106,6 +105,7 @@ DEPARTAMENTOS_IMG = {
     "poliester":  "MICROFIBRAS POLIESTER/CAPA/_DSC1260.jpg",
     "dryfit":     "DRY-FIT/CAPA/IMG_5919.jpg",
     "estampados": "ESTAMPADOS/ROMANTIK ESTAMPADO/_DSC1219.jpg",
+    "suplex":     "SUPLEX/CAPA/capa.jpg",
     "aviamentos": "capas de frente/aviamentos 2.jpg",
 }
 
@@ -335,7 +335,7 @@ def familia_da_cor(nome, hexa):
 # quem aperta o play não tem por onde sair da página. O arquivo é copiado
 # como está (já vem em 720p bem compactado) e a capa que aparece antes do
 # play é um quadro tirado dele pelo Quick Look do macOS.
-PASTA_VIDEO = "video historia"
+PASTA_VIDEO = "VIDEO HISTORIA"
 EXT_VIDEO = (".mp4", ".mov", ".m4v", ".MP4", ".MOV", ".M4V")
 
 def preparar_video(conta):
@@ -439,9 +439,12 @@ def main():
 
     for pasta, sl, tipo in PRODUTOS_IMG:
         lista = arquivos(pasta)
-        if not lista:
+        if not lista and not pasta_de_capa(pasta):
             print(f"  ! sem imagens em {pasta}", flush=True)
             continue
+        if not lista:
+            # a MADRI ficou só com a capa: sem cores, mas com foto no card
+            print(f"  · {sl}: só a capa, sem fotos de cor", flush=True)
         print(f"{sl} ({len(lista)} arquivos)…", flush=True)
         registro = {"cores": [], "galeria": [], "capa": None, "capaPropria": False}
         base = os.path.join(DESTINO, "produtos", sl)
@@ -495,8 +498,11 @@ def main():
                 if dep and os.path.exists(os.path.join(ORIGEM, dep)):
                     capa_origem = os.path.join(ORIGEM, dep)
                     registro["capaGenerica"] = True
-        if not capa_origem:
+        if not capa_origem and lista:
             capa_origem = os.path.join(resolver(pasta), lista[0])
+        if not capa_origem:
+            print(f"  ! {sl}: sem capa", flush=True)
+            continue
         capa = conta(capa_origem, os.path.join(base, "capa.jpg"), *LARGURA["capa"])
         registro["capa"] = web(capa)
         # Produto cujas "fotos de cor" são só quadradinhos chapados (a pasta
@@ -548,6 +554,22 @@ def main():
         for rel, tem_foto in esquecidas:
             estado = "COM fotos, falta cadastrar" if tem_foto else "vazia, sem fotos ainda"
             print(f"  - {rel}  ({estado})")
+
+    # Produto que saiu do catálogo deixa a pasta gerada para trás. Como tudo
+    # aqui é refeito a partir de "imagens/", o que sobrou é peso morto no
+    # repositório: sai junto.
+    pasta_prod = os.path.join(DESTINO, "produtos")
+    if os.path.isdir(pasta_prod):
+        for nome in sorted(os.listdir(pasta_prod)):
+            if nome.startswith(".") or nome in imagens:
+                continue
+            caminho = os.path.join(pasta_prod, nome)
+            if os.path.isdir(caminho):
+                for raiz, _, arqs in os.walk(caminho):
+                    for a in arqs:
+                        _ficha.pop(os.path.relpath(os.path.join(raiz, a), RAIZ), None)
+                shutil.rmtree(caminho)
+                print(f"  · {nome}: saiu do catálogo, pasta gerada removida", flush=True)
 
     videos = preparar_video(conta)
 

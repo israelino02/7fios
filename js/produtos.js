@@ -20,7 +20,7 @@ const DEPARTAMENTOS = {
   },
   poliester: {
     nome: "Microfibras Poliéster",
-    resumo: "Lisos, mesclados e risca de giz",
+    resumo: "Lisos e risca de giz",
     capa: "poliester",
   },
   estampados: {
@@ -32,6 +32,11 @@ const DEPARTAMENTOS = {
     nome: "Dry-Fit",
     resumo: "Leveza e secagem rápida",
     capa: "dryfit",
+  },
+  suplex: {
+    nome: "Suplex",
+    resumo: "Cobertura e recuperação elástica",
+    capa: "suplex",
   },
   aviamentos: {
     nome: "Aviamentos",
@@ -57,7 +62,7 @@ const VITRINE_CATEGORIAS = [
   },
   {
     nome: "Microfibras Poliéster",
-    resumo: "Lisos, mesclados e risca de giz",
+    resumo: "Lisos e risca de giz",
     frase: "Poliéster versátil e de alto giro, do liso ao risca de giz, pronto para sublimação e estampa.",
     capa: "poliester",
     grupos: ["poliester"],
@@ -90,6 +95,17 @@ const VITRINE_CATEGORIAS = [
       '<path d="M9.4 12.6a2.6 2.6 0 0 0 2.6 2.6v1.6a4.2 4.2 0 0 1-4.2-4.2h1.6Z" opacity=".5"/>',
   },
   {
+    nome: "Suplex",
+    resumo: "Cobertura e recuperação elástica",
+    frase: "Suplex de poliamida para legging e moda fitness, com boa cobertura e retorno elástico.",
+    capa: "suplex",
+    grupos: ["suplex"],
+    /* peça de treino: elasticidade nos dois sentidos */
+    icone:
+      '<path d="M7.4 2.6h9.2l-.9 6.1 1.5 12.7h-4.3L12 13.4l-.9 8h-4.3l1.5-12.7-.9-6.1Z"/>' +
+      '<path d="M9.5 5.1h5v1.2h-5V5.1Z" opacity=".45"/>',
+  },
+  {
     nome: "Aviamentos",
     resumo: "Elásticos, viés e rendas",
     frase: "A linha completa para fechar a peça: elástico, viés, renda, cordão, zíper e etiqueta.",
@@ -115,12 +131,9 @@ const ATALHOS_CELULAR = [
 const CATEGORIAS = {
   poliamida:  [
     { id: "liso", nome: "Lisos" },
-    { id: "canelada", nome: "Caneladas" },
-    { id: "suplex", nome: "Suplex" },
   ],
   poliester:  [
     { id: "liso", nome: "Lisos" },
-    { id: "mesclado", nome: "Mesclados" },
     { id: "risca", nome: "Risca de giz" },
   ],
   estampados: [
@@ -128,6 +141,7 @@ const CATEGORIAS = {
     { id: "masculino", nome: "Estampas masculinas" },
   ],
   dryfit:     [{ id: "esportivo", nome: "Esportivos" }],
+  suplex:     [{ id: "liso", nome: "Lisos" }],
   aviamentos: [
     { id: "elastico", nome: "Elásticos" },
     { id: "vies", nome: "Viés" },
@@ -168,33 +182,32 @@ const FAMILIAS_COR = [
 const PRODUTOS = [
   /* --------------------------- MICROFIBRAS POLIAMIDA --------------------- */
   {
-    nome: "Darlyng",
-    slug: "darlyng",
+    nome: "Poliamida UV",
+    slug: "poliamida-uv",
     sku: "PA-001",
-    grupo: "poliamida",
-    categoria: "liso",
-    resumo: "Microfibra poliamida lisa",
-    unidade: "metro",
-    preco: null,
-    descricao:
-      "Microfibra de poliamida com toque macio e boa cobertura. Linha com cartela ampla, muito usada em moda praia, fitness e peças de alto giro.",
-    detalhes: { Linha: "Darlyng", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
-    tags: ["Mais vendido"],
-    destaque: true,
-  },
-  {
-    nome: "Delitex",
-    slug: "delitex",
-    sku: "PA-002",
     grupo: "poliamida",
     categoria: "liso",
     resumo: "A cartela mais completa da casa",
     unidade: "metro",
     preco: null,
     descricao:
-      "Microfibra de poliamida lisa com a maior variedade de cores do estoque. Boa elasticidade e caimento uniforme.",
-    detalhes: { Linha: "Delitex", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
+      "Microfibra de poliamida com proteção UV e a maior variedade de cores do estoque. Toque macio, boa elasticidade e caimento uniforme: primeira escolha para moda praia e fitness.",
+    detalhes: { Linha: "Poliamida UV", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
     tags: ["Mais vendido"],
+    destaque: true,
+  },
+  {
+    nome: "Max Premium",
+    slug: "max-premium",
+    sku: "PA-002",
+    grupo: "poliamida",
+    categoria: "liso",
+    resumo: "A poliamida mais encorpada",
+    unidade: "metro",
+    preco: null,
+    descricao:
+      "A gramatura mais alta da casa em poliamida, para peças que pedem cobertura e estrutura.",
+    detalhes: { Linha: "Max Premium", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
     destaque: true,
   },
   {
@@ -207,79 +220,38 @@ const PRODUTOS = [
     unidade: "metro",
     preco: null,
     descricao:
-      "A linha mais encorpada de poliamida da loja, para peças que pedem melhor acabamento e cobertura.",
+      "Linha encorpada de poliamida, para peças que pedem melhor acabamento e cobertura.",
     detalhes: { Linha: "Premium", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
     destaque: true,
   },
 
+  /* --------------------------------- SUPLEX ------------------------------ */
   {
-    nome: "Delitex Canelada",
-    slug: "delitex-canelada",
-    sku: "PA-004",
-    grupo: "poliamida",
-    categoria: "canelada",
-    resumo: "Poliamida com canelado",
-    unidade: "metro",
-    preco: null,
-    descricao:
-      "Versão canelada da linha Delitex: o relevo vem da própria malha, dando textura e elasticidade no sentido da largura.",
-    detalhes: { Linha: "Delitex", Tipo: "Microfibra de poliamida", Acabamento: "Canelado" },
-    semFoto: true,
-  },
-  {
-    nome: "Delitex Confort",
-    slug: "delitex-confort",
-    sku: "PA-005",
-    grupo: "poliamida",
-    categoria: "liso",
-    resumo: "Toque mais macio da linha",
-    unidade: "metro",
-    preco: null,
-    descricao:
-      "Delitex na versão Confort, pensada para peças que ficam muito tempo em contato com a pele, como moda íntima.",
-    detalhes: { Linha: "Delitex", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
-    semFoto: true,
-  },
-  {
-    nome: "Max Premium",
-    slug: "max-premium",
-    sku: "PA-006",
-    grupo: "poliamida",
-    categoria: "liso",
-    resumo: "A poliamida mais encorpada",
-    unidade: "metro",
-    preco: null,
-    descricao:
-      "A gramatura mais alta da casa em poliamida, para peças que pedem cobertura e estrutura.",
-    detalhes: { Linha: "Max Premium", Tipo: "Microfibra de poliamida", Acabamento: "Liso" },
-    semFoto: true,
-  },
-  {
-    nome: "Suplex Blackout",
+    nome: "Suplex Blackout 290",
     slug: "suplex-blackout",
-    sku: "PA-007",
-    grupo: "poliamida",
-    categoria: "suplex",
+    sku: "SU-001",
+    grupo: "suplex",
+    categoria: "liso",
     resumo: "Não transparenta",
     unidade: "metro",
     preco: null,
     descricao:
-      "Suplex de cobertura total, indicado para legging e peças claras que não podem transparecer.",
-    detalhes: { Linha: "Blackout", Tipo: "Suplex", Indicação: "Legging e fitness" },
+      "Suplex de poliamida com 290 g de cobertura total, indicado para legging e peças claras que não podem transparecer.",
+    detalhes: { Linha: "Blackout", Tipo: "Suplex de poliamida", Gramatura: "290" },
     semFoto: true,
   },
   {
-    nome: "Suplex Flex Fit",
+    nome: "Suplex Flex Fit 310",
     slug: "suplex-flex-fit",
-    sku: "PA-008",
-    grupo: "poliamida",
-    categoria: "suplex",
+    sku: "SU-002",
+    grupo: "suplex",
+    categoria: "liso",
     resumo: "Elasticidade nos dois sentidos",
     unidade: "metro",
     preco: null,
     descricao:
-      "Suplex com boa recuperação elástica, para peças de treino que precisam voltar ao lugar depois do movimento.",
-    detalhes: { Linha: "Flex Fit", Tipo: "Suplex", Indicação: "Moda fitness" },
+      "Suplex de poliamida com 310 g e boa recuperação elástica, para peças de treino que precisam voltar ao lugar depois do movimento.",
+    detalhes: { Linha: "Flex Fit", Tipo: "Suplex de poliamida", Gramatura: "310" },
     semFoto: true,
   },
 
@@ -312,19 +284,6 @@ const PRODUTOS = [
       "Base lisa da linha Romantik, com caimento leve. Indicada para blusas, vestidos e conjuntos.",
     detalhes: { Linha: "Romantik", Tipo: "Microfibra de poliéster", Acabamento: "Liso" },
     destaque: true,
-  },
-  {
-    nome: "Romantik Mesclado",
-    slug: "romantik-mesclado",
-    sku: "PE-003",
-    grupo: "poliester",
-    categoria: "mesclado",
-    resumo: "Efeito mescla no fio",
-    unidade: "metro",
-    preco: null,
-    descricao:
-      "Versão mesclada da linha Romantik: o efeito vem do próprio fio, dando profundidade à cor sem precisar de estampa.",
-    detalhes: { Linha: "Romantik", Tipo: "Microfibra de poliéster", Acabamento: "Mesclado" },
   },
   {
     nome: "Romantik Risca de Giz",
@@ -540,30 +499,6 @@ const PRODUTOS = [
     detalhes: { Largura: "17 cm", Linha: "7 Mares" },
     tags: ["Mais vendido"],
     destaque: true,
-  },
-  {
-    nome: "Renda 7 Fios 3,3 cm",
-    slug: "renda-7-fios",
-    sku: "AV-011",
-    grupo: "aviamentos",
-    categoria: "renda",
-    resumo: "Renda estreita, 3,3 cm",
-    unidade: "metro",
-    preco: null,
-    descricao: "Renda estreita de 3,3 cm da linha própria, para detalhes e acabamentos.",
-    detalhes: { Largura: "3,3 cm", Linha: "7 Fios" },
-  },
-  {
-    nome: "Renda Belle",
-    slug: "renda-belle",
-    sku: "AV-012",
-    grupo: "aviamentos",
-    categoria: "renda",
-    resumo: "Desenho delicado",
-    unidade: "metro",
-    preco: null,
-    descricao: "Renda da linha Belle, de desenho delicado, para lingerie e peças femininas.",
-    detalhes: { Linha: "Belle", Tipo: "Renda" },
   },
 ];
 

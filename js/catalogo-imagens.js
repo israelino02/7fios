@@ -19,7 +19,7 @@ const CAPAS_DEP = {
   "aviamentos": "assets/departamentos/aviamentos.jpg?v=1788166361"
 };
 
-const FITA = "assets/banners/fita.jpg?v=1788166361";
+const FITA = null;
 
 const GERENTES = [
   {
@@ -37,12 +37,284 @@ const GERENTES = [
 ];
 
 const VIDEOS = {
-  "historia": "assets/video/historia.mp4?v=1788168292",
+  "historia": "assets/video/historia.mp4?v=1788622945",
   "historiaCapa": "assets/video/historia-capa.jpg?v=1788167349"
 };
 
 const IMAGENS = {
-  "darlyng": {
+  "poliamida-uv": {
+    "cores": [
+      {
+        "nome": "Amarelo Bb",
+        "hex": "#C9B852",
+        "familia": "amarelo",
+        "img": "assets/produtos/poliamida-uv/cores/amarelo-bb.jpg?v=1788622926",
+        "mini": "assets/produtos/poliamida-uv/cores/amarelo-bb-mini.jpg?v=1788622926"
+      },
+      {
+        "nome": "Aventurine",
+        "hex": "#196458",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/aventurine.jpg?v=1788622927",
+        "mini": "assets/produtos/poliamida-uv/cores/aventurine-mini.jpg?v=1788622927"
+      },
+      {
+        "nome": "Azulejo",
+        "hex": "#5053C3",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/azulejo.jpg?v=1788622927",
+        "mini": "assets/produtos/poliamida-uv/cores/azulejo-mini.jpg?v=1788622927"
+      },
+      {
+        "nome": "Bic",
+        "hex": "#343A9F",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/bic.jpg?v=1788622927",
+        "mini": "assets/produtos/poliamida-uv/cores/bic-mini.jpg?v=1788622927"
+      },
+      {
+        "nome": "Branco",
+        "hex": "#B1B5C1",
+        "familia": "branco",
+        "img": "assets/produtos/poliamida-uv/cores/branco.jpg?v=1788622927",
+        "mini": "assets/produtos/poliamida-uv/cores/branco-mini.jpg?v=1788622927"
+      },
+      {
+        "nome": "Burgundy",
+        "hex": "#42101B",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/burgundy.jpg?v=1788622927",
+        "mini": "assets/produtos/poliamida-uv/cores/burgundy-mini.jpg?v=1788622927"
+      },
+      {
+        "nome": "Canela",
+        "hex": "#A88D71",
+        "familia": "bege",
+        "img": "assets/produtos/poliamida-uv/cores/canela.jpg?v=1788622927",
+        "mini": "assets/produtos/poliamida-uv/cores/canela-mini.jpg?v=1788622927"
+      },
+      {
+        "nome": "Carol",
+        "hex": "#C8494A",
+        "familia": "vermelho",
+        "img": "assets/produtos/poliamida-uv/cores/carol.jpg?v=1788622928",
+        "mini": "assets/produtos/poliamida-uv/cores/carol-mini.jpg?v=1788622928"
+      },
+      {
+        "nome": "Castanho",
+        "hex": "#774E30",
+        "familia": "marrom",
+        "img": "assets/produtos/poliamida-uv/cores/castanho.jpg?v=1788622928",
+        "mini": "assets/produtos/poliamida-uv/cores/castanho-mini.jpg?v=1788622928"
+      },
+      {
+        "nome": "Cronos",
+        "hex": "#F0A15A",
+        "familia": "laranja",
+        "img": "assets/produtos/poliamida-uv/cores/cronos.jpg?v=1788622928",
+        "mini": "assets/produtos/poliamida-uv/cores/cronos-mini.jpg?v=1788622928"
+      },
+      {
+        "nome": "Denim",
+        "hex": "#20324E",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/denim.jpg?v=1788622928",
+        "mini": "assets/produtos/poliamida-uv/cores/denim-mini.jpg?v=1788622928"
+      },
+      {
+        "nome": "Frozen",
+        "hex": "#728CA1",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/frozen.jpg?v=1788622928",
+        "mini": "assets/produtos/poliamida-uv/cores/frozen-mini.jpg?v=1788622928"
+      },
+      {
+        "nome": "Fuscia",
+        "hex": "#79163A",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/fuscia.jpg?v=1788622928",
+        "mini": "assets/produtos/poliamida-uv/cores/fuscia-mini.jpg?v=1788622929"
+      },
+      {
+        "nome": "Grafite",
+        "hex": "#777D8D",
+        "familia": "cinza",
+        "img": "assets/produtos/poliamida-uv/cores/grafite.jpg?v=1788622929",
+        "mini": "assets/produtos/poliamida-uv/cores/grafite-mini.jpg?v=1788622929"
+      },
+      {
+        "nome": "Green Olive",
+        "hex": "#888A46",
+        "familia": "verde",
+        "img": "assets/produtos/poliamida-uv/cores/green-olive.jpg?v=1788622929",
+        "mini": "assets/produtos/poliamida-uv/cores/green-olive-mini.jpg?v=1788622929"
+      },
+      {
+        "nome": "Gris",
+        "hex": "#636A73",
+        "familia": "cinza",
+        "img": "assets/produtos/poliamida-uv/cores/gris.jpg?v=1788622929",
+        "mini": "assets/produtos/poliamida-uv/cores/gris-mini.jpg?v=1788622929"
+      },
+      {
+        "nome": "Ires",
+        "hex": "#C44B72",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/ires.jpg?v=1788622929",
+        "mini": "assets/produtos/poliamida-uv/cores/ires-mini.jpg?v=1788622929"
+      },
+      {
+        "nome": "Lavanda",
+        "hex": "#B29BDB",
+        "familia": "roxo",
+        "img": "assets/produtos/poliamida-uv/cores/lavanda.jpg?v=1788622929",
+        "mini": "assets/produtos/poliamida-uv/cores/lavanda-mini.jpg?v=1788622929"
+      },
+      {
+        "nome": "Marfim",
+        "hex": "#B9AA94",
+        "familia": "bege",
+        "img": "assets/produtos/poliamida-uv/cores/marfim.jpg?v=1788622930",
+        "mini": "assets/produtos/poliamida-uv/cores/marfim-mini.jpg?v=1788622930"
+      },
+      {
+        "nome": "Marrom",
+        "hex": "#371E15",
+        "familia": "marrom",
+        "img": "assets/produtos/poliamida-uv/cores/marrom.jpg?v=1788622930",
+        "mini": "assets/produtos/poliamida-uv/cores/marrom-mini.jpg?v=1788622930"
+      },
+      {
+        "nome": "Mocha Mousse",
+        "hex": "#C2837C",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/mocha-mousse.jpg?v=1788622930",
+        "mini": "assets/produtos/poliamida-uv/cores/mocha-mousse-mini.jpg?v=1788622930"
+      },
+      {
+        "nome": "Odalisca",
+        "hex": "#AA0CAD",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/odalisca.jpg?v=1788622930",
+        "mini": "assets/produtos/poliamida-uv/cores/odalisca-mini.jpg?v=1788622930"
+      },
+      {
+        "nome": "Pavão",
+        "hex": "#183642",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/pavao.jpg?v=1788622930",
+        "mini": "assets/produtos/poliamida-uv/cores/pavao-mini.jpg?v=1788622930"
+      },
+      {
+        "nome": "Pimenta",
+        "hex": "#A0121A",
+        "familia": "vermelho",
+        "img": "assets/produtos/poliamida-uv/cores/pimenta.jpg?v=1788622931",
+        "mini": "assets/produtos/poliamida-uv/cores/pimenta-mini.jpg?v=1788622931"
+      },
+      {
+        "nome": "Pink",
+        "hex": "#C10760",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/pink.jpg?v=1788622931",
+        "mini": "assets/produtos/poliamida-uv/cores/pink-mini.jpg?v=1788622931"
+      },
+      {
+        "nome": "Preto",
+        "hex": "#121212",
+        "familia": "preto",
+        "img": "assets/produtos/poliamida-uv/cores/preto.jpg?v=1788622931",
+        "mini": "assets/produtos/poliamida-uv/cores/preto-mini.jpg?v=1788622931"
+      },
+      {
+        "nome": "Romance",
+        "hex": "#AD7166",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/romance.jpg?v=1788622931",
+        "mini": "assets/produtos/poliamida-uv/cores/romance-mini.jpg?v=1788622931"
+      },
+      {
+        "nome": "Rubro",
+        "hex": "#2A0C0F",
+        "familia": "preto",
+        "img": "assets/produtos/poliamida-uv/cores/rubro.jpg?v=1788622931",
+        "mini": "assets/produtos/poliamida-uv/cores/rubro-mini.jpg?v=1788622931"
+      },
+      {
+        "nome": "Sandia",
+        "hex": "#CB3A44",
+        "familia": "vermelho",
+        "img": "assets/produtos/poliamida-uv/cores/sandia.jpg?v=1788622931",
+        "mini": "assets/produtos/poliamida-uv/cores/sandia-mini.jpg?v=1788622931"
+      },
+      {
+        "nome": "Sanremo",
+        "hex": "#8CB0B4",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/sanremo.jpg?v=1788622932",
+        "mini": "assets/produtos/poliamida-uv/cores/sanremo-mini.jpg?v=1788622932"
+      },
+      {
+        "nome": "Tame",
+        "hex": "#1B9B9E",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/tame.jpg?v=1788622932",
+        "mini": "assets/produtos/poliamida-uv/cores/tame-mini.jpg?v=1788622932"
+      },
+      {
+        "nome": "Teos",
+        "hex": "#7E8F83",
+        "familia": "cinza",
+        "img": "assets/produtos/poliamida-uv/cores/teos.jpg?v=1788622932",
+        "mini": "assets/produtos/poliamida-uv/cores/teos-mini.jpg?v=1788622932"
+      },
+      {
+        "nome": "Terra",
+        "hex": "#B12B26",
+        "familia": "vermelho",
+        "img": "assets/produtos/poliamida-uv/cores/terra.jpg?v=1788622932",
+        "mini": "assets/produtos/poliamida-uv/cores/terra-mini.jpg?v=1788622932"
+      },
+      {
+        "nome": "Tibeton",
+        "hex": "#B38D1E",
+        "familia": "amarelo",
+        "img": "assets/produtos/poliamida-uv/cores/tibeton.jpg?v=1788622932",
+        "mini": "assets/produtos/poliamida-uv/cores/tibeton-mini.jpg?v=1788622932"
+      },
+      {
+        "nome": "Tulipero",
+        "hex": "#7A5760",
+        "familia": "rosa",
+        "img": "assets/produtos/poliamida-uv/cores/tulipero.jpg?v=1788622933",
+        "mini": "assets/produtos/poliamida-uv/cores/tulipero-mini.jpg?v=1788622933"
+      },
+      {
+        "nome": "Turquesa",
+        "hex": "#3874AB",
+        "familia": "azul",
+        "img": "assets/produtos/poliamida-uv/cores/turquesa.jpg?v=1788622933",
+        "mini": "assets/produtos/poliamida-uv/cores/turquesa-mini.jpg?v=1788622933"
+      },
+      {
+        "nome": "Verde Tw",
+        "hex": "#2C4A47",
+        "familia": "verde",
+        "img": "assets/produtos/poliamida-uv/cores/verde-tw.jpg?v=1788622933",
+        "mini": "assets/produtos/poliamida-uv/cores/verde-tw-mini.jpg?v=1788622933"
+      },
+      {
+        "nome": "Vermelho",
+        "hex": "#A7131A",
+        "familia": "vermelho",
+        "img": "assets/produtos/poliamida-uv/cores/vermelho.jpg?v=1788622933",
+        "mini": "assets/produtos/poliamida-uv/cores/vermelho-mini.jpg?v=1788622933"
+      }
+    ],
+    "capa": "assets/produtos/poliamida-uv/capa.jpg?v=1788622933",
+    "capaPropria": true
+  },
+  "max-premium": {
     "cores": [
       {
         "nome": "Aço",
@@ -215,281 +487,9 @@ const IMAGENS = {
         "familia": "vermelho"
       }
     ],
-    "capa": "assets/produtos/darlyng/capa.jpg?v=1788166366",
+    "capa": "assets/produtos/max-premium/capa.jpg?v=1788622938",
     "capaPropria": true,
     "coresChapadas": true
-  },
-  "delitex": {
-    "cores": [
-      {
-        "nome": "Amarelo Bb",
-        "hex": "#C9B852",
-        "familia": "amarelo",
-        "img": "assets/produtos/delitex/cores/amarelo-bb.jpg?v=1788166366",
-        "mini": "assets/produtos/delitex/cores/amarelo-bb-mini.jpg?v=1788166366"
-      },
-      {
-        "nome": "Aventurine",
-        "hex": "#196458",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/aventurine.jpg?v=1788166366",
-        "mini": "assets/produtos/delitex/cores/aventurine-mini.jpg?v=1788166366"
-      },
-      {
-        "nome": "Azulejo",
-        "hex": "#5053C3",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/azulejo.jpg?v=1788166366",
-        "mini": "assets/produtos/delitex/cores/azulejo-mini.jpg?v=1788166366"
-      },
-      {
-        "nome": "Bic",
-        "hex": "#343A9F",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/bic.jpg?v=1788166367",
-        "mini": "assets/produtos/delitex/cores/bic-mini.jpg?v=1788166367"
-      },
-      {
-        "nome": "Branco",
-        "hex": "#B1B5C1",
-        "familia": "branco",
-        "img": "assets/produtos/delitex/cores/branco.jpg?v=1788166367",
-        "mini": "assets/produtos/delitex/cores/branco-mini.jpg?v=1788166367"
-      },
-      {
-        "nome": "Burgundy",
-        "hex": "#42101B",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/burgundy.jpg?v=1788166367",
-        "mini": "assets/produtos/delitex/cores/burgundy-mini.jpg?v=1788166367"
-      },
-      {
-        "nome": "Canela",
-        "hex": "#A88D71",
-        "familia": "bege",
-        "img": "assets/produtos/delitex/cores/canela.jpg?v=1788166367",
-        "mini": "assets/produtos/delitex/cores/canela-mini.jpg?v=1788166367"
-      },
-      {
-        "nome": "Carol",
-        "hex": "#C8494A",
-        "familia": "vermelho",
-        "img": "assets/produtos/delitex/cores/carol.jpg?v=1788166367",
-        "mini": "assets/produtos/delitex/cores/carol-mini.jpg?v=1788166367"
-      },
-      {
-        "nome": "Castanho",
-        "hex": "#774E30",
-        "familia": "marrom",
-        "img": "assets/produtos/delitex/cores/castanho.jpg?v=1788166367",
-        "mini": "assets/produtos/delitex/cores/castanho-mini.jpg?v=1788166368"
-      },
-      {
-        "nome": "Cronos",
-        "hex": "#F0A15A",
-        "familia": "laranja",
-        "img": "assets/produtos/delitex/cores/cronos.jpg?v=1788166368",
-        "mini": "assets/produtos/delitex/cores/cronos-mini.jpg?v=1788166368"
-      },
-      {
-        "nome": "Denim",
-        "hex": "#20324E",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/denim.jpg?v=1788166368",
-        "mini": "assets/produtos/delitex/cores/denim-mini.jpg?v=1788166368"
-      },
-      {
-        "nome": "Frozen",
-        "hex": "#728CA1",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/frozen.jpg?v=1788166368",
-        "mini": "assets/produtos/delitex/cores/frozen-mini.jpg?v=1788166368"
-      },
-      {
-        "nome": "Fuscia",
-        "hex": "#79163A",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/fuscia.jpg?v=1788166368",
-        "mini": "assets/produtos/delitex/cores/fuscia-mini.jpg?v=1788166368"
-      },
-      {
-        "nome": "Grafite",
-        "hex": "#777D8D",
-        "familia": "cinza",
-        "img": "assets/produtos/delitex/cores/grafite.jpg?v=1788166368",
-        "mini": "assets/produtos/delitex/cores/grafite-mini.jpg?v=1788166368"
-      },
-      {
-        "nome": "Green Olive",
-        "hex": "#888A46",
-        "familia": "verde",
-        "img": "assets/produtos/delitex/cores/green-olive.jpg?v=1788166369",
-        "mini": "assets/produtos/delitex/cores/green-olive-mini.jpg?v=1788166369"
-      },
-      {
-        "nome": "Gris",
-        "hex": "#636A73",
-        "familia": "cinza",
-        "img": "assets/produtos/delitex/cores/gris.jpg?v=1788166369",
-        "mini": "assets/produtos/delitex/cores/gris-mini.jpg?v=1788166369"
-      },
-      {
-        "nome": "Ires",
-        "hex": "#C44B72",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/ires.jpg?v=1788166369",
-        "mini": "assets/produtos/delitex/cores/ires-mini.jpg?v=1788166369"
-      },
-      {
-        "nome": "Lavanda",
-        "hex": "#B29BDB",
-        "familia": "roxo",
-        "img": "assets/produtos/delitex/cores/lavanda.jpg?v=1788166369",
-        "mini": "assets/produtos/delitex/cores/lavanda-mini.jpg?v=1788166369"
-      },
-      {
-        "nome": "Marfim",
-        "hex": "#B9AA94",
-        "familia": "bege",
-        "img": "assets/produtos/delitex/cores/marfim.jpg?v=1788166369",
-        "mini": "assets/produtos/delitex/cores/marfim-mini.jpg?v=1788166369"
-      },
-      {
-        "nome": "Marrom",
-        "hex": "#371E15",
-        "familia": "marrom",
-        "img": "assets/produtos/delitex/cores/marrom.jpg?v=1788166369",
-        "mini": "assets/produtos/delitex/cores/marrom-mini.jpg?v=1788166370"
-      },
-      {
-        "nome": "Mocha Mousse",
-        "hex": "#C2837C",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/mocha-mousse.jpg?v=1788166370",
-        "mini": "assets/produtos/delitex/cores/mocha-mousse-mini.jpg?v=1788166370"
-      },
-      {
-        "nome": "Odalisca",
-        "hex": "#AA0CAD",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/odalisca.jpg?v=1788166370",
-        "mini": "assets/produtos/delitex/cores/odalisca-mini.jpg?v=1788166370"
-      },
-      {
-        "nome": "Pavão",
-        "hex": "#183642",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/pavao.jpg?v=1788166370",
-        "mini": "assets/produtos/delitex/cores/pavao-mini.jpg?v=1788166370"
-      },
-      {
-        "nome": "Pimenta",
-        "hex": "#A0121A",
-        "familia": "vermelho",
-        "img": "assets/produtos/delitex/cores/pimenta.jpg?v=1788166370",
-        "mini": "assets/produtos/delitex/cores/pimenta-mini.jpg?v=1788166370"
-      },
-      {
-        "nome": "Pink",
-        "hex": "#C10760",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/pink.jpg?v=1788166370",
-        "mini": "assets/produtos/delitex/cores/pink-mini.jpg?v=1788166370"
-      },
-      {
-        "nome": "Preto",
-        "hex": "#121212",
-        "familia": "preto",
-        "img": "assets/produtos/delitex/cores/preto.jpg?v=1788166371",
-        "mini": "assets/produtos/delitex/cores/preto-mini.jpg?v=1788166371"
-      },
-      {
-        "nome": "Romance",
-        "hex": "#AD7166",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/romance.jpg?v=1788166371",
-        "mini": "assets/produtos/delitex/cores/romance-mini.jpg?v=1788166371"
-      },
-      {
-        "nome": "Rubro",
-        "hex": "#2A0C0F",
-        "familia": "preto",
-        "img": "assets/produtos/delitex/cores/rubro.jpg?v=1788166371",
-        "mini": "assets/produtos/delitex/cores/rubro-mini.jpg?v=1788166371"
-      },
-      {
-        "nome": "Sandia",
-        "hex": "#CB3A44",
-        "familia": "vermelho",
-        "img": "assets/produtos/delitex/cores/sandia.jpg?v=1788166371",
-        "mini": "assets/produtos/delitex/cores/sandia-mini.jpg?v=1788166371"
-      },
-      {
-        "nome": "Sanremo",
-        "hex": "#8CB0B4",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/sanremo.jpg?v=1788166371",
-        "mini": "assets/produtos/delitex/cores/sanremo-mini.jpg?v=1788166371"
-      },
-      {
-        "nome": "Tame",
-        "hex": "#1B9B9E",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/tame.jpg?v=1788166372",
-        "mini": "assets/produtos/delitex/cores/tame-mini.jpg?v=1788166372"
-      },
-      {
-        "nome": "Teos",
-        "hex": "#7E8F83",
-        "familia": "cinza",
-        "img": "assets/produtos/delitex/cores/teos.jpg?v=1788166372",
-        "mini": "assets/produtos/delitex/cores/teos-mini.jpg?v=1788166372"
-      },
-      {
-        "nome": "Terra",
-        "hex": "#B12B26",
-        "familia": "vermelho",
-        "img": "assets/produtos/delitex/cores/terra.jpg?v=1788166372",
-        "mini": "assets/produtos/delitex/cores/terra-mini.jpg?v=1788166372"
-      },
-      {
-        "nome": "Tibeton",
-        "hex": "#B38D1E",
-        "familia": "amarelo",
-        "img": "assets/produtos/delitex/cores/tibeton.jpg?v=1788166372",
-        "mini": "assets/produtos/delitex/cores/tibeton-mini.jpg?v=1788166372"
-      },
-      {
-        "nome": "Tulipero",
-        "hex": "#7A5760",
-        "familia": "rosa",
-        "img": "assets/produtos/delitex/cores/tulipero.jpg?v=1788166372",
-        "mini": "assets/produtos/delitex/cores/tulipero-mini.jpg?v=1788166372"
-      },
-      {
-        "nome": "Turquesa",
-        "hex": "#3874AB",
-        "familia": "azul",
-        "img": "assets/produtos/delitex/cores/turquesa.jpg?v=1788166373",
-        "mini": "assets/produtos/delitex/cores/turquesa-mini.jpg?v=1788166373"
-      },
-      {
-        "nome": "Verde Tw",
-        "hex": "#2C4A47",
-        "familia": "verde",
-        "img": "assets/produtos/delitex/cores/verde-tw.jpg?v=1788166373",
-        "mini": "assets/produtos/delitex/cores/verde-tw-mini.jpg?v=1788166373"
-      },
-      {
-        "nome": "Vermelho",
-        "hex": "#A7131A",
-        "familia": "vermelho",
-        "img": "assets/produtos/delitex/cores/vermelho.jpg?v=1788166373",
-        "mini": "assets/produtos/delitex/cores/vermelho-mini.jpg?v=1788166373"
-      }
-    ],
-    "capa": "assets/produtos/delitex/capa.jpg?v=1788166373",
-    "capaPropria": true
   },
   "premium": {
     "cores": [
@@ -906,20 +906,6 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/bic-mini.jpg?v=1788166388"
       },
       {
-        "nome": "Branco",
-        "hex": "#B1B5C1",
-        "familia": "branco",
-        "img": "assets/produtos/romantik-liso/cores/branco.jpg?v=1788166388",
-        "mini": "assets/produtos/romantik-liso/cores/branco-mini.jpg?v=1788166388"
-      },
-      {
-        "nome": "Canela",
-        "hex": "#A98E71",
-        "familia": "bege",
-        "img": "assets/produtos/romantik-liso/cores/canela.jpg?v=1788166388",
-        "mini": "assets/produtos/romantik-liso/cores/canela-mini.jpg?v=1788166388"
-      },
-      {
         "nome": "Castanho",
         "hex": "#774E31",
         "familia": "marrom",
@@ -934,20 +920,6 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/chumbo-mini.jpg?v=1788166389"
       },
       {
-        "nome": "Coral",
-        "hex": "#C14645",
-        "familia": "laranja",
-        "img": "assets/produtos/romantik-liso/cores/coral.jpg?v=1788166389",
-        "mini": "assets/produtos/romantik-liso/cores/coral-mini.jpg?v=1788166389"
-      },
-      {
-        "nome": "Frozen",
-        "hex": "#93B4C6",
-        "familia": "azul",
-        "img": "assets/produtos/romantik-liso/cores/frozen.jpg?v=1788166389",
-        "mini": "assets/produtos/romantik-liso/cores/frozen-mini.jpg?v=1788166389"
-      },
-      {
         "nome": "Fucsia",
         "hex": "#78163A",
         "familia": "rosa",
@@ -955,32 +927,11 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/fucsia-mini.jpg?v=1788166390"
       },
       {
-        "nome": "Ires",
-        "hex": "#99405E",
-        "familia": "rosa",
-        "img": "assets/produtos/romantik-liso/cores/ires.jpg?v=1788166390",
-        "mini": "assets/produtos/romantik-liso/cores/ires-mini.jpg?v=1788166390"
-      },
-      {
-        "nome": "Lavanda",
-        "hex": "#9E92B8",
-        "familia": "roxo",
-        "img": "assets/produtos/romantik-liso/cores/lavanda.jpg?v=1788166390",
-        "mini": "assets/produtos/romantik-liso/cores/lavanda-mini.jpg?v=1788166390"
-      },
-      {
         "nome": "Marrom",
         "hex": "#57302F",
         "familia": "marrom",
         "img": "assets/produtos/romantik-liso/cores/marrom.jpg?v=1788166390",
         "mini": "assets/produtos/romantik-liso/cores/marrom-mini.jpg?v=1788166391"
-      },
-      {
-        "nome": "Mescla",
-        "hex": "#6E6D69",
-        "familia": "cinza",
-        "img": "assets/produtos/romantik-liso/cores/mescla.jpg?v=1788166391",
-        "mini": "assets/produtos/romantik-liso/cores/mescla-mini.jpg?v=1788166391"
       },
       {
         "nome": "Pimenta",
@@ -1004,20 +955,6 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/preto-mini.jpg?v=1788166392"
       },
       {
-        "nome": "Romance",
-        "hex": "#AD7166",
-        "familia": "rosa",
-        "img": "assets/produtos/romantik-liso/cores/romance.jpg?v=1788166392",
-        "mini": "assets/produtos/romantik-liso/cores/romance-mini.jpg?v=1788166392"
-      },
-      {
-        "nome": "Rosa Bb",
-        "hex": "#A88484",
-        "familia": "rosa",
-        "img": "assets/produtos/romantik-liso/cores/rosa-bb.jpg?v=1788166392",
-        "mini": "assets/produtos/romantik-liso/cores/rosa-bb-mini.jpg?v=1788166392"
-      },
-      {
         "nome": "Sensuale",
         "hex": "#2B0D10",
         "familia": "preto",
@@ -1032,13 +969,6 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/tangerina-mini.jpg?v=1788166393"
       },
       {
-        "nome": "Teos",
-        "hex": "#7F8F83",
-        "familia": "cinza",
-        "img": "assets/produtos/romantik-liso/cores/teos.jpg?v=1788166393",
-        "mini": "assets/produtos/romantik-liso/cores/teos-mini.jpg?v=1788166393"
-      },
-      {
         "nome": "Terra",
         "hex": "#982318",
         "familia": "vermelho",
@@ -1051,13 +981,6 @@ const IMAGENS = {
         "familia": "amarelo",
         "img": "assets/produtos/romantik-liso/cores/tibeton.jpg?v=1788166394",
         "mini": "assets/produtos/romantik-liso/cores/tibeton-mini.jpg?v=1788166394"
-      },
-      {
-        "nome": "Tulipero",
-        "hex": "#79575F",
-        "familia": "rosa",
-        "img": "assets/produtos/romantik-liso/cores/tulipero.jpg?v=1788166394",
-        "mini": "assets/produtos/romantik-liso/cores/tulipero-mini.jpg?v=1788166394"
       },
       {
         "nome": "Turquesa",
@@ -1096,68 +1019,6 @@ const IMAGENS = {
       }
     ],
     "capa": "assets/produtos/romantik-liso/capa.jpg?v=1788166396",
-    "capaPropria": true
-  },
-  "romantik-mesclado": {
-    "cores": [
-      {
-        "nome": "Azul Oceano",
-        "hex": "#57627D",
-        "familia": "azul",
-        "img": "assets/produtos/romantik-mesclado/cores/azul-oceano.jpg?v=1788166396",
-        "mini": "assets/produtos/romantik-mesclado/cores/azul-oceano-mini.jpg?v=1788166396"
-      },
-      {
-        "nome": "Bic",
-        "hex": "#385992",
-        "familia": "azul",
-        "img": "assets/produtos/romantik-mesclado/cores/bic.jpg?v=1788166396",
-        "mini": "assets/produtos/romantik-mesclado/cores/bic-mini.jpg?v=1788166396"
-      },
-      {
-        "nome": "Major",
-        "hex": "#6B6952",
-        "familia": "amarelo",
-        "img": "assets/produtos/romantik-mesclado/cores/major.jpg?v=1788166396",
-        "mini": "assets/produtos/romantik-mesclado/cores/major-mini.jpg?v=1788166396"
-      },
-      {
-        "nome": "Sensuale",
-        "hex": "#8C4A55",
-        "familia": "vermelho",
-        "img": "assets/produtos/romantik-mesclado/cores/sensuale.jpg?v=1788166397",
-        "mini": "assets/produtos/romantik-mesclado/cores/sensuale-mini.jpg?v=1788166397"
-      },
-      {
-        "nome": "Tibeton",
-        "hex": "#6F7054",
-        "familia": "amarelo",
-        "img": "assets/produtos/romantik-mesclado/cores/tibeton.jpg?v=1788166397",
-        "mini": "assets/produtos/romantik-mesclado/cores/tibeton-mini.jpg?v=1788166397"
-      },
-      {
-        "nome": "Tomate",
-        "hex": "#87383D",
-        "familia": "vermelho",
-        "img": "assets/produtos/romantik-mesclado/cores/tomate.jpg?v=1788166397",
-        "mini": "assets/produtos/romantik-mesclado/cores/tomate-mini.jpg?v=1788166397"
-      },
-      {
-        "nome": "Turquesa",
-        "hex": "#3C6B79",
-        "familia": "azul",
-        "img": "assets/produtos/romantik-mesclado/cores/turquesa.jpg?v=1788166397",
-        "mini": "assets/produtos/romantik-mesclado/cores/turquesa-mini.jpg?v=1788166397"
-      },
-      {
-        "nome": "Verde Musgo",
-        "hex": "#667479",
-        "familia": "verde",
-        "img": "assets/produtos/romantik-mesclado/cores/verde-musgo.jpg?v=1788166397",
-        "mini": "assets/produtos/romantik-mesclado/cores/verde-musgo-mini.jpg?v=1788166397"
-      }
-    ],
-    "capa": "assets/produtos/romantik-mesclado/capa.jpg?v=1788166398",
     "capaPropria": true
   },
   "romantik-risca": {
@@ -1705,21 +1566,6 @@ const IMAGENS = {
       "assets/produtos/renda-7-mares/galeria/8.jpg?v=1788166422"
     ],
     "capa": "assets/produtos/renda-7-mares/capa.jpg?v=1788166422",
-    "capaPropria": false
-  },
-  "renda-belle": {
-    "galeria": [
-      "assets/produtos/renda-belle/galeria/1.jpg?v=1788166423"
-    ],
-    "capa": "assets/produtos/renda-belle/capa.jpg?v=1788166423",
-    "capaPropria": false
-  },
-  "renda-7-fios": {
-    "galeria": [
-      "assets/produtos/renda-7-fios/galeria/1.jpg?v=1788166423",
-      "assets/produtos/renda-7-fios/galeria/2.jpg?v=1788166423"
-    ],
-    "capa": "assets/produtos/renda-7-fios/capa.jpg?v=1788166423",
     "capaPropria": false
   }
 };

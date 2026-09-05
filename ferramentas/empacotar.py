@@ -117,6 +117,9 @@ def main():
         open(os.path.join(RAIZ, "assets/logo.jpg"), "rb").read()).decode()
 
     corpo = html.split("<body>", 1)[1].split("</body>", 1)[0]
+    # o contêiner de tags vem de googletagmanager.com, que o link de
+    # visualização bloqueia; fora dele o console não enche de erro à toa
+    corpo = re.sub(r"<script>\(function\(w,d,s,l,i\).*?</script>", "", corpo, flags=re.S)
     corpo = re.sub(r'\s*<script src="js/[^"]+"></script>', "", corpo)
     corpo = rotear(sem_iframe(corpo)).replace("assets/logo.jpg", logo)
 
