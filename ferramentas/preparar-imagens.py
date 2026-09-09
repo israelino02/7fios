@@ -457,7 +457,14 @@ def main():
             lista = [a for a in lista
                      if not re.match(r"^(IMG[_ ]|_?DSC|Imagem do WhatsApp)", a, re.I)]
             for arq in lista:
-                nome = titulo(os.path.splitext(arq)[0].replace("(2)", "").strip())
+                # "1. TANGERINA.jpg" → a cor se chama Tangerina. O número na
+                # frente serve só para o dono escolher qual cor abre o card:
+                # como "1" vem antes de qualquer letra, ela fica em primeiro e
+                # vira a capa. Exige o ponto (ou traço) para não confundir com
+                # cor que comece com número de verdade.
+                cru = re.sub(r"^\s*\d{1,2}\s*[.\-)]\s*", "",
+                             os.path.splitext(arq)[0].replace("(2)", "").strip())
+                nome = titulo(cru)
                 cs = slug(nome)
                 origem = os.path.join(resolver(pasta), arq)
                 grande = conta(origem, os.path.join(base, "cores", cs + ".jpg"), *LARGURA["cor"])

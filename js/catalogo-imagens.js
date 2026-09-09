@@ -808,6 +808,13 @@ const IMAGENS = {
   "madri": {
     "cores": [
       {
+        "nome": "Bic",
+        "hex": "#393B8F",
+        "familia": "azul",
+        "img": "assets/produtos/madri/cores/bic.jpg?v=1788930979",
+        "mini": "assets/produtos/madri/cores/bic-mini.jpg?v=1788930979"
+      },
+      {
         "nome": "Amarelo Bb",
         "hex": "#C0B053",
         "familia": "amarelo",
@@ -820,13 +827,6 @@ const IMAGENS = {
         "familia": "azul",
         "img": "assets/produtos/madri/cores/azul-oceano.jpg?v=1788166378",
         "mini": "assets/produtos/madri/cores/azul-oceano-mini.jpg?v=1788166379"
-      },
-      {
-        "nome": "Bic",
-        "hex": "#393B8F",
-        "familia": "azul",
-        "img": "assets/produtos/madri/cores/bic.jpg?v=1788166379",
-        "mini": "assets/produtos/madri/cores/bic-mini.jpg?v=1788166379"
       },
       {
         "nome": "Branco",
@@ -1011,11 +1011,18 @@ const IMAGENS = {
         "mini": "assets/produtos/madri/cores/vermelho-mini.jpg?v=1788166387"
       }
     ],
-    "capa": "assets/produtos/madri/capa.jpg?v=1788638310",
+    "capa": "assets/produtos/madri/capa.jpg?v=1788930980",
     "capaPropria": false
   },
   "romantik-liso": {
     "cores": [
+      {
+        "nome": "Sensuale",
+        "hex": "#2B0D10",
+        "familia": "preto",
+        "img": "assets/produtos/romantik-liso/cores/sensuale.jpg?v=1788930980",
+        "mini": "assets/produtos/romantik-liso/cores/sensuale-mini.jpg?v=1788930980"
+      },
       {
         "nome": "Amarelo Bb",
         "hex": "#C0B053",
@@ -1087,13 +1094,6 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/preto-mini.jpg?v=1788166392"
       },
       {
-        "nome": "Sensuale",
-        "hex": "#2B0D10",
-        "familia": "preto",
-        "img": "assets/produtos/romantik-liso/cores/sensuale.jpg?v=1788166393",
-        "mini": "assets/produtos/romantik-liso/cores/sensuale-mini.jpg?v=1788166393"
-      },
-      {
         "nome": "Tangerina",
         "hex": "#D63C0F",
         "familia": "laranja",
@@ -1150,7 +1150,7 @@ const IMAGENS = {
         "mini": "assets/produtos/romantik-liso/cores/vermelho-mini.jpg?v=1788166396"
       }
     ],
-    "capa": "assets/produtos/romantik-liso/capa.jpg?v=1788638311",
+    "capa": "assets/produtos/romantik-liso/capa.jpg?v=1788930981",
     "capaPropria": false
   },
   "romantik-risca": {
@@ -1259,6 +1259,13 @@ const IMAGENS = {
   },
   "summersol": {
     "cores": [
+      {
+        "nome": "Tangerina",
+        "hex": "#D63C0F",
+        "familia": "laranja",
+        "img": "assets/produtos/summersol/cores/tangerina.jpg?v=1788930982",
+        "mini": "assets/produtos/summersol/cores/tangerina-mini.jpg?v=1788930982"
+      },
       {
         "nome": "Amarelo Bb",
         "hex": "#C0B053",
@@ -1393,13 +1400,6 @@ const IMAGENS = {
         "mini": "assets/produtos/summersol/cores/sensuale-mini.jpg?v=1788166407"
       },
       {
-        "nome": "Tangerina",
-        "hex": "#D63C0F",
-        "familia": "laranja",
-        "img": "assets/produtos/summersol/cores/tangerina.jpg?v=1788166407",
-        "mini": "assets/produtos/summersol/cores/tangerina-mini.jpg?v=1788166407"
-      },
-      {
         "nome": "Teos",
         "hex": "#7F8F83",
         "familia": "cinza",
@@ -1463,7 +1463,7 @@ const IMAGENS = {
         "mini": "assets/produtos/summersol/cores/vermelho-mini.jpg?v=1788166410"
       }
     ],
-    "capa": "assets/produtos/summersol/capa.jpg?v=1788638312",
+    "capa": "assets/produtos/summersol/capa.jpg?v=1788930983",
     "capaPropria": false
   },
   "dry-fit-prime": {
