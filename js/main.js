@@ -580,8 +580,22 @@
     const empilhado = () => window.matchMedia("(max-width: 760px)").matches;
     let pendente = false;
 
+    /* A troca de painel ativo dispara uma transição CSS de .55s (ver
+       ".sel{ transition:height .55s ... }" no styles.css). Num scroll rápido
+       de celular o usuário passa por vários painéis em menos de .55s, e cada
+       novo "escolhido" cortava a transição do painel anterior no meio do
+       caminho — por isso parecia travar ou pular em vez de abrir suave.
+       Aqui a troca respeita a duração da transição: se ainda não deu tempo
+       de terminar, agenda a troca pra quando der, sempre mirando no alvo
+       mais recente (se o scroll continuar, reagenda; se parar, aplica). */
+    const DURACAO_TRANSICAO = 560; // .55s do CSS + folga
+    let ultimaTroca = 0;
+    let trocaPendenteId = null;
+
     function conferir() {
       pendente = false;
+      clearTimeout(trocaPendenteId);
+      trocaPendenteId = null;
       if (!empilhado()) return;
 
       const caixa = alvo.getBoundingClientRect();
@@ -601,9 +615,19 @@
       const andamento = Math.min(1, Math.max(0, (comeco - caixa.top) / trecho));
       const escolhido = Math.min(total - 1, Math.floor(andamento * total));
 
-      if (escolhido !== categoriaAtiva) {
+      if (escolhido === categoriaAtiva) return;
+
+      const faltam = DURACAO_TRANSICAO - (performance.now() - ultimaTroca);
+      if (faltam <= 0) {
+        ultimaTroca = performance.now();
         categoriaAtiva = escolhido;
         pintarCategorias();
+      } else {
+        /* ainda dentro da transição anterior: reagenda uma nova conferência
+           pra quando ela acabar, em vez de aplicar um alvo já desatualizado —
+           assim sempre pousa na categoria certa pra posição de scroll do
+           momento em que o usuário parar ou desacelerar. */
+        trocaPendenteId = setTimeout(conferir, faltam);
       }
     }
 

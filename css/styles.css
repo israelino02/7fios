@@ -437,7 +437,7 @@ h1,h2,h3,.brand__name{
 .produtos{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); }
 .loja__mais{ display:flex; justify-content:center; margin-top:2rem; }
 
-/* atalhos das três linhas: só no celular, logo abaixo da migalha */
+/* atalhos dos departamentos: só no celular, logo abaixo da migalha */
 .atalhos-dep{ display:none; }
 
 .vazio{
@@ -732,7 +732,7 @@ h1,h2,h3,.brand__name{
   }
 
   .atalhos-dep{
-    display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
     gap:.45rem; margin:-.4rem 0 1rem;
   }
   .atalho-dep{

@@ -108,7 +108,7 @@ const VITRINE_CATEGORIAS = [
   {
     nome: "Aviamentos",
     resumo: "Elásticos, viés e rendas",
-    frase: "A linha completa para fechar a peça: elástico, viés, renda, cordão, zíper e etiqueta.",
+    frase: "Tudo para fechar a peça: elásticos lisos, estampados e personalizados, viés e renda larga.",
     capa: "aviamentos",
     grupos: ["aviamentos"],
     /* botão de quatro furos */
@@ -118,11 +118,12 @@ const VITRINE_CATEGORIAS = [
 ];
 
 /* ------------------------------------------------------- ATALHOS DO CELULAR
-   Três botões que aparecem logo abaixo da migalha, só em tela de celular.
-   "grupos" aponta para as chaves de DEPARTAMENTOS.                         */
+   Quatro botões (2 por linha) que aparecem logo abaixo da migalha, só em
+   tela de celular. "grupos" aponta para as chaves de DEPARTAMENTOS.        */
 const ATALHOS_CELULAR = [
   { nome: "Microfibras", grupos: ["poliamida", "poliester", "estampados"] },
   { nome: "Dry-fit",     grupos: ["dryfit"] },
+  { nome: "Suplex",      grupos: ["suplex"] },
   { nome: "Aviamentos",  grupos: ["aviamentos"] },
 ];
 
