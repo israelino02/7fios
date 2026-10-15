@@ -4,8 +4,14 @@ Prepara as imagens da pasta "imagens/" para o site.
 
 O que ele faz:
   1. reduz e comprime cada foto (as originais têm até 20 MB; as do site ficam em KB);
-  2. tira a cor média de cada foto de cor, para pintar as bolinhas dos cards;
-  3. escreve js/catalogo-imagens.js, que o site lê.
+  2. gera a versão WebP de cada foto (até 280 KB), que é a que o site usa;
+  3. tira a cor média de cada foto de cor, para pintar as bolinhas dos cards;
+  4. gera a versão WebM do vídeo da história;
+  5. escreve js/catalogo-imagens.js, que o site lê, com as medidas das capas
+     e a versão estreita delas para o celular;
+  6. escreve a foto do banner principal direto no index.html.
+
+Precisa de: Pillow (pip3 install pillow) e ffmpeg (brew install ffmpeg).
 
 Como rodar (depois de mexer nas fotos):
     python3 ferramentas/preparar-imagens.py
@@ -23,6 +29,8 @@ DESTINO = os.path.join(RAIZ, "assets")
 # ---------------------------------------------------------------- tamanhos
 LARGURA = {
     "banner": (1400, 62),
+    # os dois banners pequenos ao lado do principal nunca passam de ~450 px
+    "banner_mini": (900, 62),
     "departamento": (1400, 72),
     "capa": (900, 72),
     "cor": (1300, 76),
@@ -219,7 +227,10 @@ def arquivos(pasta):
 
 def web(caminho):
     """Caminho como o site enxerga, com a data do arquivo no fim. Assim, quando
-    você troca uma foto, o endereço muda e o navegador não mostra a antiga."""
+    você troca uma foto, o endereço muda e o navegador não mostra a antiga.
+    Foto vira WebP aqui: o site sempre recebe o WebP, nunca o JPG."""
+    if caminho.lower().endswith(".jpg"):
+        caminho = para_webp(caminho)
     rel = os.path.relpath(caminho, RAIZ)
     try:
         return f"{rel}?v={int(os.path.getmtime(caminho))}"
@@ -258,6 +269,111 @@ def converter(entrada, saida, largura, qualidade):
     if marca:
         _ficha[chave] = marca
     return saida
+
+# --------------------------------------------------------------------- webp
+# O site serve WebP: mesma foto, mesmo tamanho em pixels, arquivo bem menor.
+# O JPG continua sendo gerado em assets/ como arquivo de trabalho, porque é
+# dele que saem a cor média das bolinhas e o peso que decide a capa e as
+# "cores chapadas"; medir isso no WebP mudaria o catálogo. O WebP nasce do
+# JPG, ao lado dele, e é ele que vai para o catalogo-imagens.js.
+# Precisa do Pillow (pip3 install pillow). Sem ele, o site segue em JPG.
+TETO_WEBP = 280 * 1024
+QUALIDADE_WEBP = (82, 78, 74, 70)
+
+def para_webp(jpg):
+    webp = os.path.splitext(jpg)[0] + ".webp"
+    if os.path.exists(webp) and os.path.getmtime(webp) >= os.path.getmtime(jpg):
+        return webp
+    try:
+        from PIL import Image
+    except ImportError:
+        print("  ! sem Pillow: fotos ficam em JPG (pip3 install pillow)", flush=True)
+        return jpg
+
+    foto = Image.open(jpg)
+    icc = foto.info.get("icc_profile")
+    foto = foto.convert("RGB")
+    extra = {"icc_profile": icc} if icc else {}
+
+    # Primeiro baixa a qualidade; só se ainda passar do teto é que reduz os
+    # pixels, 10% por vez. Foto de trama fina (risca de giz) é a que chega lá.
+    dados = None
+    while dados is None:
+        for q in QUALIDADE_WEBP:
+            buf = io.BytesIO()
+            foto.save(buf, "WEBP", quality=q, method=6, **extra)
+            if buf.tell() <= TETO_WEBP:
+                dados = buf.getvalue()
+                break
+        else:
+            foto = foto.resize((int(foto.width * 0.9), int(foto.height * 0.9)),
+                               Image.LANCZOS)
+
+    tmp = webp + ".tmp"
+    with open(tmp, "wb") as fp:
+        fp.write(dados)
+    os.replace(tmp, webp)
+    return webp
+
+# Capa do card em duas larguras. No celular a loja tem 3 colunas e cada card
+# mede uns 120 px: baixar a capa de 900 px ali é desperdício. A versão
+# estreita fica ao lado, com "-p" no nome, e o navegador escolhe pelo srcset.
+# As medidas vão para MEDIDAS, no catalogo-imagens.js; com elas a foto também
+# ganha width e height, e a página não pula quando a imagem chega.
+LARGURA_MENOR = {"capa": 480}
+MEDIDAS = {}
+
+def web_com_menor(jpg, largura):
+    """Igual ao web(), e ainda gera a versão estreita e anota as medidas."""
+    grande = web(jpg)
+    webp = os.path.splitext(jpg)[0] + ".webp"
+    if not os.path.exists(webp):
+        return grande  # sem Pillow: segue só com a foto grande
+    from PIL import Image
+
+    with Image.open(webp) as f:
+        w, h = f.size
+    if w <= largura:
+        MEDIDAS[grande.split("?")[0]] = [w, h]
+        return grande
+
+    menor = os.path.splitext(jpg)[0] + "-p.webp"
+    if not os.path.exists(menor) or os.path.getmtime(menor) < os.path.getmtime(webp):
+        with Image.open(jpg) as f:
+            icc = f.info.get("icc_profile")
+            foto = f.convert("RGB")
+        foto = foto.resize((largura, round(foto.height * largura / foto.width)),
+                           Image.LANCZOS)
+        foto.save(menor + ".tmp", "WEBP", quality=78, method=6,
+                  **({"icc_profile": icc} if icc else {}))
+        os.replace(menor + ".tmp", menor)
+
+    MEDIDAS[grande.split("?")[0]] = [w, h, web(menor), largura]
+    return grande
+
+# O banner principal é a primeira coisa grande que aparece na home, e é por
+# ele que o Google mede a velocidade da página. Esperar o JavaScript montar a
+# foto atrasava tudo: aqui ela vai escrita no próprio index.html, com aviso
+# para o navegador baixar antes do resto. O bloco fica entre estas marcas.
+HERO_INICIO = "<!-- foto do banner principal"
+HERO_FIM = "<!-- /foto do banner principal -->"
+
+def escrever_hero(url):
+    pagina = os.path.join(RAIZ, "index.html")
+    html = io.open(pagina, encoding="utf-8").read()
+    i, j = html.find(HERO_INICIO), html.find(HERO_FIM)
+    if not url or i < 0 or j < i:
+        print("  ! index.html sem as marcas do banner principal", flush=True)
+        return
+    bloco = (
+        HERO_INICIO + ": escrito pelo ferramentas/preparar-imagens.py -->\n"
+        f'<link rel="preload" as="image" href="{url}" fetchpriority="high">\n'
+        f'<style>#bannerHero{{background-image:url("{url}")}}</style>\n'
+    )
+    novo = html[:i] + bloco + html[j:]
+    if novo != html:
+        with io.open(pagina, "w", encoding="utf-8") as fp:
+            fp.write(novo)
 
 def cor_media(imagem):
     """Reduz a foto a 1 pixel e lê a cor, vira a bolinha de cor do card."""
@@ -338,6 +454,9 @@ def familia_da_cor(nome, hexa):
 # como está (já vem em 720p bem compactado) e a capa que aparece antes do
 # play é um quadro tirado dele pelo Quick Look do macOS.
 PASTA_VIDEO = "VIDEO HISTORIA"
+# WebM a 450 kbps de imagem: o 1min30 da história fica perto de 5,5 MB,
+# contra 8,4 MB do MP4, com a mesma cara na tela.
+BITRATE_WEBM = "450k"
 EXT_VIDEO = (".mp4", ".mov", ".m4v", ".MP4", ".MOV", ".M4V")
 
 def preparar_video(conta):
@@ -372,7 +491,31 @@ def preparar_video(conta):
             conta(os.path.join(temp, quadros[0]), capa, *LARGURA["banner"])
         shutil.rmtree(temp, ignore_errors=True)
 
+    # Versão WebM (VP9 + Opus): o navegador que entende baixa ela, que é bem
+    # menor; Safari antigo cai no MP4. Precisa do ffmpeg (brew install ffmpeg).
+    webm = os.path.join(DESTINO, "video", "historia.webm")
+    if shutil.which("ffmpeg") and (not os.path.exists(webm)
+                                   or os.path.getmtime(webm) < os.path.getmtime(destino)):
+        print("  vídeo: gerando WebM (leva alguns minutos)…", flush=True)
+        log = os.path.join(DESTINO, "video", "_vp9")
+        comum = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", destino,
+                 "-c:v", "libvpx-vp9", "-b:v", BITRATE_WEBM, "-row-mt", "1",
+                 "-deadline", "good", "-cpu-used", "2", "-passlogfile", log]
+        try:
+            subprocess.run(comum + ["-pass", "1", "-an", "-f", "null", os.devnull], check=True)
+            subprocess.run(comum + ["-pass", "2", "-c:a", "libopus", "-b:a", "64k",
+                                    webm + ".tmp.webm"], check=True)
+            os.replace(webm + ".tmp.webm", webm)
+        except subprocess.CalledProcessError:
+            print("  ! WebM falhou, o site segue só com o MP4", flush=True)
+        finally:
+            for f in os.listdir(os.path.dirname(webm)):
+                if f.startswith("_vp9") or f.endswith(".tmp.webm"):
+                    os.remove(os.path.join(os.path.dirname(webm), f))
+
     saida = {"historia": web(destino)}
+    if os.path.exists(webm):
+        saida["historiaWebm"] = web(webm)
     if os.path.exists(capa):
         saida["historiaCapa"] = web(capa)
     return saida
@@ -404,7 +547,8 @@ def main():
         origem = os.path.join(ORIGEM, rel)
         if os.path.exists(origem):
             destino = os.path.join(DESTINO, "banners", nome + ".jpg")
-            conta(origem, destino, *LARGURA["banner"])
+            tamanho = "banner_mini" if nome in ("microfibras", "aviamentos") else "banner"
+            conta(origem, destino, *LARGURA[tamanho])
             banners[nome] = web(destino)
 
     for nome, rel in list(DEPARTAMENTOS_IMG.items()):
@@ -516,7 +660,7 @@ def main():
             print(f"  ! {sl}: sem capa", flush=True)
             continue
         capa = conta(capa_origem, os.path.join(base, "capa.jpg"), *LARGURA["capa"])
-        registro["capa"] = web(capa)
+        registro["capa"] = web_com_menor(capa, LARGURA_MENOR["capa"])
         # Produto cujas "fotos de cor" são só quadradinhos chapados (a pasta
         # tem PNGs de 11 KB, sem trama nenhuma). Mostrar aquilo em tela cheia
         # fica pior que não mostrar: o site passa a usar a capa de verdade e o
@@ -527,10 +671,11 @@ def main():
             registro["coresChapadas"] = True
             for c in registro["cores"]:
                 for campo in ("img", "mini"):
-                    caminho = os.path.join(RAIZ, c[campo].split("?")[0])
-                    _ficha.pop(os.path.relpath(caminho, RAIZ), None)
-                    if os.path.exists(caminho):
-                        os.remove(caminho)
+                    base_arq = os.path.splitext(os.path.join(RAIZ, c[campo].split("?")[0]))[0]
+                    for caminho in (base_arq + ".jpg", base_arq + ".webp"):
+                        _ficha.pop(os.path.relpath(caminho, RAIZ), None)
+                        if os.path.exists(caminho):
+                            os.remove(caminho)
                     c.pop(campo)
             print(f"  · {sl}: cores chapadas, usando a capa nas fotos", flush=True)
 
@@ -609,14 +754,28 @@ def main():
         fp.write("const FITA = " + json.dumps(fita, ensure_ascii=False) + ";\n\n")
         fp.write("const GERENTES = " + json.dumps(gerentes, ensure_ascii=False, indent=2) + ";\n\n")
         fp.write("const VIDEOS = " + json.dumps(videos, ensure_ascii=False, indent=2) + ";\n\n")
-        fp.write("const IMAGENS = " + json.dumps(imagens, ensure_ascii=False, indent=2) + ";\n")
+        fp.write("const IMAGENS = " + json.dumps(imagens, ensure_ascii=False, indent=2) + ";\n\n")
+        fp.write("/* largura e altura das capas, e a versão estreita para o celular */\n")
+        fp.write("const MEDIDAS = {\n" + ",\n".join(
+            f"  {json.dumps(k, ensure_ascii=False)}: {json.dumps(v, ensure_ascii=False)}"
+            for k, v in MEDIDAS.items()) + "\n};\n")
+
+    escrever_hero(banners.get("hero"))
 
     os.makedirs(DESTINO, exist_ok=True)
     with io.open(FICHA, "w", encoding="utf-8") as fp:
         json.dump(_ficha, fp)
 
     print(f"\nPronto: {total['feitas']} imagens processadas.")
-    print(f"Gerado: {os.path.relpath(saida, RAIZ)}")
+    print(f"Gerado: {os.path.relpath(saida, RAIZ)}", flush=True)
+
+    # Fotos e cores mudaram: as páginas em HTML puro (departamentos, sitemap,
+    # llms.txt) precisam acompanhar. Sem o Node, avisa e segue.
+    try:
+        subprocess.run([sys.executable, os.path.join(RAIZ, "ferramentas", "gerar-paginas.py")],
+                       check=True)
+    except (OSError, subprocess.CalledProcessError):
+        print("  ! páginas não foram refeitas: rode python3 ferramentas/gerar-paginas.py", flush=True)
 
 if __name__ == "__main__":
     main()

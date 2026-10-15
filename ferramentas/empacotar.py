@@ -28,6 +28,8 @@ PADRAO = (520, 56)
 # links de página que, dentro do arquivo único, viram rota de tela
 ROTAS = [
     (re.compile(r'href="index\.html\?[^"]*"'), 'href="#/loja"'),
+    # as páginas de departamento não entram no arquivo único: viram a loja
+    (re.compile(r'href="(?:microfibra-[a-z]+|tecidos?-[a-z-]+|aviamentos)\.html"'), 'href="#/loja"'),
     ('href="contato.html#faq"', 'href="#/contato"'),
     ('href="sobre.html"', 'href="#/sobre"'),
     ('href="contato.html"', 'href="#/contato"'),
@@ -97,9 +99,12 @@ def main():
     html = ler("index.html")
     css = ler("css/styles.css")
 
-    dados = re.sub(r'"(assets/[^"]+\.(?:jpg|jpeg|png)(?:\?v=\d+)?)"',
-                   lambda m: '"' + embutir(m.group(1)) + '"',
-                   ler("js/catalogo-imagens.js"))
+    # as medidas e a versão estreita das capas não servem aqui: as fotos já
+    # entram reduzidas, e embutir as duas versões dobraria o arquivo
+    dados = re.sub(r"const MEDIDAS = \{.*?\n\};", "const MEDIDAS = {};",
+                   ler("js/catalogo-imagens.js"), flags=re.S)
+    dados = re.sub(r'"(assets/[^"]+\.(?:jpg|jpeg|png|webp)(?:\?v=\d+)?)"',
+                   lambda m: '"' + embutir(m.group(1)) + '"', dados)
 
     # O vídeo tem 8 MB e o limite é 16 MB com as 412 fotos embutidas junto.
     # Aqui ele fica de fora e a página mostra o quadro da fachada; no site de
@@ -121,12 +126,12 @@ def main():
     # visualização bloqueia; fora dele o console não enche de erro à toa
     corpo = re.sub(r"<script>\(function\(w,d,s,l,i\).*?</script>", "", corpo, flags=re.S)
     corpo = re.sub(r'\s*<script src="js/[^"]+"></script>', "", corpo)
-    corpo = rotear(sem_iframe(corpo)).replace("assets/logo.jpg", logo)
+    corpo = rotear(sem_iframe(corpo)).replace("assets/logo.webp", logo)
 
     # as outras duas telas entram como irmãs da loja, escondidas até serem pedidas
     telas = []
     for nome, arquivo in (("sobre", "sobre.html"), ("contato", "contato.html")):
-        m = rotear(miolo(arquivo)).replace("assets/logo.jpg", logo)
+        m = rotear(miolo(arquivo)).replace("assets/logo.webp", logo)
         telas.append(f'<div class="tela" id="tela-{nome}" hidden>{m}</div>')
 
     corpo = corpo.replace("<main>", '<div class="tela" id="tela-loja"><main>', 1)

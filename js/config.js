@@ -22,9 +22,9 @@ const CONFIG = {
   empresa: {
     nome: "7 Fios Têxtil",
     nomeCompleto: "Sete Fios Têxtil",
-    endereco: "Av. Pref. Braz de Líra, 760 - Santa Cruz do Capibaribe - PE",
+    endereco: "Av. Pref. Braz de Líra, 760, Santa Cruz do Capibaribe, PE",
     email: "Comercial@setefios.com.br",
-    telefoneExibicao: "(81) 99461-6071",
+    telefoneExibicao: "(81) 99461 6071",
     horario: "Seg a Sex, 8h às 18h",
     horarios: [
       { dia: "Segunda a Sexta", valor: "08:00 às 18:00" },

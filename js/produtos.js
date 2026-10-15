@@ -406,7 +406,7 @@ const PRODUTOS = [
     unidade: "rolo",
     preco: null,
     descricao:
-      "Elásticos com arte já estampada, prontos para pronta entrega, sem precisar encomendar personalização.",
+      "Elásticos com arte já estampada, a pronta entrega, sem precisar encomendar personalização.",
     detalhes: { Larguras: "25 mm, 30 mm e 35 mm", Tipo: "Arte pública (estampado)" },
     destaque: true,
   },
@@ -523,12 +523,37 @@ const SOBRE = {
     "Fornecer produtos têxteis e aviamentos de alta qualidade com excelente custo-benefício, atendendo o mercado de moda íntima com agilidade e inovação.",
   visao:
     "Ser referência nacional em distribuição de tecidos e aviamentos para o mercado de moda íntima, com parcerias estratégicas e crescimento sustentável.",
+  /* "icone" é o desenho do cartão (caminho SVG, 24 x 24). */
   valores: [
-    { nome: "Qualidade",            texto: "Produtos que atendem aos mais altos padrões de durabilidade e conforto." },
-    { nome: "Custo-benefício",      texto: "Excelência e preço justo, agregando valor ao seu investimento." },
-    { nome: "Inteligência",         texto: "Conhecimento e tecnologia aplicados para inovar em cada processo." },
-    { nome: "Agilidade",            texto: "Rapidez e eficiência para responder às demandas do mercado." },
-    { nome: "Parceria e Confiança", texto: "Relações duradouras, lado a lado com nossos clientes." },
-    { nome: "Ética e Transparência",texto: "Conduta íntegra e responsável em todas as negociações." },
+    {
+      nome: "Qualidade",
+      texto: "Tecido e aviamento que aguentam o uso e a lavagem da peça pronta.",
+      icone: "M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6Z",
+    },
+    {
+      nome: "Custo-benefício",
+      texto: "Preço justo para quem compra para produzir e revender.",
+      icone: "M12 21s-8-4.4-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 5.6-8 10-8 10Z",
+    },
+    {
+      nome: "Inteligência",
+      texto: "Ouvimos o que o cliente pede e trazemos produto novo a partir disso.",
+      icone: "M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2ZM9 19h6v1a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-1Z",
+    },
+    {
+      nome: "Agilidade",
+      texto: "Atendimento direto pelo WhatsApp e pronta entrega na loja do Polo.",
+      icone: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z",
+    },
+    {
+      nome: "Parceria e Confiança",
+      texto: "Muitos clientes começaram com a gente e continuam até hoje.",
+      icone: "M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 2c-2.7 0-6 1.3-6 4v2h12v-2c0-2.7-3.3-4-6-4Zm8 0c-.6 0-1.3.1-1.9.2 1.2.9 1.9 2 1.9 3.8v2h6v-2c0-2.7-3.3-4-6-4Z",
+    },
+    {
+      nome: "Ética e Transparência",
+      texto: "O que foi combinado na conversa é o que chega no pedido.",
+      icone: "M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Zm0 5a2 2 0 0 1 2 2c0 .9-.6 1.4-1 1.8-.4.3-.5.5-.5 1.2h-1c0-1.1.4-1.6.9-2 .3-.3.6-.5.6-1a1 1 0 0 0-2 0h-1a2 2 0 0 1 2-2Zm-.5 6h1v1h-1v-1Z",
+    },
   ],
 };

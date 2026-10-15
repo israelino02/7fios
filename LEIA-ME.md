@@ -47,15 +47,25 @@ Depois de mexer nas fotos, rode:
 python3 ferramentas/preparar-imagens.py
 ```
 
-O script faz três coisas:
+O script faz isto:
 
 1. **Reduz e comprime tudo**. As originais têm até 20 MB cada; no site elas
    ficam com dezenas de KB. Suas fotos originais **não são alteradas**;
-2. **Lê a cor média de cada foto**, e é daí que saem as bolinhas coloridas dos
+2. **Gera a versão WebP** de cada foto, com no máximo 280 KB, e é ela que o
+   site usa. O JPG continua em `assets/` só como arquivo de trabalho e não
+   sobe para a hospedagem. A capa de cada produto ganha também uma versão
+   estreita (`capa-p.webp`, 480 px), que é a que o celular baixa;
+3. **Lê a cor média de cada foto**, e é daí que saem as bolinhas coloridas dos
    cards e o filtro de cor;
-3. **Escreve `js/catalogo-imagens.js`**, que o site lê sozinho.
+4. **Gera o vídeo da história em WebM**, menor que o MP4 (precisa do ffmpeg:
+   `brew install ffmpeg`);
+5. **Escreve `js/catalogo-imagens.js`**, que o site lê sozinho, e a foto do
+   banner principal direto no `index.html`, para ela carregar primeiro;
+6. **Refaz as páginas em HTML puro** (seção 9), chamando o
+   `ferramentas/gerar-paginas.py`.
 
-Rodar de novo é rápido: ele pula o que já converteu.
+Precisa do Pillow (`pip3 install pillow`) e do Node. Rodar de novo é rápido:
+ele pula o que já converteu.
 
 **Regras que ele segue para a capa de cada produto:**
 
@@ -115,12 +125,23 @@ O orçamento fica salvo no navegador do cliente: ele pode sair e voltar depois.
 
 ## 5. Publicar o site
 
-Suba a pasta inteira (mantendo a estrutura) em qualquer hospedagem estática:
-Hostinger, Vercel, Netlify, GitHub Pages, cPanel. O arquivo de entrada é o
-`index.html`.
+O site fica na Hostinger, em `public_html`. O pacote sai do que está guardado
+no git, já sem o que não precisa ir para o ar:
 
-**Não precisa subir a pasta `imagens/`**: ela é só a fonte, tem 1,7 GB. O site
-usa a `assets/`, que tem 28 MB.
+```bash
+git archive --format=zip -o 7fios-site.zip HEAD
+```
+
+O `.gitattributes` diz o que fica fora: a pasta `ferramentas/`, este LEIA-ME
+e os JPG de trabalho de `assets/` (o site usa os WebP). O zip tem uns 38 MB.
+No Gerenciador de Arquivos da Hostinger, suba o zip em `public_html` e
+extraia por cima. O `.htaccess` é arquivo oculto: ligue "Mostrar arquivos
+ocultos" para conferir que ele está lá.
+
+**Não precisa subir a pasta `imagens/`**: ela é só a fonte, tem 1,5 GB.
+
+Depois de publicar uma página nova, mande o `sitemap.xml` de novo no Search
+Console.
 
 **Depois de atualizar o catálogo**, abra o `index.html` e troque o `?v=3` das
 últimas linhas e do CSS para `?v=4`. Isso força quem já visitou a enxergar a
@@ -133,7 +154,11 @@ versão nova na hora, em vez da guardada no navegador.
 ```
 index.html                      a loja
 sobre.html                      história, missão, valores e gerentes
-contato.html                    canais, mapa e horários
+contato.html                    canais, mapa, horários e dúvidas frequentes
+privacidade.html                política de privacidade (escrita à mão)
+microfibra-poliamida.html …     uma página por departamento ← gerada
+404.html                        página de endereço que não existe ← gerada
+sitemap.xml, llms.txt           mapa do site e resumo para as I.As ← gerados
 css/styles.css                  aparência (índigo #1D0E47 e dourado #FFD801, da logo)
 js/config.js                    WhatsApp, endereço, e-mail, horários  ← você edita
 js/produtos.js                  textos, categorias, valores, gerentes ← você edita
@@ -142,6 +167,8 @@ js/comum.js                     cabeçalho e rodapé das 3 páginas
 js/main.js                      motor da loja
 js/pagina.js                    conteúdo das páginas Sobre e Contato
 ferramentas/preparar-imagens.py script que prepara as fotos
+ferramentas/gerar-paginas.py    escreve as páginas em HTML puro (seção 9)
+ferramentas/empacotar.py        arquivo único para o link de visualização
 imagens/                        suas fotos originais (não sobe pro site)
 assets/                         fotos já otimizadas (essa sobe)
 ```
@@ -173,12 +200,57 @@ em `PRODUTOS_IMG`, o selo some sozinho e a foto de verdade entra no lugar.
 
 ## 8. Dúvidas frequentes (FAQ) e busca no Google
 
-A seção "Perguntas de quem compra para revender", na home, existe para ser
-achada no Google: as respostas usam os termos que seus clientes procuram
-(tecido para confecção atacado, suplex, dry fit, elástico personalizado, viés,
-renda, Santa Cruz do Capibaribe e por aí). Editar é no próprio `index.html`,
-procurando por `faq__item`.
+A seção "Perguntas de quem compra para revender" fica na página de Contato.
+Editar é no próprio `contato.html`, procurando por `faq__item`. Escreva como
+o vendedor responderia, sem repetir palavra-chave: o Google e as I.As
+penalizam texto que só empilha termos. O `gerar-paginas.py` lê essas
+perguntas e escreve os dados estruturados (FAQPage) da página sozinho.
 
 Junto com ela há um bloco de dados estruturados (`application/ld+json`) no fim
 do `index.html`, que informa ao Google o nome da loja, telefone, endereço e
 horário.
+
+---
+
+## 9. Páginas por departamento, e o que o Google e as I.As leem
+
+A loja é montada pelo JavaScript. O Google nem sempre roda JavaScript e os
+robôs das I.As quase nunca rodam, então para eles a loja parecia vazia. O
+`ferramentas/gerar-paginas.py` escreve em HTML puro:
+
+- **uma página por departamento**: `microfibra-poliamida.html`,
+  `microfibra-poliester.html`, `tecidos-estampados.html`,
+  `tecido-dry-fit.html`, `tecido-suplex.html` e `aviamentos.html`. Cada uma
+  tem texto, os produtos com foto, ficha e lista de cores, perguntas
+  frequentes e os dados estruturados (Product, BreadcrumbList e FAQPage). O
+  botão "Ver cores e orçamento" abre a loja já filtrada e com a ficha do
+  produto aberta (`index.html?grupos=suplex&produto=SU-001`);
+- **endereço, telefone, horário e links de contato** dentro do HTML de todas
+  as páginas, e o rodapé apontando para os departamentos;
+- os textos do **Sobre** e os horários do **Contato**;
+- a **404**, o **sitemap.xml** e o **llms.txt**.
+
+O texto de cada página de departamento (título, abertura e perguntas) fica
+no começo do próprio script, em `PAGINAS`. Nome, descrição, ficha e cores
+dos produtos continuam vindo de `js/produtos.js` e das fotos. Mudou alguma
+coisa, rode:
+
+```bash
+python3 ferramentas/gerar-paginas.py
+```
+
+O `preparar-imagens.py` já chama ele no fim. Os links com `?grupos=` (os do
+Google Ads e do Perfil da Empresa) continuam funcionando como antes.
+
+---
+
+## 10. Privacidade e aviso de cookies
+
+O site usa Tag Manager, Analytics, Google Ads, Pixel da Meta e Clarity. Por
+isso tem a `privacidade.html` (link no rodapé de todas as páginas) e o aviso
+de cookies, que está em `js/comum.js`. Quem recusa não carrega o Tag Manager
+nas páginas seguintes, e a medição para na hora. A escolha fica guardada no
+navegador com a chave `7fios_cookies`.
+
+Se entrar ferramenta nova no Tag Manager, acrescente na lista da política e
+troque a data do topo dela.

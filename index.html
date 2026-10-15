@@ -7,15 +7,17 @@
 <!-- Gerenciador de Tags do Google: entra antes de tudo, para não perder
      clique de quem sai rápido. As conversões do Ads e o Analytics são
      ligados lá dentro do painel, não aqui; assim dá para mexer nas tags sem
-     mexer no site. Os eventos que o site empurra estão em js/comum.js. -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+     mexer no site. Os eventos que o site empurra estão em js/comum.js.
+     Quem recusou a medição no aviso de cookies não carrega o Tag Manager. -->
+<script>(function(w,d,s,l,i){try{if(localStorage.getItem('7fios_cookies')==='recusado')return}catch(e){}
+w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MRWT3LBV');</script>
 
 <title>7 Fios Têxtil, Loja de Tecidos e Aviamentos | Santa Cruz do Capibaribe</title>
-<meta name="description" content="Loja de tecidos e aviamentos no Polo de Confecções de PE. Microfibra, dry-fit, malhas, estampados, elásticos, rendas e viés. Monte seu orçamento e envie pelo WhatsApp.">
+<meta name="description" content="Loja de tecidos e aviamentos em Santa Cruz do Capibaribe, PE: malhas de microfibra, suplex, dry fit, estampados, elásticos, viés e renda. Orçamento pelo WhatsApp.">
 <link rel="canonical" href="https://setefios.com.br/">
 <meta name="theme-color" content="#1D0E47">
 
@@ -25,16 +27,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="7 Fios Têxtil, Tecidos e Aviamentos">
 <meta property="og:description" content="Seu fornecedor no Polo de Confecções de PE. Monte seu orçamento e fale direto com o vendedor.">
-<meta property="og:image" content="https://setefios.com.br/assets/logo.jpg">
+<meta property="og:image" content="https://setefios.com.br/assets/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="assets/logo.jpg">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/icone-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icone-180.png">
+<!-- foto do banner principal: escrito pelo ferramentas/preparar-imagens.py -->
+<link rel="preload" as="image" href="assets/banners/hero.webp?v=1792013112" fetchpriority="high">
+<style>#bannerHero{background-image:url("assets/banners/hero.webp?v=1792013112")}</style>
+<!-- /foto do banner principal -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- ?v=37 → depois de atualizar o catálogo, troque para ?v=31, ?v=32…
      para que quem já visitou o site enxergue a versão nova na hora. -->
-<link rel="stylesheet" href="css/styles.css?v=39">
+<link rel="stylesheet" href="css/styles.css?v=41">
 </head>
 <body>
 <!-- Gerenciador de Tags, para navegador com JavaScript desligado -->
@@ -47,10 +57,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============================== TARJA TOPO ============================= -->
 <div class="topbar">
   <div class="container topbar__inner">
-    <p class="topbar__aviso" id="avisoTopo"></p>
+    <p class="topbar__aviso" id="avisoTopo">Pronta entrega no Polo de Confecções • Atendimento direto pelo WhatsApp</p>
     <ul class="topbar__info">
-      <li><span data-empresa="horario"></span></li>
-      <li><a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a></li>
+      <li><span data-empresa="horario">Seg a Sex, 8h às 18h</span></li>
+      <li><a data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" data-empresa="telefone">(81) 99461 6071</a></li>
     </ul>
   </div>
 </div>
@@ -59,7 +69,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="header" id="header">
   <div class="container header__inner">
     <a class="brand" href="#inicio" aria-label="7 Fios Têxtil, página inicial">
-      <img src="assets/logo.jpg" alt="7 Fios Têxtil" width="52" height="52">
+      <img src="assets/logo.webp" alt="7 Fios Têxtil" width="52" height="52">
     </a>
 
     <form class="busca" role="search" id="formBusca" onsubmit="return false">
@@ -69,7 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </form>
 
     <div class="header__acoes">
-      <a class="acao acao--wpp" data-wpp href="#" target="_blank" rel="noopener">
+      <a class="acao acao--wpp" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
         <span class="acao__txt"><small>Fale com o vendedor</small><strong>WhatsApp</strong></span>
       </a>
@@ -120,11 +130,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </p>
         <div class="banner__acoes">
           <a class="btn btn--gold" href="#loja">Ver produtos</a>
-          <a class="btn btn--ghost" data-wpp href="#" target="_blank" rel="noopener">
+          <a class="btn btn--ghost" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
             Falar agora
           </a>
-          <a class="btn btn--ghost" data-tel-link href="#">
+          <a class="btn btn--ghost" data-tel-link href="tel:+5581994616071">
             <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
             Ligar agora
           </a>
@@ -320,7 +330,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <h2>Não achou o que procura?</h2>
     <p>Nosso estoque é maior que o site. Chame o vendedor e pergunte, a gente encontra pra você.</p>
-    <a class="btn btn--navy btn--lg" data-wpp href="#" target="_blank" rel="noopener">
+    <a class="btn btn--navy btn--lg" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
       Conversar no WhatsApp
     </a>
@@ -342,22 +352,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="footer__list">
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-          <span data-empresa="endereco"></span>
+          <span data-empresa="endereco">Av. Pref. Braz de Líra, 760, Santa Cruz do Capibaribe, PE</span>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
-          <a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a>
+          <a data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" data-empresa="telefone">(81) 99461 6071</a>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg>
-          <span data-empresa="horario"></span>
+          <span data-empresa="horario">Seg a Sex, 8h às 18h</span>
         </li>
       </ul>
     </div>
 
     <div>
       <h4>Categorias</h4>
-      <ul class="footer__list footer__list--nav" id="footerDeps"></ul>
+      <ul class="footer__list footer__list--nav" id="footerDeps">
+        <li><a href="microfibra-poliamida.html">Microfibras Poliamida</a></li>
+        <li><a href="microfibra-poliester.html">Microfibras Poliéster</a></li>
+        <li><a href="tecidos-estampados.html">Estampados</a></li>
+        <li><a href="tecido-dry-fit.html">Dry-Fit</a></li>
+        <li><a href="tecido-suplex.html">Suplex</a></li>
+        <li><a href="aviamentos.html">Aviamentos</a></li>
+      </ul>
     </div>
 
     <div>
@@ -368,12 +385,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="contato.html#faq">Dúvidas frequentes</a></li>
         <li><a href="sobre.html">Sobre nós</a></li>
         <li><a href="contato.html">Contato</a></li>
+        <li><a href="privacidade.html">Política de privacidade</a></li>
+        <li><button type="button" data-preferencias-cookies>Preferências de cookies</button></li>
       </ul>
     </div>
   </div>
 
   <div class="container footer__bottom">
-    <p>© <span id="ano"></span> Sete Fios Têxtil. Todos os direitos reservados.</p>
+    <p>© <span id="ano">2026</span> Sete Fios Têxtil. Todos os direitos reservados.</p>
     <p class="footer__nota">Preços e disponibilidade sob consulta pelo WhatsApp.</p>
   </div>
 </footer>
@@ -450,19 +469,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <!-- ========================= BOTÃO FLUTUANTE =========================== -->
-<a class="fab" data-wpp href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+<a class="fab" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
 </a>
 
-<script src="js/config.js?v=39"></script>
-<script src="js/catalogo-imagens.js?v=39"></script>
-<script src="js/produtos.js?v=39"></script>
-<script src="js/comum.js?v=39"></script>
-<script src="js/main.js?v=39"></script>
+<script src="js/config.js?v=41"></script>
+<script src="js/catalogo-imagens.js?v=41"></script>
+<script src="js/produtos.js?v=41"></script>
+<script src="js/comum.js?v=41"></script>
+<script src="js/main.js?v=41"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Store",
+  "@id": "https://setefios.com.br/#loja",
   "name": "7 Fios Têxtil",
   "alternateName": "Sete Fios Têxtil",
   "url": "https://setefios.com.br/",

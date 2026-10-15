@@ -7,8 +7,10 @@
 <!-- Gerenciador de Tags do Google: entra antes de tudo, para não perder
      clique de quem sai rápido. As conversões do Ads e o Analytics são
      ligados lá dentro do painel, não aqui; assim dá para mexer nas tags sem
-     mexer no site. Os eventos que o site empurra estão em js/comum.js. -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+     mexer no site. Os eventos que o site empurra estão em js/comum.js.
+     Quem recusou a medição no aviso de cookies não carrega o Tag Manager. -->
+<script>(function(w,d,s,l,i){try{if(localStorage.getItem('7fios_cookies')==='recusado')return}catch(e){}
+w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -25,13 +27,106 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Contato | 7 Fios Têxtil">
 <meta property="og:description" content="Telefone, WhatsApp, endereço e horário da Sete Fios Têxtil em Santa Cruz do Capibaribe, PE.">
-<meta property="og:image" content="https://setefios.com.br/assets/logo.jpg">
+<meta property="og:image" content="https://setefios.com.br/assets/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/logo.jpg">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/icone-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=39">
+<link rel="stylesheet" href="css/styles.css?v=41">
+<script type="application/ld+json" data-gerado>
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "@id": "https://setefios.com.br/contato.html#perguntas",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Vocês vendem tecido para confecção no atacado?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim. A 7 Fios fornece malhas e aviamentos para lojistas, confecções de todo porte, facções e costureiras profissionais. Os tecidos são vendidos por metro e os elásticos e o viés, por rolo. Preço e condições de atacado são passados pelo vendedor no WhatsApp."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quais tecidos vocês têm para moda fitness e academia?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Para legging e roupa de academia, o suplex de poliamida: o Blackout 290, que não transparenta, e o Flex Fit 310, mais elástico. Para camiseta e uniforme de treino, o Dry Fit Prime, furadinho e de secagem rápida. A microfibra Poliamida UV também é muito usada em moda fitness."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Trabalham com tecido para moda íntima e lingerie?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim, é o nosso principal mercado. A base são as microfibras de poliamida (Poliamida UV, Premium e Max Premium). Para o acabamento, temos o elástico fino Fênix, de 7 mm, indicado para lingerie, o viés e a renda 7 Mares."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Tem tecido para uniforme e camiseta dry fit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Tem. O Dry Fit Prime é a primeira escolha da casa para uniforme, camiseta esportiva e roupa de treino. Para camiseta estampada por sublimação, a microfibra de poliéster Madri aceita bem a impressão."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Vocês vendem aviamentos também?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Vendemos. Elástico liso de 25, 30 e 35 mm, elástico estampado de arte pública, os elásticos finos Fênix e Jurerê, elástico personalizado com a marca da confecção, viés de poliamida e de poliéster em 16 e 25 mm, o viés rendado Noronha e a renda larga 7 Mares, de 17 cm. Veja todos em aviamentos."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Que tecidos vocês têm para moda praia?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A microfibra de poliamida é a base da moda praia, e a Poliamida UV tem proteção UV e a maior cartela de cores da loja. Para peças estampadas, veja os estampados Romantik, renovados a cada temporada."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quais acabamentos de tecido vocês trabalham?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Lisos, risca de giz e estampados. Os lisos estão nas malhas de microfibra de poliamida e de poliéster, no suplex e no dry fit. A risca de giz é a Romantik Risca de Giz, de listra fina. Os estampados são da linha Romantik, com coleções femininas e masculinas."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Onde vocês ficam?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Na Av. Pref. Braz de Líra, 760, em Santa Cruz do Capibaribe, no Polo de Confecções de Pernambuco. Atendemos de segunda a sexta, das 8h às 18h. O mapa com a rota está logo acima, nesta página."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Como faço para comprar e saber o preço?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O preço é passado pelo vendedor. Monte o orçamento no site escolhendo os produtos e as cores e envie a lista pelo WhatsApp: você recebe preço, disponibilidade e condições. Se preferir, chame direto e pergunte."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Vocês atendem quem tem loja de roupas?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Atendemos. Vendemos para lojistas, confecções de todo porte, malharias, estamparias e facções."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 <!-- Gerenciador de Tags, para navegador com JavaScript desligado -->
@@ -44,10 +139,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============================== TARJA TOPO ============================= -->
 <div class="topbar">
   <div class="container topbar__inner">
-    <p class="topbar__aviso" id="avisoTopo"></p>
+    <p class="topbar__aviso" id="avisoTopo">Pronta entrega no Polo de Confecções • Atendimento direto pelo WhatsApp</p>
     <ul class="topbar__info">
-      <li><span data-empresa="horario"></span></li>
-      <li><a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a></li>
+      <li><span data-empresa="horario">Seg a Sex, 8h às 18h</span></li>
+      <li><a data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" data-empresa="telefone">(81) 99461 6071</a></li>
     </ul>
   </div>
 </div>
@@ -56,7 +151,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="header" id="header">
   <div class="container header__inner">
     <a class="brand" href="index.html" aria-label="7 Fios Têxtil, página inicial">
-      <img src="assets/logo.jpg" alt="7 Fios Têxtil" width="52" height="52">
+      <img src="assets/logo.webp" alt="7 Fios Têxtil" width="52" height="52">
     </a>
 
     <form class="busca" role="search" id="formBusca" onsubmit="return false">
@@ -66,7 +161,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </form>
 
     <div class="header__acoes">
-      <a class="acao acao--wpp" data-wpp href="#" target="_blank" rel="noopener">
+      <a class="acao acao--wpp" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
         <span class="acao__txt"><small>Fale com o vendedor</small><strong>WhatsApp</strong></span>
       </a>
@@ -119,7 +214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </span>
       <h2>Atendimento pelo WhatsApp</h2>
       <p>Nossa forma mais rápida de atendimento. Tire suas dúvidas, consulte produtos e receba atendimento personalizado.</p>
-      <a class="btn btn--gold btn--lg" data-wpp href="#" target="_blank" rel="noopener">
+      <a class="btn btn--gold btn--lg" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
         Conversar agora
       </a>
@@ -140,8 +235,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 5V5a2 2 0 0 1 2-2Z"/></svg>
         </span>
         <h3>WhatsApp</h3>
-        <p data-empresa="telefone"></p>
-        <a class="btn btn--linha btn--block" data-wpp href="#" target="_blank" rel="noopener">Fale conosco</a>
+        <p data-empresa="telefone">(81) 99461 6071</p>
+        <a class="btn btn--linha btn--block" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">Fale conosco</a>
       </article>
 
       <article class="canal">
@@ -149,8 +244,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.6 2L12 12.2 19.4 7H4.6Z"/></svg>
         </span>
         <h3>E-mail</h3>
-        <p data-empresa="email"></p>
-        <a class="btn btn--linha btn--block" data-email-link href="#">Enviar e-mail</a>
+        <p data-empresa="email">Comercial@setefios.com.br</p>
+        <a class="btn btn--linha btn--block" data-email-link href="mailto:Comercial@setefios.com.br">Enviar e-mail</a>
       </article>
 
       <article class="canal">
@@ -158,8 +253,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
         </span>
         <h3>Endereço</h3>
-        <p data-empresa="endereco"></p>
-        <a class="btn btn--linha btn--block" data-mapa href="#" target="_blank" rel="noopener">Ver no mapa</a>
+        <p data-empresa="endereco">Av. Pref. Braz de Líra, 760, Santa Cruz do Capibaribe, PE</p>
+        <a class="btn btn--linha btn--block" data-mapa href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Pref.%20Braz%20de%20L%C3%ADra%2C%20760%2C%20Santa%20Cruz%20do%20Capibaribe%2C%20PE%2C%20Brasil" target="_blank" rel="noopener">Ver no mapa</a>
       </article>
     </div>
   </div>
@@ -181,11 +276,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           allowfullscreen></iframe>
       </div>
       <div class="mapa__acoes">
-        <a class="btn btn--navy" data-rota href="#" target="_blank" rel="noopener">
+        <a class="btn btn--navy" data-rota href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Pref.%20Braz%20de%20L%C3%ADra%2C%20760%2C%20Santa%20Cruz%20do%20Capibaribe%2C%20PE%2C%20Brasil" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M21.7 11.3 12.7 2.3a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4ZM13 15v-2.5h-2V15l-3-3.5 3-3.5V10h4v5h-2Z"/></svg>
           Traçar rota até a loja
         </a>
-        <a class="btn btn--linha" data-mapa href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn btn--linha" data-mapa href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Pref.%20Braz%20de%20L%C3%ADra%2C%20760%2C%20Santa%20Cruz%20do%20Capibaribe%2C%20PE%2C%20Brasil" target="_blank" rel="noopener">Abrir no Google Maps</a>
       </div>
     </div>
 
@@ -195,13 +290,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
         </span>
         <h3>Telefone</h3>
-        <p class="bloco__valor"><a data-tel-link href="#" data-empresa="telefone"></a></p>
+        <p class="bloco__valor"><a data-tel-link href="tel:+5581994616071" data-empresa="telefone">(81) 99461 6071</a></p>
         <p class="bloco__nota">Ligue ou chame no WhatsApp, o número é o mesmo.</p>
 
         <div class="avaliacao">
           <span class="avaliacao__estrelas" aria-hidden="true">★★★★★</span>
           <p>Já comprou com a gente? Conte como foi.</p>
-          <a class="btn btn--linha btn--block" data-avaliar href="#" target="_blank" rel="noopener">
+          <a class="btn btn--linha btn--block" data-avaliar href="https://g.page/r/CaTct8qnGWhbEAE/review" target="_blank" rel="noopener">
             Avalie-nos no Google
           </a>
         </div>
@@ -212,17 +307,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg>
         </span>
         <h3>Horário de funcionamento</h3>
-        <dl class="horarios" id="horarios"></dl>
+        <dl class="horarios" id="horarios">
+        <div>
+          <dt>Segunda a Sexta</dt>
+          <dd>08:00 às 18:00</dd>
+        </div>
+        <div>
+          <dt>Sábado</dt>
+          <dd class="fechado">Fechado</dd>
+        </div>
+        <div>
+          <dt>Domingo</dt>
+          <dd class="fechado">Fechado</dd>
+        </div>
+      </dl>
       </article>
     </div>
 
-    <a class="insta" data-insta-link href="#" target="_blank" rel="noopener">
+    <a class="insta" data-insta-link href="https://instagram.com/7fiostextil" target="_blank" rel="noopener">
       <span class="insta__ico">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 10.7a4.2 4.2 0 1 1 0-8.4 4.2 4.2 0 0 1 0 8.4Zm6.8-11a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
       </span>
       <span class="insta__txt">
         <strong>Acompanhe nossas novidades, lançamentos e inspirações para seus projetos.</strong>
-        <span class="insta__arroba" data-empresa="instagram"></span>
+        <span class="insta__arroba" data-empresa="instagram">@7fiostextil</span>
       </span>
     </a>
   </div>
@@ -240,104 +348,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="faq__lista">
       <details class="faq__item">
         <summary>Vocês vendem tecido para confecção no atacado?</summary>
-        <p>
-          Sim. Somos fornecedor de tecidos para confecção e trabalhamos com venda de
-          tecidos no atacado, em rolo ou por metro, para quem compra tecido para
-          revenda. Atendemos lojistas, pequenas confecções, facção e costureira
-          profissional. Para preço de tecido no atacado e condições, fale com o
-          vendedor pelo WhatsApp.
-        </p>
+        <p>Sim. A 7 Fios fornece malhas e aviamentos para lojistas, confecções de todo porte, facções e costureiras profissionais. Os tecidos são vendidos por metro e os elásticos e o viés, por rolo. Preço e condições de atacado são passados pelo vendedor no WhatsApp.</p>
       </details>
 
       <details class="faq__item">
         <summary>Quais tecidos vocês têm para moda fitness e academia?</summary>
-        <p>
-          Temos malha para academia no atacado e tecido para roupa fitness: suplex,
-          suplex blackout e suplex flex fit, além de tecido para legging no atacado e
-          malha para legging e top. Também trabalhamos com tecido dry fit no atacado,
-          usado em roupa de ginástica e uniforme esportivo.
-        </p>
+        <p>Para legging e roupa de academia, o <a href="tecido-suplex.html">suplex de poliamida</a>: o Blackout 290, que não transparenta, e o Flex Fit 310, mais elástico. Para camiseta e uniforme de treino, o <a href="tecido-dry-fit.html">Dry Fit Prime</a>, furadinho e de secagem rápida. A microfibra Poliamida UV também é muito usada em moda fitness.</p>
       </details>
 
       <details class="faq__item">
         <summary>Trabalham com tecido para moda íntima e lingerie?</summary>
-        <p>
-          Sim, é o nosso principal mercado. Temos malha poliamida no atacado, malha
-          para lingerie, malha com proteção UV, suplex no atacado e
-          tecido premium para confecção, usados em malha para cueca e sutiã e na
-          confecção de cuecas.
-        </p>
+        <p>Sim, é o nosso principal mercado. A base são as <a href="microfibra-poliamida.html">microfibras de poliamida</a> (Poliamida UV, Premium e Max Premium). Para o acabamento, temos o elástico fino Fênix, de 7 mm, indicado para lingerie, o viés e a renda 7 Mares.</p>
       </details>
 
       <details class="faq__item">
         <summary>Tem tecido para uniforme e camiseta dry fit?</summary>
-        <p>
-          Temos tecido para uniforme profissional e tecido dry fit para uniforme, que é
-          a escolha mais comum para camisa polo dry fit e tecido para camiseta dry fit.
-          O poliéster liso aceita bem estamparia e é procurado como tecido para
-          sublimação no atacado.
-        </p>
+        <p>Tem. O <a href="tecido-dry-fit.html">Dry Fit Prime</a> é a primeira escolha da casa para uniforme, camiseta esportiva e roupa de treino. Para camiseta estampada por sublimação, a <a href="microfibra-poliester.html">microfibra de poliéster Madri</a> aceita bem a impressão.</p>
       </details>
 
       <details class="faq__item">
         <summary>Vocês vendem aviamentos também?</summary>
-        <p>
-          Sim, somos loja de tecidos e aviamentos. Temos elástico para confecção no
-          atacado, elástico personalizado, elástico liso, elástico para lingerie e
-          elástico para cueca, além de elástico para costura industrial. Também
-          trabalhamos com renda para lingerie no atacado, renda para moda íntima, viés
-          para confecção no atacado, viés colorido e viés para acabamento de roupa.
-        </p>
+        <p>Vendemos. Elástico liso de 25, 30 e 35 mm, elástico estampado de arte pública, os elásticos finos Fênix e Jurerê, elástico personalizado com a marca da confecção, viés de poliamida e de poliéster em 16 e 25 mm, o viés rendado Noronha e a renda larga 7 Mares, de 17 cm. Veja todos em <a href="aviamentos.html">aviamentos</a>.</p>
       </details>
 
       <details class="faq__item">
         <summary>Que tecidos vocês têm para moda praia?</summary>
-        <p>
-          Somos fornecedor de tecido para moda praia, com malha para moda praia em
-          poliamida, tecido para roupa de banho e tecido estampado no atacado, incluindo
-          tecido estampado para moda praia e tecido para moda praia feminina.
-        </p>
+        <p>A microfibra de poliamida é a base da moda praia, e a Poliamida UV tem proteção UV e a maior cartela de cores da loja. Para peças estampadas, veja os <a href="tecidos-estampados.html">estampados Romantik</a>, renovados a cada temporada.</p>
       </details>
 
       <details class="faq__item">
         <summary>Quais acabamentos de tecido vocês trabalham?</summary>
-        <p>
-          Trabalhamos com tecido liso para confecção e tecido liso para uniforme, tecido
-          liso para uniforme, tecido risca de giz no atacado, suplex para legging
-          e tecido estampado no atacado, com estampas femininas e masculinas renovadas
-          por temporada. Também temos malha para roupa infantil e tecido para pijama no
-          atacado.
-        </p>
+        <p>Lisos, risca de giz e estampados. Os lisos estão nas malhas de microfibra de poliamida e de poliéster, no suplex e no dry fit. A risca de giz é a Romantik Risca de Giz, de listra fina. Os estampados são da linha Romantik, com coleções femininas e masculinas.</p>
       </details>
 
       <details class="faq__item">
         <summary>Onde vocês ficam?</summary>
-        <p>
-          Ficamos na Av. Pref. Braz de Líra, 760, em Santa Cruz do Capibaribe, no Polo
-          de Confecções de Pernambuco. Somos fornecedor de tecidos em Santa Cruz do
-          Capibaribe e trabalhamos com tecido no atacado no agreste pernambucano, com
-          aviamentos no atacado no mesmo endereço.
-        </p>
+        <p>Na Av. Pref. Braz de Líra, 760, em Santa Cruz do Capibaribe, no Polo de Confecções de Pernambuco. Atendemos de segunda a sexta, das 8h às 18h. O mapa com a rota está logo acima, nesta página.</p>
       </details>
 
       <details class="faq__item">
         <summary>Como faço para comprar e saber o preço?</summary>
-        <p>
-          Os preços são passados pelo vendedor. Monte seu orçamento aqui no site
-          escolhendo os produtos e as cores, e envie a lista pelo WhatsApp: você recebe
-          preço, disponibilidade e condições. Também dá para perguntar direto onde
-          comprar tecido no atacado, comprar malha para confecção ou comprar tecido
-          suplex no atacado.
-        </p>
+        <p>O preço é passado pelo vendedor. Monte o orçamento no site escolhendo os produtos e as cores e envie a lista pelo WhatsApp: você recebe preço, disponibilidade e condições. Se preferir, chame direto e pergunte.</p>
       </details>
 
       <details class="faq__item">
         <summary>Vocês atendem quem tem loja de roupas?</summary>
-        <p>
-          Sim. Somos fornecedor de tecido para lojista e distribuidor de tecidos no
-          atacado, com rolo de tecido para revenda e tecido para loja de roupas.
-          Atendemos malharia, estamparia, facção de roupas e confecções de todo porte.
-        </p>
+        <p>Atendemos. Vendemos para lojistas, confecções de todo porte, malharias, estamparias e facções.</p>
       </details>
     </div>
   </div>
@@ -358,22 +414,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="footer__list">
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-          <span data-empresa="endereco"></span>
+          <span data-empresa="endereco">Av. Pref. Braz de Líra, 760, Santa Cruz do Capibaribe, PE</span>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
-          <a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a>
+          <a data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" data-empresa="telefone">(81) 99461 6071</a>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg>
-          <span data-empresa="horario"></span>
+          <span data-empresa="horario">Seg a Sex, 8h às 18h</span>
         </li>
       </ul>
     </div>
 
     <div>
       <h4>Categorias</h4>
-      <ul class="footer__list footer__list--nav" id="footerDeps"></ul>
+      <ul class="footer__list footer__list--nav" id="footerDeps">
+        <li><a href="microfibra-poliamida.html">Microfibras Poliamida</a></li>
+        <li><a href="microfibra-poliester.html">Microfibras Poliéster</a></li>
+        <li><a href="tecidos-estampados.html">Estampados</a></li>
+        <li><a href="tecido-dry-fit.html">Dry-Fit</a></li>
+        <li><a href="tecido-suplex.html">Suplex</a></li>
+        <li><a href="aviamentos.html">Aviamentos</a></li>
+      </ul>
     </div>
 
     <div>
@@ -384,26 +447,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="#faq">Dúvidas frequentes</a></li>
         <li><a href="sobre.html">Sobre nós</a></li>
         <li><a href="contato.html">Contato</a></li>
+        <li><a href="privacidade.html">Política de privacidade</a></li>
+        <li><button type="button" data-preferencias-cookies>Preferências de cookies</button></li>
       </ul>
     </div>
   </div>
 
   <div class="container footer__bottom">
-    <p>© <span id="ano"></span> Sete Fios Têxtil. Todos os direitos reservados.</p>
+    <p>© <span id="ano">2026</span> Sete Fios Têxtil. Todos os direitos reservados.</p>
     <p class="footer__nota">Preços e disponibilidade sob consulta pelo WhatsApp.</p>
   </div>
 </footer>
 
 <!-- ========================= BOTÃO FLUTUANTE =========================== -->
-<a class="fab" data-wpp href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+<a class="fab" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
 </a>
 
 
-<script src="js/config.js?v=39"></script>
-<script src="js/produtos.js?v=39"></script>
-<script src="js/catalogo-imagens.js?v=39"></script>
-<script src="js/comum.js?v=39"></script>
-<script src="js/pagina.js?v=39"></script>
+<script src="js/config.js?v=41"></script>
+<script src="js/produtos.js?v=41"></script>
+<script src="js/catalogo-imagens.js?v=41"></script>
+<script src="js/comum.js?v=41"></script>
+<script src="js/pagina.js?v=41"></script>
 </body>
 </html>

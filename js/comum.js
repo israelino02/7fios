@@ -1,7 +1,7 @@
 /* ==========================================================================
-   7 FIOS TÊXTIL, o que é igual nas três páginas
+   7 FIOS TÊXTIL, o que é igual em todas as páginas
    (cabeçalho, menu, links do WhatsApp, dados da empresa, contador do carrinho)
-   Carregado em index.html, sobre.html e contato.html.
+   Carregado em todas as páginas.
    ========================================================================== */
 
 const $  = (s, ctx = document) => ctx.querySelector(s);
@@ -16,6 +16,20 @@ const semAcento = (t) =>
   String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
 const CHAVE_CARRINHO = "7fios_orcamento";
+
+/* src de uma foto do catálogo, com width/height e, quando a capa tem versão
+   estreita, o srcset para o celular baixar a menor. As medidas vêm de
+   MEDIDAS (js/catalogo-imagens.js); foto sem medida sai só com o src.
+   "tamanhos" é a largura que a foto ocupa na tela, no formato do sizes. */
+function fotoAttrs(url, tamanhos) {
+  const m =
+    typeof MEDIDAS !== "undefined" && MEDIDAS[String(url).split("?")[0]];
+  if (!m) return `src="${esc(url)}"`;
+  let a = `src="${esc(url)}" width="${m[0]}" height="${m[1]}"`;
+  if (m[2])
+    a += ` srcset="${esc(m[2])} ${m[3]}w, ${esc(url)} ${m[0]}w" sizes="${esc(tamanhos)}"`;
+  return a;
+}
 
 /* Link do Google Maps com rota a partir de onde a pessoa está. */
 function linkRota() {
@@ -128,8 +142,117 @@ function contarCarrinho() {
 window.dataLayer = window.dataLayer || [];
 
 function rastrear(evento, dados) {
+  if (lerEscolhaCookies() === "recusado") return;
   window.dataLayer.push(Object.assign({ event: evento }, dados || {}));
 }
+
+/* ==========================================================================
+   AVISO DE COOKIES
+   O Tag Manager carrega Google Analytics, Google Ads, Pixel da Meta e
+   Microsoft Clarity. O aviso informa e deixa recusar sem atrapalhar a loja.
+   Quem recusa: a medição para na hora (abaixo) e, nas próximas páginas, o
+   Tag Manager nem é carregado (o teste fica no <head> de cada página, com
+   a mesma chave). O orçamento não depende disto: ele só existe no aparelho
+   da pessoa e faz parte do funcionamento da loja.
+   ========================================================================== */
+const CHAVE_COOKIES = "7fios_cookies";
+
+function lerEscolhaCookies() {
+  try {
+    return localStorage.getItem(CHAVE_COOKIES);
+  } catch (e) {
+    return null;
+  }
+}
+
+function gravarEscolhaCookies(valor) {
+  try {
+    localStorage.setItem(CHAVE_COOKIES, valor);
+  } catch (e) {
+    /* navegador sem armazenamento: a escolha vale só nesta página */
+  }
+}
+
+function pararMedicao() {
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag("consent", "update", {
+    ad_storage: "denied", analytics_storage: "denied",
+    ad_user_data: "denied", ad_personalization: "denied",
+  });
+  try { if (window.fbq) window.fbq("consent", "revoke"); } catch (e) {}
+  try {
+    if (window.clarity) {
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "denied" });
+      window.clarity("consent", false);
+    }
+  } catch (e) {}
+
+  /* apaga os cookies de medição que já tinham sido gravados nesta visita */
+  const medicao = /^(_ga|_gid|_gat|_gcl|_fbp|_fbc|_clck|_clsk)/;
+  const host = location.hostname;
+  const dominios = ["", host, "." + host.replace(/^www\./, "")];
+  document.cookie.split(";").forEach((par) => {
+    const nome = par.split("=")[0].trim();
+    if (!medicao.test(nome)) return;
+    dominios.forEach((d) => {
+      document.cookie = nome + "=; Max-Age=0; path=/" + (d ? "; domain=" + d : "");
+    });
+  });
+}
+
+/* Enquanto o aviso está aberto, o botão verde do WhatsApp sobe para cima
+   dele: no celular o aviso ocupa justamente a faixa de baixo, e o botão é o
+   caminho de compra mais usado. */
+function espacoDoAviso() {
+  const aviso = $("#avisoCookies");
+  const aberto = !!aviso && !aviso.hidden;
+  if (aberto)
+    document.documentElement.style.setProperty("--aviso-altura", aviso.offsetHeight + "px");
+  document.body.classList.toggle("com-aviso", aberto);
+}
+addEventListener("resize", espacoDoAviso);
+
+function mostrarAvisoCookies(forcar) {
+  if (!forcar && lerEscolhaCookies()) return;
+
+  let aviso = $("#avisoCookies");
+  if (!aviso) {
+    aviso = document.createElement("div");
+    aviso.id = "avisoCookies";
+    aviso.className = "cookies";
+    aviso.setAttribute("role", "region");
+    aviso.setAttribute("aria-label", "Aviso de cookies");
+    aviso.innerHTML = `
+      <p>Usamos cookies para medir as visitas e o resultado dos nossos anúncios.
+         Você pode recusar sem prejuízo para usar o site.
+         <a href="privacidade.html">Política de privacidade</a></p>
+      <div class="cookies__acoes">
+        <button type="button" class="btn btn--linha btn--sm" data-cookies="recusado">Recusar</button>
+        <button type="button" class="btn btn--gold btn--sm" data-cookies="aceito">Aceitar</button>
+      </div>`;
+    document.body.appendChild(aviso);
+
+    aviso.addEventListener("click", (e) => {
+      const botao = e.target.closest("[data-cookies]");
+      if (!botao) return;
+      const antes = lerEscolhaCookies();
+      const escolha = botao.dataset.cookies;
+      gravarEscolhaCookies(escolha);
+      aviso.hidden = true;
+      espacoDoAviso();
+      if (escolha === "recusado") pararMedicao();
+      /* voltou a aceitar depois de ter recusado: o Tag Manager não foi
+         carregado nesta página, então recarrega para a medição voltar */
+      else if (antes === "recusado") location.reload();
+    });
+  }
+  aviso.hidden = false;
+  espacoDoAviso();
+}
+
+addEventListener("click", (e) => {
+  if (e.target.closest("[data-preferencias-cookies]")) mostrarAvisoCookies(true);
+});
 
 /* De onde na página partiu o clique. Serve para saber se quem chama no
    WhatsApp vem do botão verde flutuante, do card do produto ou do rodapé. */
@@ -138,6 +261,7 @@ function ondeEsta(el) {
   if (el.closest(".header")) return "cabecalho";
   if (el.closest(".topo")) return "tarja-do-topo";
   if (el.closest(".card")) return "card-do-produto";
+  if (el.closest(".linha")) return "pagina-do-departamento";
   if (el.closest(".modal")) return "ficha-do-produto";
   if (el.closest(".drawer")) return "carrinho";
   if (el.closest(".rodape")) return "rodape";
@@ -168,6 +292,7 @@ addEventListener("click", (e) => {
     }, onde));
   }
   if (el.hasAttribute("data-wpp")) return rastrear("clique_whatsapp", onde);
+  if (el.hasAttribute("data-wpp-produto")) return rastrear("clique_whatsapp", onde);
   if (el.hasAttribute("data-tel-link")) return rastrear("clique_telefone", onde);
   if (el.hasAttribute("data-email-link")) return rastrear("clique_email", onde);
   if (el.hasAttribute("data-rota") || el.hasAttribute("data-mapa"))
@@ -228,10 +353,12 @@ function montarMenu() {
   });
 }
 
-/* Categorias do rodapé: iguais em todas as páginas. */
+/* Categorias do rodapé: iguais em todas as páginas. O gerar-paginas.py já
+   escreve no HTML os links para as páginas de cada departamento; este é só
+   o plano B, para página que ainda não passou pelo gerador. */
 function montarRodape() {
   const alvo = $("#footerDeps");
-  if (!alvo || typeof VITRINE_CATEGORIAS === "undefined") return;
+  if (!alvo || alvo.children.length || typeof VITRINE_CATEGORIAS === "undefined") return;
   alvo.innerHTML = VITRINE_CATEGORIAS.map(
     (c) =>
       `<li><a href="index.html?grupos=${c.grupos.join(",")}#loja"
@@ -265,3 +392,4 @@ montarRodape();
 buscaForaDaLoja();
 contarCarrinho();
 montarMenu();
+mostrarAvisoCookies();

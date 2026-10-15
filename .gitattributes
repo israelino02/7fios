@@ -1,0 +1,21 @@
+# O que fica FORA do pacote que sobe para a Hostinger.
+# O pacote sai do que está guardado no git:
+#     git archive --format=zip -o 7fios-site.zip HEAD
+# e tudo marcado com export-ignore abaixo não entra nele.
+
+# ferramentas e anotações servem só para quem mexe no site
+ferramentas/ export-ignore
+LEIA-ME.md export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+Imagem*WhatsApp*.jpg export-ignore
+assets/.convertidos.json export-ignore
+
+# As fotos em JPG são o arquivo de trabalho do preparar-imagens.py (é delas
+# que sai a cor das bolinhas). O site usa só as versões WebP. Ficam de fora a
+# logo.jpg e a compartilhar.jpg, que o Google e o WhatsApp leem.
+assets/banners/*.jpg export-ignore
+assets/departamentos/*.jpg export-ignore
+assets/gerentes/*.jpg export-ignore
+assets/produtos/**/*.jpg export-ignore
+assets/video/*.jpg export-ignore

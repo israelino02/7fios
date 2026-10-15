@@ -7,8 +7,10 @@
 <!-- Gerenciador de Tags do Google: entra antes de tudo, para não perder
      clique de quem sai rápido. As conversões do Ads e o Analytics são
      ligados lá dentro do painel, não aqui; assim dá para mexer nas tags sem
-     mexer no site. Os eventos que o site empurra estão em js/comum.js. -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+     mexer no site. Os eventos que o site empurra estão em js/comum.js.
+     Quem recusou a medição no aviso de cookies não carrega o Tag Manager. -->
+<script>(function(w,d,s,l,i){try{if(localStorage.getItem('7fios_cookies')==='recusado')return}catch(e){}
+w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -25,13 +27,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Nossa história | 7 Fios Têxtil">
 <meta property="og:description" content="Como a Sete Fios Têxtil nasceu e virou referência em tecidos e aviamentos no Polo de Confecções de PE.">
-<meta property="og:image" content="https://setefios.com.br/assets/logo.jpg">
+<meta property="og:image" content="https://setefios.com.br/assets/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/logo.jpg">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/icone-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=39">
+<link rel="stylesheet" href="css/styles.css?v=41">
 </head>
 <body>
 <!-- Gerenciador de Tags, para navegador com JavaScript desligado -->
@@ -44,10 +50,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============================== TARJA TOPO ============================= -->
 <div class="topbar">
   <div class="container topbar__inner">
-    <p class="topbar__aviso" id="avisoTopo"></p>
+    <p class="topbar__aviso" id="avisoTopo">Pronta entrega no Polo de Confecções • Atendimento direto pelo WhatsApp</p>
     <ul class="topbar__info">
-      <li><span data-empresa="horario"></span></li>
-      <li><a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a></li>
+      <li><span data-empresa="horario">Seg a Sex, 8h às 18h</span></li>
+      <li><a data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" data-empresa="telefone">(81) 99461 6071</a></li>
     </ul>
   </div>
 </div>
@@ -56,7 +62,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="header" id="header">
   <div class="container header__inner">
     <a class="brand" href="index.html" aria-label="7 Fios Têxtil, página inicial">
-      <img src="assets/logo.jpg" alt="7 Fios Têxtil" width="52" height="52">
+      <img src="assets/logo.webp" alt="7 Fios Têxtil" width="52" height="52">
     </a>
 
     <form class="busca" role="search" id="formBusca" onsubmit="return false">
@@ -66,7 +72,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </form>
 
     <div class="header__acoes">
-      <a class="acao acao--wpp" data-wpp href="#" target="_blank" rel="noopener">
+      <a class="acao acao--wpp" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
         <span class="acao__txt"><small>Fale com o vendedor</small><strong>WhatsApp</strong></span>
       </a>
@@ -116,7 +122,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="historia__texto">
       <p class="eyebrow">Como começou</p>
       <h2 class="section__titulo">Uma história de dedicação</h2>
-      <p class="texto-longo" id="historia"></p>
+      <p class="texto-longo" id="historia">A Sete Fios nasceu da fé e da determinação. Com apenas um computador, um birô e uma mala de mostruário, os primeiros clientes surgiram entre idas e vindas em uma moto. O que parecia simples se tornou uma história de superação, gratidão e confiança no futuro. Durante a pandemia, vivemos momentos desafiadores, mas descobrimos a força da equipe e a fidelidade dos clientes que estiveram conosco desde o início. Hoje, muitos clientes deixaram de ser apenas compradores e se tornaram amigos, inspirando inovações e ajudando a moldar novos produtos.</p>
       <ul class="marcos">
         <li><strong>Um birô</strong><span>e uma mala de mostruário no começo</span></li>
         <li><strong>Uma moto</strong><span>levava os primeiros pedidos</span></li>
@@ -135,14 +141,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 2.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
         </span>
         <h3>Nossa missão</h3>
-        <p id="missao"></p>
+        <p id="missao">Fornecer produtos têxteis e aviamentos de alta qualidade com excelente custo-benefício, atendendo o mercado de moda íntima com agilidade e inovação.</p>
       </article>
       <article class="bloco bloco--missao">
         <span class="canal__ico canal__ico--pequeno">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2c3.3 0 6 .3 7.2 1.5C22.9 4.7 22 9 18 13l-1 1v5l-4 2v-5.6l-2.4-2.4H5l2-4c4-4 8.3-4.9 9.5-3.7M9 17c0 1.7-1.3 3-3 3-1 0-2 1-3 2 1-1 2-2 2-3 0-1.7 1.3-3 3-3 .6 0 1 .4 1 1Zm6.5-9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
         </span>
         <h3>Nossa visão</h3>
-        <p id="visao"></p>
+        <p id="visao">Ser referência nacional em distribuição de tecidos e aviamentos para o mercado de moda íntima, com parcerias estratégicas e crescimento sustentável.</p>
       </article>
     </div>
   </div>
@@ -153,7 +159,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <header class="section__head">
       <h2 class="section__titulo" id="t-valores">Nossos valores</h2>
     </header>
-    <div class="valores" id="valores"></div>
+    <div class="valores" id="valores">
+      <article class="valor">
+        <span class="valor__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6Z"/></svg></span>
+        <h3>Qualidade</h3>
+        <p>Tecido e aviamento que aguentam o uso e a lavagem da peça pronta.</p>
+      </article>
+      <article class="valor">
+        <span class="valor__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-4.4-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 5.6-8 10-8 10Z"/></svg></span>
+        <h3>Custo-benefício</h3>
+        <p>Preço justo para quem compra para produzir e revender.</p>
+      </article>
+      <article class="valor">
+        <span class="valor__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2ZM9 19h6v1a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-1Z"/></svg></span>
+        <h3>Inteligência</h3>
+        <p>Ouvimos o que o cliente pede e trazemos produto novo a partir disso.</p>
+      </article>
+      <article class="valor">
+        <span class="valor__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg></span>
+        <h3>Agilidade</h3>
+        <p>Atendimento direto pelo WhatsApp e pronta entrega na loja do Polo.</p>
+      </article>
+      <article class="valor">
+        <span class="valor__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 2c-2.7 0-6 1.3-6 4v2h12v-2c0-2.7-3.3-4-6-4Zm8 0c-.6 0-1.3.1-1.9.2 1.2.9 1.9 2 1.9 3.8v2h6v-2c0-2.7-3.3-4-6-4Z"/></svg></span>
+        <h3>Parceria e Confiança</h3>
+        <p>Muitos clientes começaram com a gente e continuam até hoje.</p>
+      </article>
+      <article class="valor">
+        <span class="valor__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Zm0 5a2 2 0 0 1 2 2c0 .9-.6 1.4-1 1.8-.4.3-.5.5-.5 1.2h-1c0-1.1.4-1.6.9-2 .3-.3.6-.5.6-1a1 1 0 0 0-2 0h-1a2 2 0 0 1 2-2Zm-.5 6h1v1h-1v-1Z"/></svg></span>
+        <h3>Ética e Transparência</h3>
+        <p>O que foi combinado na conversa é o que chega no pedido.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -164,7 +201,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="section__titulo" id="t-gerentes">Nossos gerentes</h2>
       <p class="section__sub">Quem cuida do atendimento e do dia a dia da loja</p>
     </header>
-    <div class="gerentes" id="gerentes"></div>
+    <div class="gerentes" id="gerentes">
+      <article class="gerente">
+        <img src="assets/gerentes/perfil-raianne-comercial.webp?v=1792013116" alt="Raianne Oliveira" loading="lazy">
+        <strong>Raianne Oliveira</strong>
+        <small>Dep. Comercial</small>
+      </article>
+      <article class="gerente">
+        <img src="assets/gerentes/manasses-ferreira.webp?v=1792013116" alt="Manassés Ferreira" loading="lazy">
+        <strong>Manassés Ferreira</strong>
+        <small>Dep. Comercial</small>
+      </article>
+      <article class="gerente">
+        <img src="assets/gerentes/hellen-aragao.webp?v=1792013116" alt="Hellen Aragão" loading="lazy">
+        <strong>Hellen Aragão</strong>
+        <small>Dep. Financeiro</small>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -172,7 +225,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <h2>Vamos conversar?</h2>
     <p>Fale com nosso time e receba atendimento personalizado para a sua confecção.</p>
-    <a class="btn btn--navy btn--lg" data-wpp href="#" target="_blank" rel="noopener">
+    <a class="btn btn--navy btn--lg" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
       Conversar no WhatsApp
     </a>
@@ -194,22 +247,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="footer__list">
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-          <span data-empresa="endereco"></span>
+          <span data-empresa="endereco">Av. Pref. Braz de Líra, 760, Santa Cruz do Capibaribe, PE</span>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg>
-          <a data-wpp href="#" target="_blank" rel="noopener" data-empresa="telefone"></a>
+          <a data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" data-empresa="telefone">(81) 99461 6071</a>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 10V6h-2v8h6v-2h-4Z"/></svg>
-          <span data-empresa="horario"></span>
+          <span data-empresa="horario">Seg a Sex, 8h às 18h</span>
         </li>
       </ul>
     </div>
 
     <div>
       <h4>Categorias</h4>
-      <ul class="footer__list footer__list--nav" id="footerDeps"></ul>
+      <ul class="footer__list footer__list--nav" id="footerDeps">
+        <li><a href="microfibra-poliamida.html">Microfibras Poliamida</a></li>
+        <li><a href="microfibra-poliester.html">Microfibras Poliéster</a></li>
+        <li><a href="tecidos-estampados.html">Estampados</a></li>
+        <li><a href="tecido-dry-fit.html">Dry-Fit</a></li>
+        <li><a href="tecido-suplex.html">Suplex</a></li>
+        <li><a href="aviamentos.html">Aviamentos</a></li>
+      </ul>
     </div>
 
     <div>
@@ -220,26 +280,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="contato.html#faq">Dúvidas frequentes</a></li>
         <li><a href="sobre.html">Sobre nós</a></li>
         <li><a href="contato.html">Contato</a></li>
+        <li><a href="privacidade.html">Política de privacidade</a></li>
+        <li><button type="button" data-preferencias-cookies>Preferências de cookies</button></li>
       </ul>
     </div>
   </div>
 
   <div class="container footer__bottom">
-    <p>© <span id="ano"></span> Sete Fios Têxtil. Todos os direitos reservados.</p>
+    <p>© <span id="ano">2026</span> Sete Fios Têxtil. Todos os direitos reservados.</p>
     <p class="footer__nota">Preços e disponibilidade sob consulta pelo WhatsApp.</p>
   </div>
 </footer>
 
 <!-- ========================= BOTÃO FLUTUANTE =========================== -->
-<a class="fab" data-wpp href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+<a class="fab" data-wpp href="https://wa.me/5581994616071?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%207%20Fios%20T%C3%AAxtil%20e%20gostaria%20de%20falar%20com%20um%20vendedor." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5l1 2.4c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.1.5.2.5.4v1Z"/></svg>
 </a>
 
 
-<script src="js/config.js?v=39"></script>
-<script src="js/produtos.js?v=39"></script>
-<script src="js/catalogo-imagens.js?v=39"></script>
-<script src="js/comum.js?v=39"></script>
-<script src="js/pagina.js?v=39"></script>
+<script src="js/config.js?v=41"></script>
+<script src="js/produtos.js?v=41"></script>
+<script src="js/catalogo-imagens.js?v=41"></script>
+<script src="js/comum.js?v=41"></script>
+<script src="js/pagina.js?v=41"></script>
 </body>
 </html>

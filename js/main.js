@@ -137,7 +137,7 @@
           return `
           <div class="item" data-n="${n}">
             <div class="item__media">
-              ${foto ? `<img src="${esc(foto)}" alt="" loading="lazy">` : ""}
+              ${foto ? `<img ${fotoAttrs(foto, "62px")} alt="" loading="lazy">` : ""}
             </div>
             <div class="item__info">
               <p class="item__nome">${esc(p.nome)}</p>
@@ -197,7 +197,7 @@
     return `
       <article class="card" data-sku="${esc(p.sku)}">
         <div class="card__media" data-abrir>
-          ${p._capa ? `<img src="${esc(p._capa)}" alt="${esc(p.nome)}" loading="lazy">` : ""}
+          ${p._capa ? `<img ${fotoAttrs(p._capa, "(max-width:760px) 34vw, 260px")} alt="${esc(p.nome)}" loading="lazy">` : ""}
           ${p._semFoto ? '<span class="card__embreve">Foto em breve</span>' : ""}
           ${p.maisProcurado ? '<span class="card__destaque">Mais procurado</span>' : ""}
           <button class="card__olho" type="button" data-abrir>Ver detalhes</button>
@@ -382,8 +382,10 @@
      linha de produto direto no Google Ads, e deixa a pessoa copiar o link do
      que está vendo. Só mexemos nos nossos parâmetros; o que vem de fora
      (gclid do Ads, utm de campanha) fica onde está, senão a medição de
-     conversão do anúncio se perde. */
-  const NOSSOS_PARAMETROS = ["grupos", "categorias", "cores", "busca"];
+     conversão do anúncio se perde. "produto" só abre a ficha na chegada
+     (link das páginas de departamento) e sai do endereço logo depois, para
+     a ficha não reabrir sozinha quando a pessoa recarrega a página. */
+  const NOSSOS_PARAMETROS = ["grupos", "categorias", "cores", "busca", "produto"];
 
   function sincronizarEndereco() {
     if (!history.replaceState) return;
@@ -1047,6 +1049,15 @@
   carregarCarrinho();
   pintarCarrinho();
   pintarProdutos();
+
+  /* Veio do botão "Ver cores" de uma página de departamento: a loja abre
+     filtrada na linha e com a ficha do produto, que mostra todas as cores
+     e deixa pôr no orçamento. */
+  const produtoUrl = parametros.get("produto");
+  if (produtoUrl) {
+    sincronizarEndereco();
+    if (acharProduto(produtoUrl)) abrirFicha(produtoUrl);
+  }
 
   /* Chegou por um link com filtro (um sitelink do anúncio, por exemplo) e sem
      âncora no endereço: leva direto para a prateleira, senão a pessoa cai no

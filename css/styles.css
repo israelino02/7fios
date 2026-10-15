@@ -699,8 +699,10 @@ h1,h2,h3,.brand__name{
   position:fixed; right:1rem; bottom:1rem; z-index:100;
   width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
   background:var(--wpp); color:#04331A; box-shadow:0 8px 22px rgba(37,211,102,.42);
-  transition:transform var(--tr);
+  transition:transform var(--tr), bottom .25s;
 }
+/* aviso de cookies aberto: o botão sobe e fica visível acima dele */
+body.com-aviso .fab{ bottom:calc(var(--aviso-altura, 0px) + 1.6rem); }
 .fab svg{ width:29px; height:29px; fill:currentColor; }
 .fab:hover{ transform:scale(1.08); }
 
@@ -982,62 +984,28 @@ h1,h2,h3,.brand__name{
 .bloco--visao .canal__ico svg{ fill:var(--navy); }
 
 /* -------------------------------- VALORES ----------------------------
-   Fundo colorido em movimento por baixo de um painel escuro translúcido.
-   Feito só com gradientes e uma rotação lenta: sem WebGL, sem biblioteca.
+   Cartão claro, no mesmo desenho dos blocos de contato: ícone em índigo e
+   dourado, título e uma frase. Antes havia um fundo colorido girando por
+   baixo de um vidro escuro; saiu porque chamava mais atenção que o texto.
    ------------------------------------------------------------------- */
-.valores{ display:grid; gap:1.4rem; grid-template-columns:repeat(3,1fr); }
+.valores{ display:grid; gap:1rem; grid-template-columns:repeat(3,1fr); }
 @media (max-width:900px){ .valores{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:560px){ .valores{ grid-template-columns:1fr; } }
 
 .valor{
-  position:relative; isolation:isolate; overflow:hidden;
-  border-radius:22px; min-height:270px;
-  background:var(--tom-a,#1D0E47);
-  transition:transform var(--tr), box-shadow var(--tr);
-}
-.valor:hover{ transform:translateY(-4px); box-shadow:0 18px 46px rgba(20,9,53,.28); }
-
-/* as manchas de cor que giram devagar */
-.valor__fundo{
-  position:absolute; inset:-45%; z-index:0;
-  background:
-    radial-gradient(38% 46% at 28% 30%, var(--tom-b) 0%, transparent 62%),
-    radial-gradient(42% 40% at 74% 68%, var(--tom-a) 0%, transparent 66%),
-    radial-gradient(30% 34% at 62% 22%, rgba(255,255,255,.5) 0%, transparent 58%),
-    conic-gradient(from 210deg, var(--tom-a), var(--tom-b), var(--tom-a));
-  filter:blur(22px) saturate(1.35);
-  animation:girar var(--giro,22s) linear infinite;
-}
-@keyframes girar{
-  from{ transform:rotate(0deg) scale(1.06); }
-  50% { transform:rotate(180deg) scale(1.18); }
-  to  { transform:rotate(360deg) scale(1.06); }
-}
-
-/* o painel escuro por cima, que deixa o texto legível */
-.valor__vidro{
-  position:relative; z-index:1; display:flex; flex-direction:column; height:100%;
-  padding:1.7rem 1.6rem;
-  background:rgba(14,7,36,.68);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:22px;
-  backdrop-filter:blur(2px);
+  background:var(--branco); border:1px solid var(--cinza-200);
+  border-radius:var(--raio); padding:1.5rem 1.4rem;
 }
 .valor__ico{
-  width:46px; height:46px; border-radius:14px; margin-bottom:1rem;
-  display:grid; place-items:center;
-  background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.18);
+  width:42px; height:42px; border-radius:10px; margin-bottom:.9rem;
+  display:grid; place-items:center; background:var(--navy);
 }
-.valor__ico svg{ width:22px; height:22px; fill:var(--gold); }
+.valor__ico svg{ width:20px; height:20px; fill:var(--gold); }
 .valor h3{
-  font-family:"Inter",sans-serif; font-size:1.15rem; font-weight:700;
-  color:var(--branco); margin-bottom:.5rem;
+  font-family:"Inter",sans-serif; font-size:1.05rem; font-weight:700;
+  color:var(--navy); margin-bottom:.4rem;
 }
-.valor p{ margin:0; font-size:.9rem; line-height:1.6; color:rgba(255,255,255,.82); }
-
-@media (prefers-reduced-motion:reduce){
-  .valor__fundo{ animation:none; }
-}
+.valor p{ margin:0; font-size:.9rem; line-height:1.6; color:var(--cinza-500); }
 
 /* gerentes */
 .gerentes{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
@@ -1096,8 +1064,7 @@ h1,h2,h3,.brand__name{
   .destaque-wpp h2{ font-size:1.15rem; }
   .destaque-wpp p{ font-size:.85rem; margin-bottom:1rem; }
 
-  .valor{ min-height:0; }
-  .valor__vidro{ padding:1.2rem 1.1rem; }
+  .valor{ padding:1.2rem 1.1rem; }
   .valor h3{ font-size:1rem; }
   .valor p{ font-size:.84rem; }
 
@@ -1180,8 +1147,7 @@ h1,h2,h3,.brand__name{
   .grid-duplo--mv .canal__ico--pequeno svg{ width:15px; height:15px; }
 
   .valores{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; }
-  .valor{ border-radius:16px; }
-  .valor__vidro{ padding:.95rem .85rem; border-radius:16px; }
+  .valor{ padding:.95rem .85rem; }
   .valor__ico{ width:34px; height:34px; border-radius:10px; margin-bottom:.6rem; }
   .valor__ico svg{ width:16px; height:16px; }
   .valor h3{ font-size:.85rem; margin-bottom:.3rem; }
@@ -1214,3 +1180,96 @@ h1,h2,h3,.brand__name{
     gap:.3rem; padding:.9rem 0 4.5rem; font-size:.72rem;
   }
 }
+
+/* ========================== AVISO DE COOKIES ========================== */
+/* fica acima do botão flutuante do WhatsApp e abaixo da ficha e do carrinho */
+.cookies{
+  position:fixed; left:1rem; right:1rem; bottom:1rem; z-index:110;
+  max-width:760px; margin-inline:auto;
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  background:var(--navy); color:var(--branco);
+  padding:1rem 1.2rem; border-radius:var(--raio); box-shadow:var(--sombra-alta);
+  font-size:.85rem; line-height:1.5; animation:sobe .25s;
+}
+.cookies[hidden]{ display:none; }
+.cookies p{ margin:0; flex:1 1 20rem; color:rgba(255,255,255,.85); }
+.cookies a{ color:var(--gold); text-decoration:underline; }
+.cookies__acoes{ display:flex; gap:.5rem; flex:none; }
+.cookies .btn--linha{ background:transparent; color:var(--branco); border-color:rgba(255,255,255,.35); }
+.cookies .btn--linha:hover{ background:rgba(255,255,255,.08); border-color:var(--branco); }
+
+@media (max-width:760px){
+  .cookies{ left:.6rem; right:.6rem; bottom:.6rem; padding:.9rem 1rem; }
+  .cookies__acoes{ width:100%; }
+  .cookies__acoes .btn{ flex:1; justify-content:center; }
+}
+
+/* ====================== POLÍTICA DE PRIVACIDADE ======================= */
+.politica{ padding:2.2rem 0 3rem; }
+.politica h2{ font-size:1.25rem; color:var(--navy); margin:2.1rem 0 .6rem; }
+.politica p,
+.politica li{ color:var(--cinza-500); line-height:1.75; }
+.politica p{ margin:0 0 .9rem; }
+.politica ul{ margin:0 0 1rem; padding-left:1.2rem; list-style:disc; }
+.politica li{ margin-bottom:.4rem; }
+.politica strong{ color:var(--tinta); }
+.politica a{ color:var(--navy-700); text-decoration:underline; }
+.politica__data{ font-size:.85rem; color:var(--cinza-400) !important; }
+.politica__botao{ margin-top:.2rem; }
+
+/* ===================== PÁGINAS DE DEPARTAMENTO ======================== */
+/* Geradas pelo ferramentas/gerar-paginas.py: texto, linhas de produto com
+   foto e ficha, e as perguntas. A loja continua sendo a home; daqui a
+   pessoa vai para ela já filtrada, ou direto para o WhatsApp. */
+.breadcrumb--claro{ color:rgba(255,255,255,.65); margin-bottom:.9rem; }
+.breadcrumb--claro a:hover{ color:var(--gold); }
+.breadcrumb--claro strong{ color:var(--branco); }
+.pagina-topo__acoes{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1.4rem; }
+
+.dep-texto{ max-width:70ch; }
+.dep-texto p{ margin:0 0 1rem; color:var(--cinza-500); line-height:1.75; }
+.dep-texto p:last-child{ margin-bottom:0; }
+
+.linhas{ display:flex; flex-direction:column; gap:1.1rem; }
+.linha{
+  display:grid; grid-template-columns:minmax(0,320px) 1fr; gap:1.6rem; align-items:start;
+  background:var(--branco); border:1px solid var(--cinza-200); border-radius:var(--raio);
+  padding:1.1rem; scroll-margin-top:150px;
+}
+.linha__foto{
+  position:relative; aspect-ratio:1/1; overflow:hidden;
+  border-radius:var(--raio-sm); background:var(--cinza-100);
+}
+.linha__foto img{ width:100%; height:100%; object-fit:cover; }
+.linha__selo{
+  position:absolute; top:.6rem; left:.6rem; padding:.3rem .6rem; border-radius:999px;
+  background:var(--gold); color:var(--navy); font-size:.7rem; font-weight:700;
+}
+.linha__txt{ padding:.3rem .2rem 0 0; }
+.linha h3{ margin:.25rem 0 .2rem; font-family:"Inter",sans-serif; font-size:1.25rem; color:var(--navy); }
+.linha__resumo{ margin:0 0 .6rem; font-weight:600; color:var(--tinta); font-size:.92rem; }
+.linha__txt > p{ margin:0 0 .8rem; color:var(--cinza-500); font-size:.92rem; line-height:1.7; }
+.linha__ficha{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.55rem 1rem;
+  margin:0 0 .9rem; padding:.8rem 0; border-block:1px solid var(--cinza-100);
+}
+.linha__ficha dt{ font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--cinza-400); }
+.linha__ficha dd{ margin:.1rem 0 0; font-size:.88rem; color:var(--tinta); }
+.linha__txt > .linha__cores{ font-size:.85rem; }
+.linha__cores strong{ color:var(--tinta); }
+.linha__acoes{ display:flex; gap:.5rem; flex-wrap:wrap; }
+
+@media (max-width:760px){
+  .linha{ grid-template-columns:1fr; gap:1rem; padding:.8rem; }
+  .linha__foto{ aspect-ratio:4/3; }
+  .linha h3{ font-size:1.1rem; }
+  .linha__acoes .btn{ flex:1 1 auto; justify-content:center; }
+}
+
+/* página 404 */
+.nao-achou{ text-align:center; }
+.nao-achou__lista{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom:1.6rem; }
+
+/* link dentro da resposta de uma dúvida */
+.faq__item p a{ color:var(--navy-700); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.faq__item p a:hover{ color:var(--navy); }
