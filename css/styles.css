@@ -1273,3 +1273,7 @@ body.com-aviso .fab{ bottom:calc(var(--aviso-altura, 0px) + 1.6rem); }
 /* link dentro da resposta de uma dúvida */
 .faq__item p a{ color:var(--navy-700); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
 .faq__item p a:hover{ color:var(--navy); }
+
+/* nota do Perfil no Google, acima do convite para avaliar */
+.avaliacao__nota{ margin:.1rem 0 .15rem !important; color:var(--tinta); font-size:.88rem; }
+.avaliacao__nota strong{ font-size:1.05rem; color:var(--navy); }

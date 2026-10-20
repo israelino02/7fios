@@ -34,6 +34,9 @@ const CONFIG = {
     instagram: "https://instagram.com/7fiostextil",
     avaliacao: "https://g.page/r/CaTct8qnGWhbEAE/review",
     instagramNome: "@7fiostextil",
+    /* Nota e total do Perfil da Empresa no Google. Não é atualizado sozinho:
+       confira no Maps de vez em quando e rode o gerar-paginas.py. */
+    avaliacoes: { nota: "5,0", total: 23, conferido: "20/10/2026" },
   },
 
   /* Frase que passa na tarja preta do topo. */

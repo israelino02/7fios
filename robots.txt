@@ -1,5 +1,63 @@
 # 7 Fios Têxtil
+# Quem busca tecido e aviamento pode chegar pelo Google ou por uma I.A.
+# (ChatGPT, Claude, Perplexity, Gemini). A permissão aos robôs é decisão
+# nossa, e está declarada nome por nome, de propósito.
+
 User-agent: *
+Allow: /
+
+# Google e Bing
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# OpenAI (ChatGPT): treino, busca e pesquisa feita a pedido do usuário
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google Gemini e Apple Intelligence
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI e Common Crawl (base de vários modelos). O Copilot usa o Bingbot.
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://setefios.com.br/sitemap.xml

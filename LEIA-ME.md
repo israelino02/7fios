@@ -228,7 +228,17 @@ robôs das I.As quase nunca rodam, então para eles a loja parecia vazia. O
 - **endereço, telefone, horário e links de contato** dentro do HTML de todas
   as páginas, e o rodapé apontando para os departamentos;
 - os textos do **Sobre** e os horários do **Contato**;
-- a **404**, o **sitemap.xml** e o **llms.txt**.
+- a **404**, o **sitemap.xml** e o **llms.txt**;
+- o **menu do topo** com o endereço de cada departamento (na home o clique
+  continua filtrando a loja na hora) e a **migalha** do Sobre, Contato e
+  Privacidade, visível e em dados estruturados;
+- a **nota do Google** no Contato, lida de `empresa.avaliacoes` em
+  `js/config.js`. Ela não se atualiza sozinha: de vez em quando confira o
+  Perfil no Maps, troque nota, total e data, e rode o `gerar-paginas.py`.
+
+O `robots.txt` nomeia um a um os robôs do Google, Bing e das I.As (ChatGPT,
+Claude, Perplexity, Gemini) e libera todos. É decisão de negócio: se um dia
+for preciso barrar algum, é só trocar o `Allow` por `Disallow` na linha dele.
 
 O texto de cada página de departamento (título, abertura e perguntas) fica
 no começo do próprio script, em `PAGINAS`. Nome, descrição, ficha e cores

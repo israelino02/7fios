@@ -12,7 +12,10 @@ vazia, sem produto, sem endereço e sem telefone. Este script resolve isso:
   2. endereço, telefone, horário e links de contato escritos dentro do HTML
      de todas as páginas, e o rodapé apontando para os departamentos;
   3. os textos do Sobre e os horários do Contato;
-  4. a página 404, o sitemap.xml e o llms.txt (o resumo para as I.As).
+  4. a página 404, o sitemap.xml e o llms.txt (o resumo para as I.As);
+  5. o menu do topo com o endereço de cada departamento (no clique, a loja
+     da home continua filtrando na hora; o robô segue o link), e a migalha
+     (visível e em dados estruturados) no Sobre, no Contato e na Privacidade.
 
 Os textos dos produtos continuam em js/produtos.js e as fotos em
 js/catalogo-imagens.js. Mudou lá, rode de novo; o preparar-imagens.py já
@@ -357,6 +360,7 @@ class Empresa:
             "instagram": e.get("instagramNome", ""),
         }
         self.aviso = cfg.get("avisoTopo", "")
+        self.avaliacoes = e.get("avaliacoes")
 
     def wpp_produto(self, nome):
         texto = self.msg_produto.replace("{produto}", nome)
@@ -380,7 +384,57 @@ def trocar_dentro(h, id_, conteudo):
     return padrao.sub(lambda m: m.group(1) + conteudo + m.group(4), h, count=1)
 
 
-def preencher(h, emp, deps_links):
+def menu_dos_departamentos(h, atual=None):
+    """No menu do topo, cada departamento aponta para a sua página. Na home o
+    JavaScript intercepta o clique e filtra a loja sem recarregar (o que vale
+    é o data-ir-grupos); em qualquer outra página o clique abre a página do
+    departamento, e é esse endereço que o Google e as I.As seguem."""
+    def troca_link(m):
+        grupo = m.group("grupo")
+        pag = PAGINAS.get(grupo)
+        if not pag:
+            return m.group(0)
+        tag = re.sub(r'\s+class="[^"]*is-active"', "", m.group(0))
+        tag = re.sub(r'href="[^"]*"', f'href="{pag["arquivo"]}"', tag, count=1)
+        if atual == pag["arquivo"]:
+            tag = tag.replace("<a ", '<a class="is-active" ', 1)
+        return tag
+    return re.sub(r'<a\b[^>]*data-ir-grupos="(?P<grupo>\w+)"[^>]*>', troca_link, h)
+
+
+MIGALHAS = {
+    "sobre.html": "Sobre",
+    "contato.html": "Contato",
+    "privacidade.html": "Política de privacidade",
+}
+
+
+def migalha(h, arquivo):
+    """Migalha visível no topo da página e BreadcrumbList nos dados
+    estruturados (mesclado ao bloco que já existir, como o FAQPage)."""
+    nome = MIGALHAS[arquivo]
+    h = re.sub(r'\s*<nav class="breadcrumb breadcrumb--claro" data-migalha.*?</nav>', "",
+               h, flags=re.S)
+    topo = '<section class="pagina-topo">\n  <div class="container">'
+    h = h.replace(topo, topo + (
+        '\n    <nav class="breadcrumb breadcrumb--claro" data-migalha aria-label="Você está em">'
+        f'\n      <a href="index.html">Início</a> <span>/</span> <strong>{esc(nome)}</strong>'
+        '\n    </nav>'), 1)
+
+    url = SITE + arquivo
+    lista = {"@type": "BreadcrumbList", "@id": url + "#migalha", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Início", "item": SITE},
+        {"@type": "ListItem", "position": 2, "name": nome, "item": url}]}
+    achou = re.search(r'<script type="application/ld\+json" data-gerado>(.*?)</script>', h, re.S)
+    itens = []
+    if achou:
+        antigo = json.loads(achou.group(1))
+        itens = antigo.get("@graph") or [{k: v for k, v in antigo.items() if k != "@context"}]
+        itens = [i for i in itens if i.get("@type") != "BreadcrumbList"]
+    return com_dados(h, {"@context": "https://schema.org", "@graph": itens + [lista]})
+
+
+def preencher(h, emp, deps_links, atual=None):
     # textos de contato: <span data-empresa="telefone"></span>
     def texto(m):
         v = emp.textos.get(m.group("campo"))
@@ -395,7 +449,13 @@ def preencher(h, emp, deps_links):
         h = padrao.sub(
             lambda m: re.sub(r'href="[^"]*"', f'href="{esc(url)}"', m.group(0), count=1), h)
 
+    h = menu_dos_departamentos(h, atual)
     h = trocar_dentro(h, "avisoTopo", esc(emp.aviso))
+    if emp.avaliacoes:
+        a = emp.avaliacoes
+        h = trocar_dentro(
+            h, "avaliacaoNota",
+            f'<strong>{esc(a["nota"])}</strong> no Google, com {a["total"]} avaliações de clientes')
     h = trocar_dentro(h, "ano", str(date.today().year))
     h = trocar_dentro(h, "footerDeps", deps_links)
 
@@ -780,6 +840,9 @@ def montar_llms(D, emp, resumo_deps):
         f"- WhatsApp e telefone: {e['telefoneExibicao']} ({emp.links['data-wpp'].split('?')[0]})",
         f"- E-mail: {e['email']}",
         f"- Horário: {e['horario']}",
+        *([f"- Avaliações no Google: nota {e['avaliacoes']['nota']}, "
+           f"{e['avaliacoes']['total']} avaliações (conferido em {e['avaliacoes']['conferido']})"]
+          if e.get("avaliacoes") else []),
         f"- Instagram: {e.get('instagram', '')}",
         "- Como comprar: escolha os produtos e as cores no site, monte o orçamento "
         "e envie pelo WhatsApp. O vendedor responde com preço, disponibilidade e condições.",
@@ -843,6 +906,8 @@ def main():
             h = preencher_sobre(h, D)
         if arquivo == "contato.html":
             h = preencher_contato(h, D)
+        if arquivo in MIGALHAS:
+            h = migalha(h, arquivo)
         if gravar(arquivo, h):
             feitos.append(arquivo)
 
@@ -857,7 +922,7 @@ def main():
         pag = PAGINAS[chave]
         miolo, descricao, dados, total, produtos = montar_departamento(chave, pag, D, emp)
         cabeca = trocar_cabeca(antes, pag["titulo"], descricao, SITE + arquivo)
-        h = preencher(com_dados(cabeca, dados) + miolo + depois, emp, rodape)
+        h = preencher(com_dados(cabeca, dados) + miolo + depois, emp, rodape, atual=arquivo)
         if gravar(arquivo, h):
             feitos.append(arquivo)
         frase = ", ".join(p["nome"] for p in produtos)
